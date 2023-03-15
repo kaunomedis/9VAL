@@ -1,0 +1,4151 @@
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"main.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.MX_GPIO_Init,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  23              	MX_GPIO_Init:
+  24              	.LFB95:
+  25              		.file 1 "Core/Src/main.c"
+   1:Core/Src/main.c **** /* USER CODE BEGIN Header */
+   2:Core/Src/main.c **** /**
+   3:Core/Src/main.c ****   ******************************************************************************
+   4:Core/Src/main.c ****   * @file           : main.c
+   5:Core/Src/main.c ****   * @brief          : RTC 9H
+   6:Core/Src/main.c ****   ******************************************************************************
+   7:Core/Src/main.c ****   * @attention
+   8:Core/Src/main.c ****   *
+   9:Core/Src/main.c ****   * Copyright (c) 2023 STMicroelectronics.
+  10:Core/Src/main.c ****   * All rights reserved.
+  11:Core/Src/main.c ****   *
+  12:Core/Src/main.c ****   * This software is licensed under terms that can be found in the LICENSE file
+  13:Core/Src/main.c ****   * in the root directory of this software component.
+  14:Core/Src/main.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  15:Core/Src/main.c ****   *
+  16:Core/Src/main.c ****   ******************************************************************************
+  17:Core/Src/main.c ****   */
+  18:Core/Src/main.c **** /* USER CODE END Header */
+  19:Core/Src/main.c **** /* Includes ------------------------------------------------------------------*/
+  20:Core/Src/main.c **** #include "main.h"
+  21:Core/Src/main.c **** #include "usb_device.h"
+  22:Core/Src/main.c **** 
+  23:Core/Src/main.c **** /* Private includes ----------------------------------------------------------*/
+  24:Core/Src/main.c **** /* USER CODE BEGIN Includes */
+  25:Core/Src/main.c **** #include "USER/user.c"
+  26:Core/Src/main.c **** /* USER CODE END Includes */
+  27:Core/Src/main.c **** 
+  28:Core/Src/main.c **** /* Private typedef -----------------------------------------------------------*/
+  29:Core/Src/main.c **** /* USER CODE BEGIN PTD */
+  30:Core/Src/main.c **** 
+  31:Core/Src/main.c **** /* USER CODE END PTD */
+  32:Core/Src/main.c **** 
+  33:Core/Src/main.c **** /* Private define ------------------------------------------------------------*/
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 2
+
+
+  34:Core/Src/main.c **** /* USER CODE BEGIN PD */
+  35:Core/Src/main.c **** 
+  36:Core/Src/main.c **** /* USER CODE END PD */
+  37:Core/Src/main.c **** 
+  38:Core/Src/main.c **** /* Private macro -------------------------------------------------------------*/
+  39:Core/Src/main.c **** /* USER CODE BEGIN PM */
+  40:Core/Src/main.c **** 
+  41:Core/Src/main.c **** /* USER CODE END PM */
+  42:Core/Src/main.c **** 
+  43:Core/Src/main.c **** /* Private variables ---------------------------------------------------------*/
+  44:Core/Src/main.c **** IWDG_HandleTypeDef hiwdg;
+  45:Core/Src/main.c **** 
+  46:Core/Src/main.c **** RTC_HandleTypeDef hrtc;
+  47:Core/Src/main.c **** 
+  48:Core/Src/main.c **** TIM_HandleTypeDef htim1;
+  49:Core/Src/main.c **** 
+  50:Core/Src/main.c **** /* USER CODE BEGIN PV */
+  51:Core/Src/main.c **** 
+  52:Core/Src/main.c **** /* USER CODE END PV */
+  53:Core/Src/main.c **** 
+  54:Core/Src/main.c **** /* Private function prototypes -----------------------------------------------*/
+  55:Core/Src/main.c **** void SystemClock_Config(void);
+  56:Core/Src/main.c **** static void MX_GPIO_Init(void);
+  57:Core/Src/main.c **** static void MX_RTC_Init(void);
+  58:Core/Src/main.c **** static void MX_TIM1_Init(void);
+  59:Core/Src/main.c **** static void MX_IWDG_Init(void);
+  60:Core/Src/main.c **** /* USER CODE BEGIN PFP */
+  61:Core/Src/main.c **** 
+  62:Core/Src/main.c **** /* USER CODE END PFP */
+  63:Core/Src/main.c **** 
+  64:Core/Src/main.c **** /* Private user code ---------------------------------------------------------*/
+  65:Core/Src/main.c **** /* USER CODE BEGIN 0 */
+  66:Core/Src/main.c **** 
+  67:Core/Src/main.c **** /* USER CODE END 0 */
+  68:Core/Src/main.c **** 
+  69:Core/Src/main.c **** /**
+  70:Core/Src/main.c ****   * @brief  The application entry point.
+  71:Core/Src/main.c ****   * @retval int
+  72:Core/Src/main.c ****   */
+  73:Core/Src/main.c **** int main(void)
+  74:Core/Src/main.c **** {
+  75:Core/Src/main.c ****   /* USER CODE BEGIN 1 */
+  76:Core/Src/main.c **** 
+  77:Core/Src/main.c ****   /* USER CODE END 1 */
+  78:Core/Src/main.c **** 
+  79:Core/Src/main.c ****   /* MCU Configuration--------------------------------------------------------*/
+  80:Core/Src/main.c **** 
+  81:Core/Src/main.c ****   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  82:Core/Src/main.c ****   HAL_Init();
+  83:Core/Src/main.c **** 
+  84:Core/Src/main.c ****   /* USER CODE BEGIN Init */
+  85:Core/Src/main.c **** 
+  86:Core/Src/main.c ****   /* USER CODE END Init */
+  87:Core/Src/main.c **** 
+  88:Core/Src/main.c ****   /* Configure the system clock */
+  89:Core/Src/main.c ****   SystemClock_Config();
+  90:Core/Src/main.c **** 
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 3
+
+
+  91:Core/Src/main.c ****   /* USER CODE BEGIN SysInit */
+  92:Core/Src/main.c **** 
+  93:Core/Src/main.c ****   /* USER CODE END SysInit */
+  94:Core/Src/main.c **** 
+  95:Core/Src/main.c ****   /* Initialize all configured peripherals */
+  96:Core/Src/main.c ****   MX_GPIO_Init();
+  97:Core/Src/main.c ****   MX_RTC_Init();
+  98:Core/Src/main.c ****   MX_TIM1_Init();
+  99:Core/Src/main.c ****   MX_USB_DEVICE_Init();
+ 100:Core/Src/main.c ****   MX_IWDG_Init();
+ 101:Core/Src/main.c ****   /* USER CODE BEGIN 2 */
+ 102:Core/Src/main.c **** user_init();
+ 103:Core/Src/main.c ****   /* USER CODE END 2 */
+ 104:Core/Src/main.c **** 
+ 105:Core/Src/main.c ****   /* Infinite loop */
+ 106:Core/Src/main.c ****   /* USER CODE BEGIN WHILE */
+ 107:Core/Src/main.c ****   while (1)
+ 108:Core/Src/main.c ****   {
+ 109:Core/Src/main.c ****     /* USER CODE END WHILE */
+ 110:Core/Src/main.c **** 
+ 111:Core/Src/main.c ****     /* USER CODE BEGIN 3 */
+ 112:Core/Src/main.c **** 	user_loop();
+ 113:Core/Src/main.c ****   }
+ 114:Core/Src/main.c ****   /* USER CODE END 3 */
+ 115:Core/Src/main.c **** }
+ 116:Core/Src/main.c **** 
+ 117:Core/Src/main.c **** /**
+ 118:Core/Src/main.c ****   * @brief System Clock Configuration
+ 119:Core/Src/main.c ****   * @retval None
+ 120:Core/Src/main.c ****   */
+ 121:Core/Src/main.c **** void SystemClock_Config(void)
+ 122:Core/Src/main.c **** {
+ 123:Core/Src/main.c ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+ 124:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 125:Core/Src/main.c ****   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+ 126:Core/Src/main.c **** 
+ 127:Core/Src/main.c ****   /** Initializes the RCC Oscillators according to the specified parameters
+ 128:Core/Src/main.c ****   * in the RCC_OscInitTypeDef structure.
+ 129:Core/Src/main.c ****   */
+ 130:Core/Src/main.c ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI|RCC_OSCILLATORTYPE_HSE
+ 131:Core/Src/main.c ****                               |RCC_OSCILLATORTYPE_LSE;
+ 132:Core/Src/main.c ****   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+ 133:Core/Src/main.c ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+ 134:Core/Src/main.c ****   RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+ 135:Core/Src/main.c ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+ 136:Core/Src/main.c ****   RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+ 137:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 138:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+ 139:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL6;
+ 140:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 141:Core/Src/main.c ****   {
+ 142:Core/Src/main.c ****     Error_Handler();
+ 143:Core/Src/main.c ****   }
+ 144:Core/Src/main.c **** 
+ 145:Core/Src/main.c ****   /** Initializes the CPU, AHB and APB buses clocks
+ 146:Core/Src/main.c ****   */
+ 147:Core/Src/main.c ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 4
+
+
+ 148:Core/Src/main.c ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+ 149:Core/Src/main.c ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+ 150:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 151:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+ 152:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 153:Core/Src/main.c **** 
+ 154:Core/Src/main.c ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
+ 155:Core/Src/main.c ****   {
+ 156:Core/Src/main.c ****     Error_Handler();
+ 157:Core/Src/main.c ****   }
+ 158:Core/Src/main.c ****   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_USB;
+ 159:Core/Src/main.c ****   PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
+ 160:Core/Src/main.c ****   PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL;
+ 161:Core/Src/main.c ****   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+ 162:Core/Src/main.c ****   {
+ 163:Core/Src/main.c ****     Error_Handler();
+ 164:Core/Src/main.c ****   }
+ 165:Core/Src/main.c **** }
+ 166:Core/Src/main.c **** 
+ 167:Core/Src/main.c **** /**
+ 168:Core/Src/main.c ****   * @brief IWDG Initialization Function
+ 169:Core/Src/main.c ****   * @param None
+ 170:Core/Src/main.c ****   * @retval None
+ 171:Core/Src/main.c ****   */
+ 172:Core/Src/main.c **** static void MX_IWDG_Init(void)
+ 173:Core/Src/main.c **** {
+ 174:Core/Src/main.c **** 
+ 175:Core/Src/main.c ****   /* USER CODE BEGIN IWDG_Init 0 */
+ 176:Core/Src/main.c **** 
+ 177:Core/Src/main.c ****   /* USER CODE END IWDG_Init 0 */
+ 178:Core/Src/main.c **** 
+ 179:Core/Src/main.c ****   /* USER CODE BEGIN IWDG_Init 1 */
+ 180:Core/Src/main.c **** 
+ 181:Core/Src/main.c ****   /* USER CODE END IWDG_Init 1 */
+ 182:Core/Src/main.c ****   hiwdg.Instance = IWDG;
+ 183:Core/Src/main.c ****   hiwdg.Init.Prescaler = IWDG_PRESCALER_4;
+ 184:Core/Src/main.c ****   hiwdg.Init.Reload = 4095;
+ 185:Core/Src/main.c ****   if (HAL_IWDG_Init(&hiwdg) != HAL_OK)
+ 186:Core/Src/main.c ****   {
+ 187:Core/Src/main.c ****     Error_Handler();
+ 188:Core/Src/main.c ****   }
+ 189:Core/Src/main.c ****   /* USER CODE BEGIN IWDG_Init 2 */
+ 190:Core/Src/main.c **** 
+ 191:Core/Src/main.c ****   /* USER CODE END IWDG_Init 2 */
+ 192:Core/Src/main.c **** 
+ 193:Core/Src/main.c **** }
+ 194:Core/Src/main.c **** 
+ 195:Core/Src/main.c **** /**
+ 196:Core/Src/main.c ****   * @brief RTC Initialization Function
+ 197:Core/Src/main.c ****   * @param None
+ 198:Core/Src/main.c ****   * @retval None
+ 199:Core/Src/main.c ****   */
+ 200:Core/Src/main.c **** static void MX_RTC_Init(void)
+ 201:Core/Src/main.c **** {
+ 202:Core/Src/main.c **** 
+ 203:Core/Src/main.c ****   /* USER CODE BEGIN RTC_Init 0 */
+ 204:Core/Src/main.c **** 
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 5
+
+
+ 205:Core/Src/main.c ****   /* USER CODE END RTC_Init 0 */
+ 206:Core/Src/main.c **** 
+ 207:Core/Src/main.c ****   RTC_TimeTypeDef sTime = {0};
+ 208:Core/Src/main.c ****   RTC_DateTypeDef DateToUpdate = {0};
+ 209:Core/Src/main.c **** 
+ 210:Core/Src/main.c ****   /* USER CODE BEGIN RTC_Init 1 */
+ 211:Core/Src/main.c ****   hrtc.Instance = RTC;
+ 212:Core/Src/main.c ****   hrtc.Init.AsynchPrediv = RTC_AUTO_1_SECOND;
+ 213:Core/Src/main.c ****   hrtc.Init.OutPut = RTC_OUTPUTSOURCE_ALARM;
+ 214:Core/Src/main.c ****   if ((RCC->BDCR & RCC_BDCR_RTCEN) == 0) {
+ 215:Core/Src/main.c ****   /* USER CODE END RTC_Init 1 */
+ 216:Core/Src/main.c **** 
+ 217:Core/Src/main.c ****   /** Initialize RTC Only
+ 218:Core/Src/main.c ****   */
+ 219:Core/Src/main.c ****   hrtc.Instance = RTC;
+ 220:Core/Src/main.c ****   hrtc.Init.AsynchPrediv = RTC_AUTO_1_SECOND;
+ 221:Core/Src/main.c ****   hrtc.Init.OutPut = RTC_OUTPUTSOURCE_ALARM;
+ 222:Core/Src/main.c ****   if (HAL_RTC_Init(&hrtc) != HAL_OK)
+ 223:Core/Src/main.c ****   {
+ 224:Core/Src/main.c ****     Error_Handler();
+ 225:Core/Src/main.c ****   }
+ 226:Core/Src/main.c **** 
+ 227:Core/Src/main.c ****   /* USER CODE BEGIN Check_RTC_BKUP */
+ 228:Core/Src/main.c ****   } else
+ 229:Core/Src/main.c ****     {
+ 230:Core/Src/main.c **** 	  HAL_NVIC_SetPriority(RTC_IRQn,15,0);
+ 231:Core/Src/main.c **** 	  HAL_NVIC_EnableIRQ(RTC_IRQn);
+ 232:Core/Src/main.c **** 	}
+ 233:Core/Src/main.c **** 	if(HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR1)!= 0x5051)
+ 234:Core/Src/main.c **** 	{
+ 235:Core/Src/main.c ****   /* USER CODE END Check_RTC_BKUP */
+ 236:Core/Src/main.c **** 
+ 237:Core/Src/main.c ****   /** Initialize RTC and set the Time and Date
+ 238:Core/Src/main.c ****   */
+ 239:Core/Src/main.c ****   sTime.Hours = 0x0;
+ 240:Core/Src/main.c ****   sTime.Minutes = 0x0;
+ 241:Core/Src/main.c ****   sTime.Seconds = 0x0;
+ 242:Core/Src/main.c **** 
+ 243:Core/Src/main.c ****   if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BCD) != HAL_OK)
+ 244:Core/Src/main.c ****   {
+ 245:Core/Src/main.c ****     Error_Handler();
+ 246:Core/Src/main.c ****   }
+ 247:Core/Src/main.c ****   DateToUpdate.WeekDay = RTC_WEEKDAY_MONDAY;
+ 248:Core/Src/main.c ****   DateToUpdate.Month = RTC_MONTH_JANUARY;
+ 249:Core/Src/main.c ****   DateToUpdate.Date = 0x1;
+ 250:Core/Src/main.c ****   DateToUpdate.Year = 0x0;
+ 251:Core/Src/main.c **** 
+ 252:Core/Src/main.c ****   if (HAL_RTC_SetDate(&hrtc, &DateToUpdate, RTC_FORMAT_BCD) != HAL_OK)
+ 253:Core/Src/main.c ****   {
+ 254:Core/Src/main.c ****     Error_Handler();
+ 255:Core/Src/main.c ****   }
+ 256:Core/Src/main.c ****   /* USER CODE BEGIN RTC_Init 2 */
+ 257:Core/Src/main.c **** 	} // Kitame user code virsuje yra IF komanda. Cia ji uzsidaro.
+ 258:Core/Src/main.c ****   // LAIKAS BUVO ISSAUGOTAS, NES USER REGISTRAS TURI MAGIC skaiciu 0x5051
+ 259:Core/Src/main.c ****   
+ 260:Core/Src/main.c ****   
+ 261:Core/Src/main.c **** // LAIKRODZIO TIKRINIMAS  
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 6
+
+
+ 262:Core/Src/main.c ****   
+ 263:Core/Src/main.c **** /* read RTC for time */
+ 264:Core/Src/main.c **** 	HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
+ 265:Core/Src/main.c **** /* read time seconds for epoch */
+ 266:Core/Src/main.c **** // uint32_t nowsecons=currTime.Hours*3600+currTime.Minutes*60+currTime.Seconds+(dienos.Date-1)*8640
+ 267:Core/Src/main.c **** 
+ 268:Core/Src/main.c **** //KALENDORIAUS TIKRINIMAS
+ 269:Core/Src/main.c **** 
+ 270:Core/Src/main.c **** 	//RTC kalendorius FAIL! Pas F103 jo ir nera. Cold boot su gyvu RTC
+ 271:Core/Src/main.c **** 	RTC_DateTypeDef dienos= {0};
+ 272:Core/Src/main.c **** 	HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
+ 273:Core/Src/main.c **** 	if(dienos.Year < 20) {rtc_check_screwd_calendar();}
+ 274:Core/Src/main.c **** 	
+ 275:Core/Src/main.c **** //HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
+ 276:Core/Src/main.c **** 
+ 277:Core/Src/main.c **** //Cia irasom MAGIC skaiciu. Jis po pilno reseto ir RTC mirties turi neislikti.
+ 278:Core/Src/main.c **** 	HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0x5051);//Write data to the specified backing area registe
+ 279:Core/Src/main.c **** 
+ 280:Core/Src/main.c **** //HAL_RTCEx_SetSmoothCalib(&hrtc,0,0,10);
+ 281:Core/Src/main.c ****   /* USER CODE END RTC_Init 2 */
+ 282:Core/Src/main.c **** 
+ 283:Core/Src/main.c **** }
+ 284:Core/Src/main.c **** 
+ 285:Core/Src/main.c **** /**
+ 286:Core/Src/main.c ****   * @brief TIM1 Initialization Function
+ 287:Core/Src/main.c ****   * @param None
+ 288:Core/Src/main.c ****   * @retval None
+ 289:Core/Src/main.c ****   */
+ 290:Core/Src/main.c **** static void MX_TIM1_Init(void)
+ 291:Core/Src/main.c **** {
+ 292:Core/Src/main.c **** 
+ 293:Core/Src/main.c ****   /* USER CODE BEGIN TIM1_Init 0 */
+ 294:Core/Src/main.c **** 
+ 295:Core/Src/main.c ****   /* USER CODE END TIM1_Init 0 */
+ 296:Core/Src/main.c **** 
+ 297:Core/Src/main.c ****   TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+ 298:Core/Src/main.c ****   TIM_MasterConfigTypeDef sMasterConfig = {0};
+ 299:Core/Src/main.c ****   TIM_OC_InitTypeDef sConfigOC = {0};
+ 300:Core/Src/main.c ****   TIM_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig = {0};
+ 301:Core/Src/main.c **** 
+ 302:Core/Src/main.c ****   /* USER CODE BEGIN TIM1_Init 1 */
+ 303:Core/Src/main.c **** 
+ 304:Core/Src/main.c ****   /* USER CODE END TIM1_Init 1 */
+ 305:Core/Src/main.c ****   htim1.Instance = TIM1;
+ 306:Core/Src/main.c ****   htim1.Init.Prescaler = 0;
+ 307:Core/Src/main.c ****   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
+ 308:Core/Src/main.c ****   htim1.Init.Period = 35535;
+ 309:Core/Src/main.c ****   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+ 310:Core/Src/main.c ****   htim1.Init.RepetitionCounter = 0;
+ 311:Core/Src/main.c ****   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+ 312:Core/Src/main.c ****   if (HAL_TIM_Base_Init(&htim1) != HAL_OK)
+ 313:Core/Src/main.c ****   {
+ 314:Core/Src/main.c ****     Error_Handler();
+ 315:Core/Src/main.c ****   }
+ 316:Core/Src/main.c ****   sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+ 317:Core/Src/main.c ****   if (HAL_TIM_ConfigClockSource(&htim1, &sClockSourceConfig) != HAL_OK)
+ 318:Core/Src/main.c ****   {
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 7
+
+
+ 319:Core/Src/main.c ****     Error_Handler();
+ 320:Core/Src/main.c ****   }
+ 321:Core/Src/main.c ****   if (HAL_TIM_PWM_Init(&htim1) != HAL_OK)
+ 322:Core/Src/main.c ****   {
+ 323:Core/Src/main.c ****     Error_Handler();
+ 324:Core/Src/main.c ****   }
+ 325:Core/Src/main.c ****   sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+ 326:Core/Src/main.c ****   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+ 327:Core/Src/main.c ****   if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK)
+ 328:Core/Src/main.c ****   {
+ 329:Core/Src/main.c ****     Error_Handler();
+ 330:Core/Src/main.c ****   }
+ 331:Core/Src/main.c ****   sConfigOC.OCMode = TIM_OCMODE_PWM1;
+ 332:Core/Src/main.c ****   sConfigOC.Pulse = 0;
+ 333:Core/Src/main.c ****   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+ 334:Core/Src/main.c ****   sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+ 335:Core/Src/main.c ****   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+ 336:Core/Src/main.c ****   sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
+ 337:Core/Src/main.c ****   sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+ 338:Core/Src/main.c ****   if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+ 339:Core/Src/main.c ****   {
+ 340:Core/Src/main.c ****     Error_Handler();
+ 341:Core/Src/main.c ****   }
+ 342:Core/Src/main.c ****   sBreakDeadTimeConfig.OffStateRunMode = TIM_OSSR_DISABLE;
+ 343:Core/Src/main.c ****   sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_DISABLE;
+ 344:Core/Src/main.c ****   sBreakDeadTimeConfig.LockLevel = TIM_LOCKLEVEL_OFF;
+ 345:Core/Src/main.c ****   sBreakDeadTimeConfig.DeadTime = 0;
+ 346:Core/Src/main.c ****   sBreakDeadTimeConfig.BreakState = TIM_BREAK_DISABLE;
+ 347:Core/Src/main.c ****   sBreakDeadTimeConfig.BreakPolarity = TIM_BREAKPOLARITY_HIGH;
+ 348:Core/Src/main.c ****   sBreakDeadTimeConfig.AutomaticOutput = TIM_AUTOMATICOUTPUT_DISABLE;
+ 349:Core/Src/main.c ****   if (HAL_TIMEx_ConfigBreakDeadTime(&htim1, &sBreakDeadTimeConfig) != HAL_OK)
+ 350:Core/Src/main.c ****   {
+ 351:Core/Src/main.c ****     Error_Handler();
+ 352:Core/Src/main.c ****   }
+ 353:Core/Src/main.c ****   /* USER CODE BEGIN TIM1_Init 2 */
+ 354:Core/Src/main.c **** 
+ 355:Core/Src/main.c ****   /* USER CODE END TIM1_Init 2 */
+ 356:Core/Src/main.c ****   HAL_TIM_MspPostInit(&htim1);
+ 357:Core/Src/main.c **** 
+ 358:Core/Src/main.c **** }
+ 359:Core/Src/main.c **** 
+ 360:Core/Src/main.c **** /**
+ 361:Core/Src/main.c ****   * @brief GPIO Initialization Function
+ 362:Core/Src/main.c ****   * @param None
+ 363:Core/Src/main.c ****   * @retval None
+ 364:Core/Src/main.c ****   */
+ 365:Core/Src/main.c **** static void MX_GPIO_Init(void)
+ 366:Core/Src/main.c **** {
+  26              		.loc 1 366 1 view -0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 32
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30 0000 30B5     		push	{r4, r5, lr}
+  31              	.LCFI0:
+  32              		.cfi_def_cfa_offset 12
+  33              		.cfi_offset 4, -12
+  34              		.cfi_offset 5, -8
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 8
+
+
+  35              		.cfi_offset 14, -4
+  36 0002 89B0     		sub	sp, sp, #36
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 48
+ 367:Core/Src/main.c ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
+  39              		.loc 1 367 3 view .LVU1
+  40              		.loc 1 367 20 is_stmt 0 view .LVU2
+  41 0004 0024     		movs	r4, #0
+  42 0006 0494     		str	r4, [sp, #16]
+  43 0008 0594     		str	r4, [sp, #20]
+  44 000a 0694     		str	r4, [sp, #24]
+  45 000c 0794     		str	r4, [sp, #28]
+ 368:Core/Src/main.c **** /* USER CODE BEGIN MX_GPIO_Init_1 */
+ 369:Core/Src/main.c **** /* USER CODE END MX_GPIO_Init_1 */
+ 370:Core/Src/main.c **** 
+ 371:Core/Src/main.c ****   /* GPIO Ports Clock Enable */
+ 372:Core/Src/main.c ****   __HAL_RCC_GPIOC_CLK_ENABLE();
+  46              		.loc 1 372 3 is_stmt 1 view .LVU3
+  47              	.LBB4:
+  48              		.loc 1 372 3 view .LVU4
+  49              		.loc 1 372 3 view .LVU5
+  50 000e 174B     		ldr	r3, .L3
+  51 0010 9A69     		ldr	r2, [r3, #24]
+  52 0012 42F01002 		orr	r2, r2, #16
+  53 0016 9A61     		str	r2, [r3, #24]
+  54              		.loc 1 372 3 view .LVU6
+  55 0018 9A69     		ldr	r2, [r3, #24]
+  56 001a 02F01002 		and	r2, r2, #16
+  57 001e 0192     		str	r2, [sp, #4]
+  58              		.loc 1 372 3 view .LVU7
+  59 0020 019A     		ldr	r2, [sp, #4]
+  60              	.LBE4:
+  61              		.loc 1 372 3 view .LVU8
+ 373:Core/Src/main.c ****   __HAL_RCC_GPIOD_CLK_ENABLE();
+  62              		.loc 1 373 3 view .LVU9
+  63              	.LBB5:
+  64              		.loc 1 373 3 view .LVU10
+  65              		.loc 1 373 3 view .LVU11
+  66 0022 9A69     		ldr	r2, [r3, #24]
+  67 0024 42F02002 		orr	r2, r2, #32
+  68 0028 9A61     		str	r2, [r3, #24]
+  69              		.loc 1 373 3 view .LVU12
+  70 002a 9A69     		ldr	r2, [r3, #24]
+  71 002c 02F02002 		and	r2, r2, #32
+  72 0030 0292     		str	r2, [sp, #8]
+  73              		.loc 1 373 3 view .LVU13
+  74 0032 029A     		ldr	r2, [sp, #8]
+  75              	.LBE5:
+  76              		.loc 1 373 3 view .LVU14
+ 374:Core/Src/main.c ****   __HAL_RCC_GPIOA_CLK_ENABLE();
+  77              		.loc 1 374 3 view .LVU15
+  78              	.LBB6:
+  79              		.loc 1 374 3 view .LVU16
+  80              		.loc 1 374 3 view .LVU17
+  81 0034 9A69     		ldr	r2, [r3, #24]
+  82 0036 42F00402 		orr	r2, r2, #4
+  83 003a 9A61     		str	r2, [r3, #24]
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 9
+
+
+  84              		.loc 1 374 3 view .LVU18
+  85 003c 9B69     		ldr	r3, [r3, #24]
+  86 003e 03F00403 		and	r3, r3, #4
+  87 0042 0393     		str	r3, [sp, #12]
+  88              		.loc 1 374 3 view .LVU19
+  89 0044 039B     		ldr	r3, [sp, #12]
+  90              	.LBE6:
+  91              		.loc 1 374 3 view .LVU20
+ 375:Core/Src/main.c **** 
+ 376:Core/Src/main.c ****   /*Configure GPIO pin Output Level */
+ 377:Core/Src/main.c ****   HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
+  92              		.loc 1 377 3 view .LVU21
+  93 0046 0A4D     		ldr	r5, .L3+4
+  94 0048 2246     		mov	r2, r4
+  95 004a 0121     		movs	r1, #1
+  96 004c 2846     		mov	r0, r5
+  97 004e FFF7FEFF 		bl	HAL_GPIO_WritePin
+  98              	.LVL0:
+ 378:Core/Src/main.c **** 
+ 379:Core/Src/main.c ****   /*Configure GPIO pin : LED_Pin */
+ 380:Core/Src/main.c ****   GPIO_InitStruct.Pin = LED_Pin;
+  99              		.loc 1 380 3 view .LVU22
+ 100              		.loc 1 380 23 is_stmt 0 view .LVU23
+ 101 0052 0123     		movs	r3, #1
+ 102 0054 0493     		str	r3, [sp, #16]
+ 381:Core/Src/main.c ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ 103              		.loc 1 381 3 is_stmt 1 view .LVU24
+ 104              		.loc 1 381 24 is_stmt 0 view .LVU25
+ 105 0056 0593     		str	r3, [sp, #20]
+ 382:Core/Src/main.c ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 106              		.loc 1 382 3 is_stmt 1 view .LVU26
+ 107              		.loc 1 382 24 is_stmt 0 view .LVU27
+ 108 0058 0694     		str	r4, [sp, #24]
+ 383:Core/Src/main.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+ 109              		.loc 1 383 3 is_stmt 1 view .LVU28
+ 110              		.loc 1 383 25 is_stmt 0 view .LVU29
+ 111 005a 0223     		movs	r3, #2
+ 112 005c 0793     		str	r3, [sp, #28]
+ 384:Core/Src/main.c ****   HAL_GPIO_Init(LED_GPIO_Port, &GPIO_InitStruct);
+ 113              		.loc 1 384 3 is_stmt 1 view .LVU30
+ 114 005e 04A9     		add	r1, sp, #16
+ 115 0060 2846     		mov	r0, r5
+ 116 0062 FFF7FEFF 		bl	HAL_GPIO_Init
+ 117              	.LVL1:
+ 385:Core/Src/main.c **** 
+ 386:Core/Src/main.c **** /* USER CODE BEGIN MX_GPIO_Init_2 */
+ 387:Core/Src/main.c **** /* USER CODE END MX_GPIO_Init_2 */
+ 388:Core/Src/main.c **** }
+ 118              		.loc 1 388 1 is_stmt 0 view .LVU31
+ 119 0066 09B0     		add	sp, sp, #36
+ 120              	.LCFI2:
+ 121              		.cfi_def_cfa_offset 12
+ 122              		@ sp needed
+ 123 0068 30BD     		pop	{r4, r5, pc}
+ 124              	.L4:
+ 125 006a 00BF     		.align	2
+ 126              	.L3:
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 10
+
+
+ 127 006c 00100240 		.word	1073876992
+ 128 0070 00080140 		.word	1073809408
+ 129              		.cfi_endproc
+ 130              	.LFE95:
+ 132              		.section	.text.rtc_clean,"ax",%progbits
+ 133              		.align	1
+ 134              		.global	rtc_clean
+ 135              		.syntax unified
+ 136              		.thumb
+ 137              		.thumb_func
+ 139              	rtc_clean:
+ 140              	.LFB68:
+ 141              		.file 2 "Core/Src/USER/rtc.c"
+   1:Core/Src/USER/rtc.c **** /* ********************************************* */
+   2:Core/Src/USER/rtc.c **** /* (c)2022 by www.vabolis.lt, Kaunas             */
+   3:Core/Src/USER/rtc.c **** /**
+   4:Core/Src/USER/rtc.c ****   **********************************************
+   5:Core/Src/USER/rtc.c ****   * @file           : rtc.c
+   6:Core/Src/USER/rtc.c ****   * @version        : 1.0
+   7:Core/Src/USER/rtc.c ****   * @brief          : generic RTC clock and calendar for STM32
+   8:Core/Src/USER/rtc.c **** **/  
+   9:Core/Src/USER/rtc.c **** /* ********************************************* */
+  10:Core/Src/USER/rtc.c **** 
+  11:Core/Src/USER/rtc.c **** #include "rtc.h"
+  12:Core/Src/USER/rtc.c **** #include "user.h"
+  13:Core/Src/USER/rtc.c **** #include "usbd_cdc_if.h"
+  14:Core/Src/USER/rtc.c **** 
+  15:Core/Src/USER/rtc.c **** //#include "epoch.c"
+  16:Core/Src/USER/rtc.c **** 
+  17:Core/Src/USER/rtc.c **** extern RTC_HandleTypeDef hrtc;
+  18:Core/Src/USER/rtc.c **** 
+  19:Core/Src/USER/rtc.c **** 
+  20:Core/Src/USER/rtc.c **** // ****** pacioje pradzioje, globalus laikas. Galima persideklaruoti, bet ar verta?
+  21:Core/Src/USER/rtc.c **** 
+  22:Core/Src/USER/rtc.c **** RTC_TimeTypeDef currTime = {0};
+  23:Core/Src/USER/rtc.c **** RTC_TimeTypeDef oldTime = {0xFF,0xFF,0xFF}; //del refresh
+  24:Core/Src/USER/rtc.c **** volatile unsigned char LastHour=255;
+  25:Core/Src/USER/rtc.c **** 
+  26:Core/Src/USER/rtc.c **** /* instrukcijos kurias reikia ikelti i main.c */
+  27:Core/Src/USER/rtc.c **** 
+  28:Core/Src/USER/rtc.c **** //-  /* USER CODE BEGIN Check_RTC_BKUP */
+  29:Core/Src/USER/rtc.c **** //-  
+  30:Core/Src/USER/rtc.c **** //-  // CIA TIKRINAM AR RTC ir kiti RAM baitai isliko gyvi.
+  31:Core/Src/USER/rtc.c **** //-    if(HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR1)!= 0x5051)
+  32:Core/Src/USER/rtc.c **** //-	{
+  33:Core/Src/USER/rtc.c **** //-  /* USER CODE END Check_RTC_BKUP */
+  34:Core/Src/USER/rtc.c **** 
+  35:Core/Src/USER/rtc.c **** 
+  36:Core/Src/USER/rtc.c **** //- /* USER CODE BEGIN RTC_Init 2 */
+  37:Core/Src/USER/rtc.c **** //-	} // Kitame user code virsuje yra IF komanda. Cia ji uzsidaro.
+  38:Core/Src/USER/rtc.c **** //-  // LAIKAS BUVO ISSAUGOTAS, NES USER REGISTRAS TURI MAGIC skaiciu 0x5051
+  39:Core/Src/USER/rtc.c **** //- 
+  40:Core/Src/USER/rtc.c **** //- /* read RTC for time */
+  41:Core/Src/USER/rtc.c **** //-	HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
+  42:Core/Src/USER/rtc.c **** //- /* read time seconds for epoch */
+  43:Core/Src/USER/rtc.c **** //- // uint32_t nowsecons=currTime.Hours*3600+currTime.Minutes*60+currTime.Seconds+(dienos.Date-1)*
+  44:Core/Src/USER/rtc.c **** //-
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 11
+
+
+  45:Core/Src/USER/rtc.c **** //- /* set time to RTC */
+  46:Core/Src/USER/rtc.c **** //-	if (HAL_RTC_SetTime(&hrtc, &currTime, RTC_FORMAT_BIN) != HAL_OK)
+  47:Core/Src/USER/rtc.c **** //-	{
+  48:Core/Src/USER/rtc.c **** //-	Error_Handler();
+  49:Core/Src/USER/rtc.c **** //-	}
+  50:Core/Src/USER/rtc.c **** //-
+  51:Core/Src/USER/rtc.c **** //- // DEMESIO! STM32F103 NETURI KALENDORIAUS ir panasu, kad neturi epoch skaitliuko.
+  52:Core/Src/USER/rtc.c **** //-	//RTC_DateTypeDef dienos= {0};
+  53:Core/Src/USER/rtc.c **** //-	//HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
+  54:Core/Src/USER/rtc.c **** //-	HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
+  55:Core/Src/USER/rtc.c **** //-
+  56:Core/Src/USER/rtc.c **** //- //Cia irasom MAGIC skaiciu. Jis po pilno reseto ir RTC mirties turi neislikti.
+  57:Core/Src/USER/rtc.c **** //-	HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0x5051);//Write data to the specified backing area regi
+  58:Core/Src/USER/rtc.c **** //-
+  59:Core/Src/USER/rtc.c **** //- //HAL_RTCEx_SetSmoothCalib(&hrtc,0,0,10);
+  60:Core/Src/USER/rtc.c **** //-   /* USER CODE END RTC_Init 2 */
+  61:Core/Src/USER/rtc.c **** 
+  62:Core/Src/USER/rtc.c **** 
+  63:Core/Src/USER/rtc.c **** // sunaikina sena laika. Naudojama LCD grafikos spartinimui
+  64:Core/Src/USER/rtc.c **** void rtc_clean(void)
+  65:Core/Src/USER/rtc.c **** {
+ 142              		.loc 2 65 1 is_stmt 1 view -0
+ 143              		.cfi_startproc
+ 144              		@ args = 0, pretend = 0, frame = 0
+ 145              		@ frame_needed = 0, uses_anonymous_args = 0
+ 146              		@ link register save eliminated.
+  66:Core/Src/USER/rtc.c **** 	oldTime.Hours = 60;
+ 147              		.loc 2 66 2 view .LVU33
+ 148              		.loc 2 66 16 is_stmt 0 view .LVU34
+ 149 0000 024B     		ldr	r3, .L6
+ 150 0002 3C22     		movs	r2, #60
+ 151 0004 1A70     		strb	r2, [r3]
+  67:Core/Src/USER/rtc.c **** 	oldTime.Minutes = 60;
+ 152              		.loc 2 67 2 is_stmt 1 view .LVU35
+ 153              		.loc 2 67 18 is_stmt 0 view .LVU36
+ 154 0006 5A70     		strb	r2, [r3, #1]
+  68:Core/Src/USER/rtc.c **** 	oldTime.Seconds = 60;
+ 155              		.loc 2 68 2 is_stmt 1 view .LVU37
+ 156              		.loc 2 68 18 is_stmt 0 view .LVU38
+ 157 0008 9A70     		strb	r2, [r3, #2]
+  69:Core/Src/USER/rtc.c **** }
+ 158              		.loc 2 69 1 view .LVU39
+ 159 000a 7047     		bx	lr
+ 160              	.L7:
+ 161              		.align	2
+ 162              	.L6:
+ 163 000c 00000000 		.word	.LANCHOR0
+ 164              		.cfi_endproc
+ 165              	.LFE68:
+ 167              		.section	.text.filter_string,"ax",%progbits
+ 168              		.align	1
+ 169              		.global	filter_string
+ 170              		.syntax unified
+ 171              		.thumb
+ 172              		.thumb_func
+ 174              	filter_string:
+ 175              	.LVL2:
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 12
+
+
+ 176              	.LFB69:
+  70:Core/Src/USER/rtc.c **** 
+  71:Core/Src/USER/rtc.c **** 
+  72:Core/Src/USER/rtc.c **** 
+  73:Core/Src/USER/rtc.c **** 
+  74:Core/Src/USER/rtc.c **** // teksto filtras laiko ir datos nustatymui.
+  75:Core/Src/USER/rtc.c **** void filter_string(char *Buf)
+  76:Core/Src/USER/rtc.c **** {
+ 177              		.loc 2 76 1 is_stmt 1 view -0
+ 178              		.cfi_startproc
+ 179              		@ args = 0, pretend = 0, frame = 0
+ 180              		@ frame_needed = 0, uses_anonymous_args = 0
+ 181              		.loc 2 76 1 is_stmt 0 view .LVU41
+ 182 0000 00B5     		push	{lr}
+ 183              	.LCFI3:
+ 184              		.cfi_def_cfa_offset 4
+ 185              		.cfi_offset 14, -4
+ 186 0002 0246     		mov	r2, r0
+  77:Core/Src/USER/rtc.c **** int i=0;
+ 187              		.loc 2 77 1 is_stmt 1 view .LVU42
+ 188              	.LVL3:
+  78:Core/Src/USER/rtc.c **** int j=0;
+ 189              		.loc 2 78 1 view .LVU43
+  79:Core/Src/USER/rtc.c **** 
+  80:Core/Src/USER/rtc.c **** for(i=0;Buf[i] != 0; i++)
+ 190              		.loc 2 80 1 view .LVU44
+ 191              		.loc 2 80 6 is_stmt 0 view .LVU45
+ 192 0004 4FF0000C 		mov	ip, #0
+ 193              		.loc 2 80 1 view .LVU46
+ 194 0008 17E0     		b	.L9
+ 195              	.LVL4:
+ 196              	.L10:
+  81:Core/Src/USER/rtc.c **** 	{
+  82:Core/Src/USER/rtc.c **** 	while(!((Buf[i]>='0' && Buf[i]<='9') || Buf[i]==':' || Buf[i]=='.') && !(Buf[i]==0))
+  83:Core/Src/USER/rtc.c **** 		{
+  84:Core/Src/USER/rtc.c **** 			for(j=i;Buf[j] !=0; ++j)
+  85:Core/Src/USER/rtc.c **** 				{
+  86:Core/Src/USER/rtc.c **** 					Buf[j]=Buf[j+1];
+ 197              		.loc 2 86 6 is_stmt 1 discriminator 3 view .LVU47
+ 198              		.loc 2 86 16 is_stmt 0 discriminator 3 view .LVU48
+ 199 000a D118     		adds	r1, r2, r3
+ 200 000c 4978     		ldrb	r1, [r1, #1]	@ zero_extendqisi2
+ 201              		.loc 2 86 12 discriminator 3 view .LVU49
+ 202 000e D154     		strb	r1, [r2, r3]
+  84:Core/Src/USER/rtc.c **** 				{
+ 203              		.loc 2 84 24 is_stmt 1 discriminator 3 view .LVU50
+ 204 0010 0133     		adds	r3, r3, #1
+ 205              	.LVL5:
+ 206              	.L12:
+  84:Core/Src/USER/rtc.c **** 				{
+ 207              		.loc 2 84 12 discriminator 1 view .LVU51
+  84:Core/Src/USER/rtc.c **** 				{
+ 208              		.loc 2 84 15 is_stmt 0 discriminator 1 view .LVU52
+ 209 0012 D018     		adds	r0, r2, r3
+ 210 0014 D15C     		ldrb	r1, [r2, r3]	@ zero_extendqisi2
+  84:Core/Src/USER/rtc.c **** 				{
+ 211              		.loc 2 84 4 discriminator 1 view .LVU53
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 13
+
+
+ 212 0016 0029     		cmp	r1, #0
+ 213 0018 F7D1     		bne	.L10
+  87:Core/Src/USER/rtc.c **** 				}
+  88:Core/Src/USER/rtc.c **** 			Buf[j]=0;
+ 214              		.loc 2 88 4 is_stmt 1 view .LVU54
+ 215              		.loc 2 88 10 is_stmt 0 view .LVU55
+ 216 001a 0023     		movs	r3, #0
+ 217              	.LVL6:
+ 218              		.loc 2 88 10 view .LVU56
+ 219 001c 0370     		strb	r3, [r0]
+ 220              	.L13:
+  82:Core/Src/USER/rtc.c **** 		{
+ 221              		.loc 2 82 7 is_stmt 1 view .LVU57
+  82:Core/Src/USER/rtc.c **** 		{
+ 222              		.loc 2 82 14 is_stmt 0 view .LVU58
+ 223 001e 9EF80010 		ldrb	r1, [lr]	@ zero_extendqisi2
+  82:Core/Src/USER/rtc.c **** 		{
+ 224              		.loc 2 82 39 view .LVU59
+ 225 0022 A1F13003 		sub	r3, r1, #48
+ 226 0026 DBB2     		uxtb	r3, r3
+  82:Core/Src/USER/rtc.c **** 		{
+ 227              		.loc 2 82 7 view .LVU60
+ 228 0028 0A2B     		cmp	r3, #10
+ 229 002a 04D9     		bls	.L11
+  82:Core/Src/USER/rtc.c **** 		{
+ 230              		.loc 2 82 8 discriminator 1 view .LVU61
+ 231 002c 2E29     		cmp	r1, #46
+ 232 002e 02D0     		beq	.L11
+  82:Core/Src/USER/rtc.c **** 		{
+ 233              		.loc 2 82 70 discriminator 2 view .LVU62
+ 234 0030 09B1     		cbz	r1, .L11
+  84:Core/Src/USER/rtc.c **** 				{
+ 235              		.loc 2 84 9 view .LVU63
+ 236 0032 6346     		mov	r3, ip
+ 237 0034 EDE7     		b	.L12
+ 238              	.L11:
+  80:Core/Src/USER/rtc.c **** 	{
+ 239              		.loc 2 80 22 is_stmt 1 discriminator 2 view .LVU64
+  80:Core/Src/USER/rtc.c **** 	{
+ 240              		.loc 2 80 23 is_stmt 0 discriminator 2 view .LVU65
+ 241 0036 0CF1010C 		add	ip, ip, #1
+ 242              	.LVL7:
+ 243              	.L9:
+  80:Core/Src/USER/rtc.c **** 	{
+ 244              		.loc 2 80 9 is_stmt 1 discriminator 1 view .LVU66
+  80:Core/Src/USER/rtc.c **** 	{
+ 245              		.loc 2 80 12 is_stmt 0 discriminator 1 view .LVU67
+ 246 003a 02EB0C0E 		add	lr, r2, ip
+ 247 003e 12F80C30 		ldrb	r3, [r2, ip]	@ zero_extendqisi2
+  80:Core/Src/USER/rtc.c **** 	{
+ 248              		.loc 2 80 1 discriminator 1 view .LVU68
+ 249 0042 002B     		cmp	r3, #0
+ 250 0044 EBD1     		bne	.L13
+  89:Core/Src/USER/rtc.c **** 		}
+  90:Core/Src/USER/rtc.c **** 	}
+  91:Core/Src/USER/rtc.c **** }
+ 251              		.loc 2 91 1 view .LVU69
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 14
+
+
+ 252 0046 5DF804FB 		ldr	pc, [sp], #4
+ 253              		.cfi_endproc
+ 254              	.LFE69:
+ 256              		.section	.text.rtc_update,"ax",%progbits
+ 257              		.align	1
+ 258              		.global	rtc_update
+ 259              		.syntax unified
+ 260              		.thumb
+ 261              		.thumb_func
+ 263              	rtc_update:
+ 264              	.LFB72:
+  92:Core/Src/USER/rtc.c **** 
+  93:Core/Src/USER/rtc.c **** //nustatyti kalendoriu.
+  94:Core/Src/USER/rtc.c **** void rtc_set_date_text(char * Buf)
+  95:Core/Src/USER/rtc.c **** {
+  96:Core/Src/USER/rtc.c **** filter_string(Buf);
+  97:Core/Src/USER/rtc.c **** //22.12.23
+  98:Core/Src/USER/rtc.c **** 
+  99:Core/Src/USER/rtc.c **** RTC_DateTypeDef dienos;
+ 100:Core/Src/USER/rtc.c **** 
+ 101:Core/Src/USER/rtc.c **** if(strlen(Buf)<8) return;
+ 102:Core/Src/USER/rtc.c **** 	char delim[] = ".";
+ 103:Core/Src/USER/rtc.c **** 
+ 104:Core/Src/USER/rtc.c **** 	char *ptr = strtok(Buf, delim);
+ 105:Core/Src/USER/rtc.c **** 	dienos.Year=atoi(ptr);
+ 106:Core/Src/USER/rtc.c **** 	
+ 107:Core/Src/USER/rtc.c **** 	ptr = strtok(NULL, delim);
+ 108:Core/Src/USER/rtc.c **** 	dienos.Month=atoi(ptr);
+ 109:Core/Src/USER/rtc.c **** 	
+ 110:Core/Src/USER/rtc.c **** 	ptr = strtok(NULL, delim);
+ 111:Core/Src/USER/rtc.c **** 	dienos.Date=atoi(ptr);
+ 112:Core/Src/USER/rtc.c **** 	
+ 113:Core/Src/USER/rtc.c ****  if (HAL_RTC_SetDate(&hrtc, &dienos, RTC_FORMAT_BIN) != HAL_OK)
+ 114:Core/Src/USER/rtc.c ****   {
+ 115:Core/Src/USER/rtc.c ****     Error_Handler();
+ 116:Core/Src/USER/rtc.c ****   }
+ 117:Core/Src/USER/rtc.c ****   
+ 118:Core/Src/USER/rtc.c ****   rtc_backup_date();
+ 119:Core/Src/USER/rtc.c **** }
+ 120:Core/Src/USER/rtc.c **** 
+ 121:Core/Src/USER/rtc.c **** //nustatyti laikrodi
+ 122:Core/Src/USER/rtc.c **** void rtc_set_time_text(char * Buf)
+ 123:Core/Src/USER/rtc.c **** {
+ 124:Core/Src/USER/rtc.c **** // echo ATT%TIME% >COMx
+ 125:Core/Src/USER/rtc.c **** //ATT19:14:32.94
+ 126:Core/Src/USER/rtc.c **** 
+ 127:Core/Src/USER/rtc.c **** 
+ 128:Core/Src/USER/rtc.c **** filter_string(Buf);
+ 129:Core/Src/USER/rtc.c **** 
+ 130:Core/Src/USER/rtc.c **** if(strlen(Buf)<8) return;
+ 131:Core/Src/USER/rtc.c **** 
+ 132:Core/Src/USER/rtc.c **** 	char delim[] = ":";
+ 133:Core/Src/USER/rtc.c **** 
+ 134:Core/Src/USER/rtc.c **** 	char *ptr = strtok(Buf, delim);
+ 135:Core/Src/USER/rtc.c **** 	currTime.Hours=atoi(ptr);
+ 136:Core/Src/USER/rtc.c **** 	
+ 137:Core/Src/USER/rtc.c **** 	ptr = strtok(NULL, delim);
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 15
+
+
+ 138:Core/Src/USER/rtc.c **** 	currTime.Minutes=atoi(ptr);
+ 139:Core/Src/USER/rtc.c **** 	
+ 140:Core/Src/USER/rtc.c **** 	ptr = strtok(NULL, delim);
+ 141:Core/Src/USER/rtc.c **** 	currTime.Seconds=atoi(ptr);
+ 142:Core/Src/USER/rtc.c **** 	
+ 143:Core/Src/USER/rtc.c ****  if (HAL_RTC_SetTime(&hrtc, &currTime, RTC_FORMAT_BIN) != HAL_OK)
+ 144:Core/Src/USER/rtc.c ****   {
+ 145:Core/Src/USER/rtc.c ****     Error_Handler();
+ 146:Core/Src/USER/rtc.c ****   }
+ 147:Core/Src/USER/rtc.c **** 
+ 148:Core/Src/USER/rtc.c **** }
+ 149:Core/Src/USER/rtc.c **** 
+ 150:Core/Src/USER/rtc.c **** // nuskaityti laika is hardwares.
+ 151:Core/Src/USER/rtc.c **** void rtc_update(void)
+ 152:Core/Src/USER/rtc.c **** {
+ 265              		.loc 2 152 1 is_stmt 1 view -0
+ 266              		.cfi_startproc
+ 267              		@ args = 0, pretend = 0, frame = 0
+ 268              		@ frame_needed = 0, uses_anonymous_args = 0
+ 269 0000 08B5     		push	{r3, lr}
+ 270              	.LCFI4:
+ 271              		.cfi_def_cfa_offset 8
+ 272              		.cfi_offset 3, -8
+ 273              		.cfi_offset 14, -4
+ 153:Core/Src/USER/rtc.c **** 	HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
+ 274              		.loc 2 153 2 view .LVU71
+ 275 0002 0022     		movs	r2, #0
+ 276 0004 0249     		ldr	r1, .L18
+ 277 0006 0348     		ldr	r0, .L18+4
+ 278 0008 FFF7FEFF 		bl	HAL_RTC_GetTime
+ 279              	.LVL8:
+ 154:Core/Src/USER/rtc.c **** }
+ 280              		.loc 2 154 1 is_stmt 0 view .LVU72
+ 281 000c 08BD     		pop	{r3, pc}
+ 282              	.L19:
+ 283 000e 00BF     		.align	2
+ 284              	.L18:
+ 285 0010 00000000 		.word	.LANCHOR1
+ 286 0014 00000000 		.word	.LANCHOR2
+ 287              		.cfi_endproc
+ 288              	.LFE72:
+ 290              		.section	.text.rtc_time_string,"ax",%progbits
+ 291              		.align	1
+ 292              		.global	rtc_time_string
+ 293              		.syntax unified
+ 294              		.thumb
+ 295              		.thumb_func
+ 297              	rtc_time_string:
+ 298              	.LVL9:
+ 299              	.LFB73:
+ 155:Core/Src/USER/rtc.c **** 
+ 156:Core/Src/USER/rtc.c **** //rtc->tekstas
+ 157:Core/Src/USER/rtc.c **** void rtc_time_string(char * text)
+ 158:Core/Src/USER/rtc.c **** {
+ 300              		.loc 2 158 1 is_stmt 1 view -0
+ 301              		.cfi_startproc
+ 302              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 16
+
+
+ 303              		@ frame_needed = 0, uses_anonymous_args = 0
+ 304              		.loc 2 158 1 is_stmt 0 view .LVU74
+ 305 0000 38B5     		push	{r3, r4, r5, lr}
+ 306              	.LCFI5:
+ 307              		.cfi_def_cfa_offset 16
+ 308              		.cfi_offset 3, -16
+ 309              		.cfi_offset 4, -12
+ 310              		.cfi_offset 5, -8
+ 311              		.cfi_offset 14, -4
+ 312 0002 0446     		mov	r4, r0
+ 159:Core/Src/USER/rtc.c **** 	HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
+ 313              		.loc 2 159 2 is_stmt 1 view .LVU75
+ 314 0004 1B4D     		ldr	r5, .L22
+ 315 0006 0022     		movs	r2, #0
+ 316 0008 2946     		mov	r1, r5
+ 317 000a 1B48     		ldr	r0, .L22+4
+ 318              	.LVL10:
+ 319              		.loc 2 159 2 is_stmt 0 view .LVU76
+ 320 000c FFF7FEFF 		bl	HAL_RTC_GetTime
+ 321              	.LVL11:
+ 160:Core/Src/USER/rtc.c **** 	text[0]=(currTime.Hours)/10+'0';
+ 322              		.loc 2 160 2 is_stmt 1 view .LVU77
+ 323              		.loc 2 160 19 is_stmt 0 view .LVU78
+ 324 0010 2A78     		ldrb	r2, [r5]	@ zero_extendqisi2
+ 325              		.loc 2 160 29 view .LVU79
+ 326 0012 1A4B     		ldr	r3, .L22+8
+ 327 0014 A3FB0212 		umull	r1, r2, r3, r2
+ 328 0018 D208     		lsrs	r2, r2, #3
+ 329 001a 3032     		adds	r2, r2, #48
+ 330              		.loc 2 160 9 view .LVU80
+ 331 001c 2270     		strb	r2, [r4]
+ 161:Core/Src/USER/rtc.c **** 	text[1]=(currTime.Hours)%10+'0';
+ 332              		.loc 2 161 2 is_stmt 1 view .LVU81
+ 333              		.loc 2 161 19 is_stmt 0 view .LVU82
+ 334 001e 2A78     		ldrb	r2, [r5]	@ zero_extendqisi2
+ 335              		.loc 2 161 29 view .LVU83
+ 336 0020 A3FB0201 		umull	r0, r1, r3, r2
+ 337 0024 C908     		lsrs	r1, r1, #3
+ 338 0026 01EB8101 		add	r1, r1, r1, lsl #2
+ 339 002a A2EB4102 		sub	r2, r2, r1, lsl #1
+ 340 002e 3032     		adds	r2, r2, #48
+ 341              		.loc 2 161 9 view .LVU84
+ 342 0030 6270     		strb	r2, [r4, #1]
+ 162:Core/Src/USER/rtc.c **** 	text[2]=':';	
+ 343              		.loc 2 162 2 is_stmt 1 view .LVU85
+ 344              		.loc 2 162 9 is_stmt 0 view .LVU86
+ 345 0032 3A20     		movs	r0, #58
+ 346 0034 A070     		strb	r0, [r4, #2]
+ 163:Core/Src/USER/rtc.c **** 
+ 164:Core/Src/USER/rtc.c **** 	text[3]=(currTime.Minutes)/10+'0';
+ 347              		.loc 2 164 2 is_stmt 1 view .LVU87
+ 348              		.loc 2 164 19 is_stmt 0 view .LVU88
+ 349 0036 6978     		ldrb	r1, [r5, #1]	@ zero_extendqisi2
+ 350              		.loc 2 164 31 view .LVU89
+ 351 0038 A3FB01C2 		umull	ip, r2, r3, r1
+ 352 003c D208     		lsrs	r2, r2, #3
+ 353 003e 02F1300C 		add	ip, r2, #48
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 17
+
+
+ 354              		.loc 2 164 9 view .LVU90
+ 355 0042 84F803C0 		strb	ip, [r4, #3]
+ 165:Core/Src/USER/rtc.c **** 	text[4]=(currTime.Minutes)%10+'0';
+ 356              		.loc 2 165 2 is_stmt 1 view .LVU91
+ 357              		.loc 2 165 31 is_stmt 0 view .LVU92
+ 358 0046 02EB8202 		add	r2, r2, r2, lsl #2
+ 359 004a A1EB4202 		sub	r2, r1, r2, lsl #1
+ 360 004e 3032     		adds	r2, r2, #48
+ 361              		.loc 2 165 9 view .LVU93
+ 362 0050 2271     		strb	r2, [r4, #4]
+ 166:Core/Src/USER/rtc.c **** 	text[5]=':';	
+ 363              		.loc 2 166 2 is_stmt 1 view .LVU94
+ 364              		.loc 2 166 9 is_stmt 0 view .LVU95
+ 365 0052 6071     		strb	r0, [r4, #5]
+ 167:Core/Src/USER/rtc.c **** 
+ 168:Core/Src/USER/rtc.c **** 	text[6]=(currTime.Seconds)/10+'0';
+ 366              		.loc 2 168 2 is_stmt 1 view .LVU96
+ 367              		.loc 2 168 19 is_stmt 0 view .LVU97
+ 368 0054 AA78     		ldrb	r2, [r5, #2]	@ zero_extendqisi2
+ 369              		.loc 2 168 31 view .LVU98
+ 370 0056 A3FB0213 		umull	r1, r3, r3, r2
+ 371 005a DB08     		lsrs	r3, r3, #3
+ 372 005c 03F13001 		add	r1, r3, #48
+ 373              		.loc 2 168 9 view .LVU99
+ 374 0060 A171     		strb	r1, [r4, #6]
+ 169:Core/Src/USER/rtc.c **** 	text[7]=(currTime.Seconds)%10+'0';
+ 375              		.loc 2 169 2 is_stmt 1 view .LVU100
+ 376              		.loc 2 169 31 is_stmt 0 view .LVU101
+ 377 0062 03EB8303 		add	r3, r3, r3, lsl #2
+ 378 0066 A2EB4303 		sub	r3, r2, r3, lsl #1
+ 379 006a 3033     		adds	r3, r3, #48
+ 380              		.loc 2 169 9 view .LVU102
+ 381 006c E371     		strb	r3, [r4, #7]
+ 170:Core/Src/USER/rtc.c **** 	text[8]=0;
+ 382              		.loc 2 170 2 is_stmt 1 view .LVU103
+ 383              		.loc 2 170 9 is_stmt 0 view .LVU104
+ 384 006e 0023     		movs	r3, #0
+ 385 0070 2372     		strb	r3, [r4, #8]
+ 171:Core/Src/USER/rtc.c **** }
+ 386              		.loc 2 171 1 view .LVU105
+ 387 0072 38BD     		pop	{r3, r4, r5, pc}
+ 388              	.LVL12:
+ 389              	.L23:
+ 390              		.loc 2 171 1 view .LVU106
+ 391              		.align	2
+ 392              	.L22:
+ 393 0074 00000000 		.word	.LANCHOR1
+ 394 0078 00000000 		.word	.LANCHOR2
+ 395 007c CDCCCCCC 		.word	-858993459
+ 396              		.cfi_endproc
+ 397              	.LFE73:
+ 399              		.section	.text.rtc_date_string,"ax",%progbits
+ 400              		.align	1
+ 401              		.global	rtc_date_string
+ 402              		.syntax unified
+ 403              		.thumb
+ 404              		.thumb_func
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 18
+
+
+ 406              	rtc_date_string:
+ 407              	.LVL13:
+ 408              	.LFB74:
+ 172:Core/Src/USER/rtc.c **** void rtc_date_string(char * text)
+ 173:Core/Src/USER/rtc.c **** {
+ 409              		.loc 2 173 1 is_stmt 1 view -0
+ 410              		.cfi_startproc
+ 411              		@ args = 0, pretend = 0, frame = 8
+ 412              		@ frame_needed = 0, uses_anonymous_args = 0
+ 413              		.loc 2 173 1 is_stmt 0 view .LVU108
+ 414 0000 10B5     		push	{r4, lr}
+ 415              	.LCFI6:
+ 416              		.cfi_def_cfa_offset 8
+ 417              		.cfi_offset 4, -8
+ 418              		.cfi_offset 14, -4
+ 419 0002 82B0     		sub	sp, sp, #8
+ 420              	.LCFI7:
+ 421              		.cfi_def_cfa_offset 16
+ 422 0004 0446     		mov	r4, r0
+ 174:Core/Src/USER/rtc.c **** 	RTC_DateTypeDef dienos;
+ 423              		.loc 2 174 2 is_stmt 1 view .LVU109
+ 175:Core/Src/USER/rtc.c **** 	HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
+ 424              		.loc 2 175 2 view .LVU110
+ 425 0006 0022     		movs	r2, #0
+ 426 0008 01A9     		add	r1, sp, #4
+ 427 000a 1B48     		ldr	r0, .L26
+ 428              	.LVL14:
+ 429              		.loc 2 175 2 is_stmt 0 view .LVU111
+ 430 000c FFF7FEFF 		bl	HAL_RTC_GetDate
+ 431              	.LVL15:
+ 176:Core/Src/USER/rtc.c **** 
+ 177:Core/Src/USER/rtc.c **** 	text[0]=(dienos.Year)/10+'0';
+ 432              		.loc 2 177 2 is_stmt 1 view .LVU112
+ 433              		.loc 2 177 17 is_stmt 0 view .LVU113
+ 434 0010 9DF80710 		ldrb	r1, [sp, #7]	@ zero_extendqisi2
+ 435              		.loc 2 177 26 view .LVU114
+ 436 0014 194B     		ldr	r3, .L26+4
+ 437 0016 A3FB0102 		umull	r0, r2, r3, r1
+ 438 001a D208     		lsrs	r2, r2, #3
+ 439 001c 02F13000 		add	r0, r2, #48
+ 440              		.loc 2 177 9 view .LVU115
+ 441 0020 2070     		strb	r0, [r4]
+ 178:Core/Src/USER/rtc.c **** 	text[1]=(dienos.Year)%10+'0';
+ 442              		.loc 2 178 2 is_stmt 1 view .LVU116
+ 443              		.loc 2 178 26 is_stmt 0 view .LVU117
+ 444 0022 02EB8202 		add	r2, r2, r2, lsl #2
+ 445 0026 A1EB4202 		sub	r2, r1, r2, lsl #1
+ 446 002a 3032     		adds	r2, r2, #48
+ 447              		.loc 2 178 9 view .LVU118
+ 448 002c 6270     		strb	r2, [r4, #1]
+ 179:Core/Src/USER/rtc.c **** 	text[2]='.';
+ 449              		.loc 2 179 2 is_stmt 1 view .LVU119
+ 450              		.loc 2 179 9 is_stmt 0 view .LVU120
+ 451 002e 2E20     		movs	r0, #46
+ 452 0030 A070     		strb	r0, [r4, #2]
+ 180:Core/Src/USER/rtc.c **** 	text[3]=(dienos.Month)/10+'0';
+ 453              		.loc 2 180 2 is_stmt 1 view .LVU121
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 19
+
+
+ 454              		.loc 2 180 17 is_stmt 0 view .LVU122
+ 455 0032 9DF80510 		ldrb	r1, [sp, #5]	@ zero_extendqisi2
+ 456              		.loc 2 180 27 view .LVU123
+ 457 0036 A3FB01C2 		umull	ip, r2, r3, r1
+ 458 003a D208     		lsrs	r2, r2, #3
+ 459 003c 02F1300C 		add	ip, r2, #48
+ 460              		.loc 2 180 9 view .LVU124
+ 461 0040 84F803C0 		strb	ip, [r4, #3]
+ 181:Core/Src/USER/rtc.c **** 	text[4]=(dienos.Month)%10+'0';
+ 462              		.loc 2 181 2 is_stmt 1 view .LVU125
+ 463              		.loc 2 181 27 is_stmt 0 view .LVU126
+ 464 0044 02EB8202 		add	r2, r2, r2, lsl #2
+ 465 0048 A1EB4202 		sub	r2, r1, r2, lsl #1
+ 466 004c 3032     		adds	r2, r2, #48
+ 467              		.loc 2 181 9 view .LVU127
+ 468 004e 2271     		strb	r2, [r4, #4]
+ 182:Core/Src/USER/rtc.c **** 	text[5]='.';
+ 469              		.loc 2 182 2 is_stmt 1 view .LVU128
+ 470              		.loc 2 182 9 is_stmt 0 view .LVU129
+ 471 0050 6071     		strb	r0, [r4, #5]
+ 183:Core/Src/USER/rtc.c **** 	text[6]=(dienos.Date)/10+'0';
+ 472              		.loc 2 183 2 is_stmt 1 view .LVU130
+ 473              		.loc 2 183 17 is_stmt 0 view .LVU131
+ 474 0052 9DF80620 		ldrb	r2, [sp, #6]	@ zero_extendqisi2
+ 475              		.loc 2 183 26 view .LVU132
+ 476 0056 A3FB0213 		umull	r1, r3, r3, r2
+ 477 005a DB08     		lsrs	r3, r3, #3
+ 478 005c 03F13001 		add	r1, r3, #48
+ 479              		.loc 2 183 9 view .LVU133
+ 480 0060 A171     		strb	r1, [r4, #6]
+ 184:Core/Src/USER/rtc.c **** 	text[7]=(dienos.Date)%10+'0';
+ 481              		.loc 2 184 2 is_stmt 1 view .LVU134
+ 482              		.loc 2 184 26 is_stmt 0 view .LVU135
+ 483 0062 03EB8303 		add	r3, r3, r3, lsl #2
+ 484 0066 A2EB4303 		sub	r3, r2, r3, lsl #1
+ 485 006a 3033     		adds	r3, r3, #48
+ 486              		.loc 2 184 9 view .LVU136
+ 487 006c E371     		strb	r3, [r4, #7]
+ 185:Core/Src/USER/rtc.c **** 	text[8]=0;
+ 488              		.loc 2 185 2 is_stmt 1 view .LVU137
+ 489              		.loc 2 185 9 is_stmt 0 view .LVU138
+ 490 006e 0023     		movs	r3, #0
+ 491 0070 2372     		strb	r3, [r4, #8]
+ 186:Core/Src/USER/rtc.c **** }
+ 492              		.loc 2 186 1 view .LVU139
+ 493 0072 02B0     		add	sp, sp, #8
+ 494              	.LCFI8:
+ 495              		.cfi_def_cfa_offset 8
+ 496              		@ sp needed
+ 497 0074 10BD     		pop	{r4, pc}
+ 498              	.LVL16:
+ 499              	.L27:
+ 500              		.loc 2 186 1 view .LVU140
+ 501 0076 00BF     		.align	2
+ 502              	.L26:
+ 503 0078 00000000 		.word	.LANCHOR2
+ 504 007c CDCCCCCC 		.word	-858993459
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 20
+
+
+ 505              		.cfi_endproc
+ 506              	.LFE74:
+ 508              		.section	.text.rtc_backup_date,"ax",%progbits
+ 509              		.align	1
+ 510              		.global	rtc_backup_date
+ 511              		.syntax unified
+ 512              		.thumb
+ 513              		.thumb_func
+ 515              	rtc_backup_date:
+ 516              	.LFB75:
+ 187:Core/Src/USER/rtc.c **** 
+ 188:Core/Src/USER/rtc.c **** void rtc_backup_date(void)
+ 189:Core/Src/USER/rtc.c **** {
+ 517              		.loc 2 189 1 is_stmt 1 view -0
+ 518              		.cfi_startproc
+ 519              		@ args = 0, pretend = 0, frame = 8
+ 520              		@ frame_needed = 0, uses_anonymous_args = 0
+ 521 0000 30B5     		push	{r4, r5, lr}
+ 522              	.LCFI9:
+ 523              		.cfi_def_cfa_offset 12
+ 524              		.cfi_offset 4, -12
+ 525              		.cfi_offset 5, -8
+ 526              		.cfi_offset 14, -4
+ 527 0002 83B0     		sub	sp, sp, #12
+ 528              	.LCFI10:
+ 529              		.cfi_def_cfa_offset 24
+ 190:Core/Src/USER/rtc.c **** RTC_DateTypeDef dienos;
+ 530              		.loc 2 190 1 view .LVU142
+ 191:Core/Src/USER/rtc.c **** 	if(HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR1)== 0x5051) //magic number, valid backup
+ 531              		.loc 2 191 2 view .LVU143
+ 532              		.loc 2 191 5 is_stmt 0 view .LVU144
+ 533 0004 0121     		movs	r1, #1
+ 534 0006 1448     		ldr	r0, .L32
+ 535 0008 FFF7FEFF 		bl	HAL_RTCEx_BKUPRead
+ 536              	.LVL17:
+ 537              		.loc 2 191 4 view .LVU145
+ 538 000c 45F25103 		movw	r3, #20561
+ 539 0010 9842     		cmp	r0, r3
+ 540 0012 01D0     		beq	.L31
+ 541              	.L28:
+ 192:Core/Src/USER/rtc.c **** 	{
+ 193:Core/Src/USER/rtc.c **** 		HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
+ 194:Core/Src/USER/rtc.c **** 		HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
+ 195:Core/Src/USER/rtc.c **** 		HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR2, (uint16_t) (dienos.Year<<8) + dienos.Month);	
+ 196:Core/Src/USER/rtc.c **** 		HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR3, (uint16_t) (dienos.Date<<8) + currTime.Hours);	
+ 197:Core/Src/USER/rtc.c **** 	}
+ 198:Core/Src/USER/rtc.c **** }
+ 542              		.loc 2 198 1 view .LVU146
+ 543 0014 03B0     		add	sp, sp, #12
+ 544              	.LCFI11:
+ 545              		.cfi_remember_state
+ 546              		.cfi_def_cfa_offset 12
+ 547              		@ sp needed
+ 548 0016 30BD     		pop	{r4, r5, pc}
+ 549              	.L31:
+ 550              	.LCFI12:
+ 551              		.cfi_restore_state
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 21
+
+
+ 193:Core/Src/USER/rtc.c **** 		HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
+ 552              		.loc 2 193 3 is_stmt 1 view .LVU147
+ 553 0018 0F4C     		ldr	r4, .L32
+ 554 001a 0022     		movs	r2, #0
+ 555 001c 01A9     		add	r1, sp, #4
+ 556 001e 2046     		mov	r0, r4
+ 557 0020 FFF7FEFF 		bl	HAL_RTC_GetDate
+ 558              	.LVL18:
+ 194:Core/Src/USER/rtc.c **** 		HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR2, (uint16_t) (dienos.Year<<8) + dienos.Month);	
+ 559              		.loc 2 194 3 view .LVU148
+ 560 0024 0D4D     		ldr	r5, .L32+4
+ 561 0026 0022     		movs	r2, #0
+ 562 0028 2946     		mov	r1, r5
+ 563 002a 2046     		mov	r0, r4
+ 564 002c FFF7FEFF 		bl	HAL_RTC_GetTime
+ 565              	.LVL19:
+ 195:Core/Src/USER/rtc.c **** 		HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR3, (uint16_t) (dienos.Date<<8) + currTime.Hours);	
+ 566              		.loc 2 195 3 view .LVU149
+ 195:Core/Src/USER/rtc.c **** 		HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR3, (uint16_t) (dienos.Date<<8) + currTime.Hours);	
+ 567              		.loc 2 195 61 is_stmt 0 view .LVU150
+ 568 0030 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
+ 195:Core/Src/USER/rtc.c **** 		HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR3, (uint16_t) (dienos.Date<<8) + currTime.Hours);	
+ 569              		.loc 2 195 79 view .LVU151
+ 570 0034 9DF80530 		ldrb	r3, [sp, #5]	@ zero_extendqisi2
+ 195:Core/Src/USER/rtc.c **** 		HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR3, (uint16_t) (dienos.Date<<8) + currTime.Hours);	
+ 571              		.loc 2 195 3 view .LVU152
+ 572 0038 03EB0222 		add	r2, r3, r2, lsl #8
+ 573 003c 0221     		movs	r1, #2
+ 574 003e 2046     		mov	r0, r4
+ 575 0040 FFF7FEFF 		bl	HAL_RTCEx_BKUPWrite
+ 576              	.LVL20:
+ 196:Core/Src/USER/rtc.c **** 	}
+ 577              		.loc 2 196 3 is_stmt 1 view .LVU153
+ 196:Core/Src/USER/rtc.c **** 	}
+ 578              		.loc 2 196 61 is_stmt 0 view .LVU154
+ 579 0044 9DF80620 		ldrb	r2, [sp, #6]	@ zero_extendqisi2
+ 196:Core/Src/USER/rtc.c **** 	}
+ 580              		.loc 2 196 81 view .LVU155
+ 581 0048 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 196:Core/Src/USER/rtc.c **** 	}
+ 582              		.loc 2 196 3 view .LVU156
+ 583 004a 03EB0222 		add	r2, r3, r2, lsl #8
+ 584 004e 0321     		movs	r1, #3
+ 585 0050 2046     		mov	r0, r4
+ 586 0052 FFF7FEFF 		bl	HAL_RTCEx_BKUPWrite
+ 587              	.LVL21:
+ 588              		.loc 2 198 1 view .LVU157
+ 589 0056 DDE7     		b	.L28
+ 590              	.L33:
+ 591              		.align	2
+ 592              	.L32:
+ 593 0058 00000000 		.word	.LANCHOR2
+ 594 005c 00000000 		.word	.LANCHOR1
+ 595              		.cfi_endproc
+ 596              	.LFE75:
+ 598              		.section	.text.rtc_int_init,"ax",%progbits
+ 599              		.align	1
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 22
+
+
+ 600              		.global	rtc_int_init
+ 601              		.syntax unified
+ 602              		.thumb
+ 603              		.thumb_func
+ 605              	rtc_int_init:
+ 606              	.LFB77:
+ 199:Core/Src/USER/rtc.c **** 
+ 200:Core/Src/USER/rtc.c **** void rtc_check_screwd_calendar(void)
+ 201:Core/Src/USER/rtc.c **** {
+ 202:Core/Src/USER/rtc.c **** RTC_DateTypeDef dienos;
+ 203:Core/Src/USER/rtc.c **** 	if(HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR1)== 0x5051) //magic number, valid backup
+ 204:Core/Src/USER/rtc.c **** 	{
+ 205:Core/Src/USER/rtc.c **** 		HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
+ 206:Core/Src/USER/rtc.c **** 		HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
+ 207:Core/Src/USER/rtc.c **** 		uint32_t now_is=currTime.Hours+dienos.Date*24+dienos.Month*31*24+dienos.Year*366*24;
+ 208:Core/Src/USER/rtc.c **** 		
+ 209:Core/Src/USER/rtc.c **** 		uint32_t tmp=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR2);
+ 210:Core/Src/USER/rtc.c **** 		uint32_t tmp2=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR3);	
+ 211:Core/Src/USER/rtc.c **** 	
+ 212:Core/Src/USER/rtc.c **** 		uint32_t now_was=(tmp>>8)*366*24+(tmp & 0x000F)*31*24+(tmp2>>8)*24+(tmp2 & 0xFF);
+ 213:Core/Src/USER/rtc.c **** 		if(now_was > now_is)
+ 214:Core/Src/USER/rtc.c **** 			{
+ 215:Core/Src/USER/rtc.c **** 			dienos.Year=(tmp >> 8);
+ 216:Core/Src/USER/rtc.c **** 			dienos.Month=tmp & 0x0F;
+ 217:Core/Src/USER/rtc.c **** 			dienos.Date=(tmp2 >> 8);
+ 218:Core/Src/USER/rtc.c **** 			 if (HAL_RTC_SetDate(&hrtc, &dienos, RTC_FORMAT_BIN) != HAL_OK)
+ 219:Core/Src/USER/rtc.c **** 			  {
+ 220:Core/Src/USER/rtc.c **** 				Error_Handler();
+ 221:Core/Src/USER/rtc.c **** 			  }
+ 222:Core/Src/USER/rtc.c **** 			 rtc_backup_date();
+ 223:Core/Src/USER/rtc.c **** 			}
+ 224:Core/Src/USER/rtc.c **** 	}
+ 225:Core/Src/USER/rtc.c **** }
+ 226:Core/Src/USER/rtc.c **** 
+ 227:Core/Src/USER/rtc.c **** 
+ 228:Core/Src/USER/rtc.c **** /* INT INT INT INT INT INT INT INT INT INT INT INT INT INT INT INT */
+ 229:Core/Src/USER/rtc.c **** 
+ 230:Core/Src/USER/rtc.c **** /* ijungti RTC pertraukimus */
+ 231:Core/Src/USER/rtc.c **** void rtc_int_init(void)
+ 232:Core/Src/USER/rtc.c **** {
+ 607              		.loc 2 232 1 is_stmt 1 view -0
+ 608              		.cfi_startproc
+ 609              		@ args = 0, pretend = 0, frame = 0
+ 610              		@ frame_needed = 0, uses_anonymous_args = 0
+ 611              		@ link register save eliminated.
+ 233:Core/Src/USER/rtc.c **** 	__HAL_RTC_SECOND_ENABLE_IT(&hrtc,RTC_IT_SEC); //turn on RTC clock seconds interrupt
+ 612              		.loc 2 233 2 view .LVU159
+ 613 0000 034B     		ldr	r3, .L35
+ 614 0002 1A68     		ldr	r2, [r3]
+ 615 0004 1368     		ldr	r3, [r2]
+ 616 0006 43F00103 		orr	r3, r3, #1
+ 617 000a 1360     		str	r3, [r2]
+ 234:Core/Src/USER/rtc.c **** }
+ 618              		.loc 2 234 1 is_stmt 0 view .LVU160
+ 619 000c 7047     		bx	lr
+ 620              	.L36:
+ 621 000e 00BF     		.align	2
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 23
+
+
+ 622              	.L35:
+ 623 0010 00000000 		.word	.LANCHOR2
+ 624              		.cfi_endproc
+ 625              	.LFE77:
+ 627              		.section	.text.circle_reset,"ax",%progbits
+ 628              		.align	1
+ 629              		.global	circle_reset
+ 630              		.syntax unified
+ 631              		.thumb
+ 632              		.thumb_func
+ 634              	circle_reset:
+ 635              	.LVL22:
+ 636              	.LFB79:
+ 637              		.file 3 "Core/Src/USER/circular_buffer.c"
+   1:Core/Src/USER/circular_buffer.c **** /* ********************************************* */
+   2:Core/Src/USER/circular_buffer.c **** /* (c)2022 by www.vabolis.lt, Kaunas             */
+   3:Core/Src/USER/circular_buffer.c **** /**
+   4:Core/Src/USER/circular_buffer.c ****   **********************************************
+   5:Core/Src/USER/circular_buffer.c ****   * @file           : circular_buffer.c
+   6:Core/Src/USER/circular_buffer.c ****   * @version        : 1.0
+   7:Core/Src/USER/circular_buffer.c ****   * @brief          : circular buffer for uart/usb
+   8:Core/Src/USER/circular_buffer.c **** **/  
+   9:Core/Src/USER/circular_buffer.c **** /* ********************************************* */
+  10:Core/Src/USER/circular_buffer.c **** 
+  11:Core/Src/USER/circular_buffer.c **** #include "circular_buffer.h"
+  12:Core/Src/USER/circular_buffer.c **** 
+  13:Core/Src/USER/circular_buffer.c **** /* INSTRUKCIJA
+  14:Core/Src/USER/circular_buffer.c **** #define BUFFER_SIZE 32
+  15:Core/Src/USER/circular_buffer.c **** 
+  16:Core/Src/USER/circular_buffer.c **** unsigned char testas[BUFFER_SIZE];
+  17:Core/Src/USER/circular_buffer.c **** CCBuf cc; //struktura
+  18:Core/Src/USER/circular_buffer.c **** //init
+  19:Core/Src/USER/circular_buffer.c **** cc.buffer=testas;
+  20:Core/Src/USER/circular_buffer.c **** circle_reset(&cc,BUFFER_SIZE);
+  21:Core/Src/USER/circular_buffer.c **** 
+  22:Core/Src/USER/circular_buffer.c **** //naudojimas
+  23:Core/Src/USER/circular_buffer.c **** 
+  24:Core/Src/USER/circular_buffer.c **** while(circle_available(&cc)>0) {a=circle_pull(&cc); naudoti duomenys}
+  25:Core/Src/USER/circular_buffer.c **** 					
+  26:Core/Src/USER/circular_buffer.c **** // uart callback
+  27:Core/Src/USER/circular_buffer.c **** circle_push(&cc , baitinisbuferis); // push received byte to circular buffer
+  28:Core/Src/USER/circular_buffer.c **** 					
+  29:Core/Src/USER/circular_buffer.c **** 
+  30:Core/Src/USER/circular_buffer.c **** ************* */
+  31:Core/Src/USER/circular_buffer.c **** 
+  32:Core/Src/USER/circular_buffer.c **** 
+  33:Core/Src/USER/circular_buffer.c **** 
+  34:Core/Src/USER/circular_buffer.c **** void circle_reset(CCBuf *c, size_t size)
+  35:Core/Src/USER/circular_buffer.c **** {
+ 638              		.loc 3 35 1 is_stmt 1 view -0
+ 639              		.cfi_startproc
+ 640              		@ args = 0, pretend = 0, frame = 0
+ 641              		@ frame_needed = 0, uses_anonymous_args = 0
+ 642              		@ link register save eliminated.
+  36:Core/Src/USER/circular_buffer.c **** 	c->head=0;
+ 643              		.loc 3 36 2 view .LVU162
+ 644              		.loc 3 36 9 is_stmt 0 view .LVU163
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 24
+
+
+ 645 0000 0023     		movs	r3, #0
+ 646 0002 4360     		str	r3, [r0, #4]
+  37:Core/Src/USER/circular_buffer.c **** 	c->tail=0;
+ 647              		.loc 3 37 2 is_stmt 1 view .LVU164
+ 648              		.loc 3 37 9 is_stmt 0 view .LVU165
+ 649 0004 8360     		str	r3, [r0, #8]
+  38:Core/Src/USER/circular_buffer.c **** 	c->max=size; //sizeof(c->buffer); <-- negauna sitos informacijos
+ 650              		.loc 3 38 2 is_stmt 1 view .LVU166
+ 651              		.loc 3 38 8 is_stmt 0 view .LVU167
+ 652 0006 0161     		str	r1, [r0, #16]
+  39:Core/Src/USER/circular_buffer.c **** 	c->count=0;
+ 653              		.loc 3 39 2 is_stmt 1 view .LVU168
+ 654              		.loc 3 39 10 is_stmt 0 view .LVU169
+ 655 0008 C360     		str	r3, [r0, #12]
+  40:Core/Src/USER/circular_buffer.c **** }
+ 656              		.loc 3 40 1 view .LVU170
+ 657 000a 7047     		bx	lr
+ 658              		.cfi_endproc
+ 659              	.LFE79:
+ 661              		.section	.text.circle_push,"ax",%progbits
+ 662              		.align	1
+ 663              		.global	circle_push
+ 664              		.syntax unified
+ 665              		.thumb
+ 666              		.thumb_func
+ 668              	circle_push:
+ 669              	.LVL23:
+ 670              	.LFB80:
+  41:Core/Src/USER/circular_buffer.c **** 
+  42:Core/Src/USER/circular_buffer.c **** void circle_push(CCBuf *c,unsigned char b)
+  43:Core/Src/USER/circular_buffer.c **** {
+ 671              		.loc 3 43 1 is_stmt 1 view -0
+ 672              		.cfi_startproc
+ 673              		@ args = 0, pretend = 0, frame = 0
+ 674              		@ frame_needed = 0, uses_anonymous_args = 0
+ 675              		@ link register save eliminated.
+  44:Core/Src/USER/circular_buffer.c **** 	c->buffer[c->head]=b;
+ 676              		.loc 3 44 2 view .LVU172
+ 677              		.loc 3 44 3 is_stmt 0 view .LVU173
+ 678 0000 0268     		ldr	r2, [r0]
+ 679              		.loc 3 44 13 view .LVU174
+ 680 0002 4368     		ldr	r3, [r0, #4]
+ 681              		.loc 3 44 20 view .LVU175
+ 682 0004 D154     		strb	r1, [r2, r3]
+  45:Core/Src/USER/circular_buffer.c **** 	c->head++; if(c->head == c->max) {c->head=0;}
+ 683              		.loc 3 45 2 is_stmt 1 view .LVU176
+ 684              		.loc 3 45 3 is_stmt 0 view .LVU177
+ 685 0006 4368     		ldr	r3, [r0, #4]
+ 686              		.loc 3 45 9 view .LVU178
+ 687 0008 0133     		adds	r3, r3, #1
+ 688 000a 4360     		str	r3, [r0, #4]
+ 689              		.loc 3 45 13 is_stmt 1 view .LVU179
+ 690              		.loc 3 45 28 is_stmt 0 view .LVU180
+ 691 000c 0269     		ldr	r2, [r0, #16]
+ 692              		.loc 3 45 15 view .LVU181
+ 693 000e 9342     		cmp	r3, r2
+ 694 0010 03D0     		beq	.L40
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 25
+
+
+ 695              	.L39:
+  46:Core/Src/USER/circular_buffer.c **** 	c->count++;
+ 696              		.loc 3 46 2 is_stmt 1 view .LVU182
+ 697              		.loc 3 46 3 is_stmt 0 view .LVU183
+ 698 0012 C368     		ldr	r3, [r0, #12]
+ 699              		.loc 3 46 10 view .LVU184
+ 700 0014 0133     		adds	r3, r3, #1
+ 701 0016 C360     		str	r3, [r0, #12]
+  47:Core/Src/USER/circular_buffer.c **** 	//if(c->count == c->max) {c->count=c->max;} //error
+  48:Core/Src/USER/circular_buffer.c **** }
+ 702              		.loc 3 48 1 view .LVU185
+ 703 0018 7047     		bx	lr
+ 704              	.L40:
+  45:Core/Src/USER/circular_buffer.c **** 	c->count++;
+ 705              		.loc 3 45 36 is_stmt 1 discriminator 1 view .LVU186
+  45:Core/Src/USER/circular_buffer.c **** 	c->count++;
+ 706              		.loc 3 45 43 is_stmt 0 discriminator 1 view .LVU187
+ 707 001a 0023     		movs	r3, #0
+ 708 001c 4360     		str	r3, [r0, #4]
+ 709 001e F8E7     		b	.L39
+ 710              		.cfi_endproc
+ 711              	.LFE80:
+ 713              		.section	.text.circle_pull,"ax",%progbits
+ 714              		.align	1
+ 715              		.global	circle_pull
+ 716              		.syntax unified
+ 717              		.thumb
+ 718              		.thumb_func
+ 720              	circle_pull:
+ 721              	.LVL24:
+ 722              	.LFB81:
+  49:Core/Src/USER/circular_buffer.c **** 
+  50:Core/Src/USER/circular_buffer.c **** unsigned char circle_pull(CCBuf *c)
+  51:Core/Src/USER/circular_buffer.c **** {
+ 723              		.loc 3 51 1 is_stmt 1 view -0
+ 724              		.cfi_startproc
+ 725              		@ args = 0, pretend = 0, frame = 0
+ 726              		@ frame_needed = 0, uses_anonymous_args = 0
+ 727              		@ link register save eliminated.
+ 728              		.loc 3 51 1 is_stmt 0 view .LVU189
+ 729 0000 0346     		mov	r3, r0
+  52:Core/Src/USER/circular_buffer.c **** unsigned char b;
+ 730              		.loc 3 52 1 is_stmt 1 view .LVU190
+  53:Core/Src/USER/circular_buffer.c **** 	b=c->buffer[c->tail];
+ 731              		.loc 3 53 2 view .LVU191
+ 732              		.loc 3 53 5 is_stmt 0 view .LVU192
+ 733 0002 0168     		ldr	r1, [r0]
+ 734              		.loc 3 53 15 view .LVU193
+ 735 0004 8268     		ldr	r2, [r0, #8]
+ 736              		.loc 3 53 3 view .LVU194
+ 737 0006 885C     		ldrb	r0, [r1, r2]	@ zero_extendqisi2
+ 738              	.LVL25:
+  54:Core/Src/USER/circular_buffer.c **** 	c->tail++;
+ 739              		.loc 3 54 2 is_stmt 1 view .LVU195
+ 740              		.loc 3 54 9 is_stmt 0 view .LVU196
+ 741 0008 0132     		adds	r2, r2, #1
+ 742 000a 9A60     		str	r2, [r3, #8]
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 26
+
+
+  55:Core/Src/USER/circular_buffer.c **** 	if(c->tail == c->max) {c->tail=0;}
+ 743              		.loc 3 55 2 is_stmt 1 view .LVU197
+ 744              		.loc 3 55 17 is_stmt 0 view .LVU198
+ 745 000c 1969     		ldr	r1, [r3, #16]
+ 746              		.loc 3 55 4 view .LVU199
+ 747 000e 8A42     		cmp	r2, r1
+ 748 0010 03D0     		beq	.L43
+ 749              	.L42:
+  56:Core/Src/USER/circular_buffer.c **** 	c->count--;
+ 750              		.loc 3 56 2 is_stmt 1 view .LVU200
+ 751              		.loc 3 56 3 is_stmt 0 view .LVU201
+ 752 0012 DA68     		ldr	r2, [r3, #12]
+ 753              		.loc 3 56 10 view .LVU202
+ 754 0014 013A     		subs	r2, r2, #1
+ 755 0016 DA60     		str	r2, [r3, #12]
+  57:Core/Src/USER/circular_buffer.c **** 	//if(c->count == c->max){c->count=0;} //error
+  58:Core/Src/USER/circular_buffer.c **** return b;
+ 756              		.loc 3 58 1 is_stmt 1 view .LVU203
+  59:Core/Src/USER/circular_buffer.c **** }
+ 757              		.loc 3 59 1 is_stmt 0 view .LVU204
+ 758 0018 7047     		bx	lr
+ 759              	.L43:
+  55:Core/Src/USER/circular_buffer.c **** 	c->count--;
+ 760              		.loc 3 55 25 is_stmt 1 discriminator 1 view .LVU205
+  55:Core/Src/USER/circular_buffer.c **** 	c->count--;
+ 761              		.loc 3 55 32 is_stmt 0 discriminator 1 view .LVU206
+ 762 001a 0022     		movs	r2, #0
+ 763 001c 9A60     		str	r2, [r3, #8]
+ 764 001e F8E7     		b	.L42
+ 765              		.cfi_endproc
+ 766              	.LFE81:
+ 768              		.section	.text.circle_push_buf,"ax",%progbits
+ 769              		.align	1
+ 770              		.global	circle_push_buf
+ 771              		.syntax unified
+ 772              		.thumb
+ 773              		.thumb_func
+ 775              	circle_push_buf:
+ 776              	.LVL26:
+ 777              	.LFB82:
+  60:Core/Src/USER/circular_buffer.c **** 
+  61:Core/Src/USER/circular_buffer.c **** void circle_push_buf(CCBuf *c, unsigned char *b, size_t len)
+  62:Core/Src/USER/circular_buffer.c **** {
+ 778              		.loc 3 62 1 is_stmt 1 view -0
+ 779              		.cfi_startproc
+ 780              		@ args = 0, pretend = 0, frame = 0
+ 781              		@ frame_needed = 0, uses_anonymous_args = 0
+ 782              		.loc 3 62 1 is_stmt 0 view .LVU208
+ 783 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 784              	.LCFI13:
+ 785              		.cfi_def_cfa_offset 24
+ 786              		.cfi_offset 3, -24
+ 787              		.cfi_offset 4, -20
+ 788              		.cfi_offset 5, -16
+ 789              		.cfi_offset 6, -12
+ 790              		.cfi_offset 7, -8
+ 791              		.cfi_offset 14, -4
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 27
+
+
+ 792 0002 0746     		mov	r7, r0
+ 793 0004 0E46     		mov	r6, r1
+ 794 0006 1546     		mov	r5, r2
+  63:Core/Src/USER/circular_buffer.c **** size_t i;
+ 795              		.loc 3 63 1 is_stmt 1 view .LVU209
+  64:Core/Src/USER/circular_buffer.c **** for (i=0;i<len;i++){circle_push(c,b[i]);}
+ 796              		.loc 3 64 1 view .LVU210
+ 797              	.LVL27:
+ 798              		.loc 3 64 7 is_stmt 0 view .LVU211
+ 799 0008 0024     		movs	r4, #0
+ 800              		.loc 3 64 1 view .LVU212
+ 801 000a 04E0     		b	.L45
+ 802              	.LVL28:
+ 803              	.L46:
+ 804              		.loc 3 64 21 is_stmt 1 discriminator 3 view .LVU213
+ 805 000c 315D     		ldrb	r1, [r6, r4]	@ zero_extendqisi2
+ 806 000e 3846     		mov	r0, r7
+ 807 0010 FFF7FEFF 		bl	circle_push
+ 808              	.LVL29:
+ 809              		.loc 3 64 16 discriminator 3 view .LVU214
+ 810              		.loc 3 64 17 is_stmt 0 discriminator 3 view .LVU215
+ 811 0014 0134     		adds	r4, r4, #1
+ 812              	.LVL30:
+ 813              	.L45:
+ 814              		.loc 3 64 10 is_stmt 1 discriminator 1 view .LVU216
+ 815              		.loc 3 64 1 is_stmt 0 discriminator 1 view .LVU217
+ 816 0016 AC42     		cmp	r4, r5
+ 817 0018 F8D3     		bcc	.L46
+  65:Core/Src/USER/circular_buffer.c **** }
+ 818              		.loc 3 65 1 view .LVU218
+ 819 001a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 820              		.loc 3 65 1 view .LVU219
+ 821              		.cfi_endproc
+ 822              	.LFE82:
+ 824              		.section	.text.circle_available,"ax",%progbits
+ 825              		.align	1
+ 826              		.global	circle_available
+ 827              		.syntax unified
+ 828              		.thumb
+ 829              		.thumb_func
+ 831              	circle_available:
+ 832              	.LVL31:
+ 833              	.LFB83:
+  66:Core/Src/USER/circular_buffer.c **** 
+  67:Core/Src/USER/circular_buffer.c **** size_t circle_available(CCBuf *c)
+  68:Core/Src/USER/circular_buffer.c **** {
+ 834              		.loc 3 68 1 is_stmt 1 view -0
+ 835              		.cfi_startproc
+ 836              		@ args = 0, pretend = 0, frame = 0
+ 837              		@ frame_needed = 0, uses_anonymous_args = 0
+ 838              		@ link register save eliminated.
+  69:Core/Src/USER/circular_buffer.c **** return c->count;
+ 839              		.loc 3 69 1 view .LVU221
+  70:Core/Src/USER/circular_buffer.c **** }
+ 840              		.loc 3 70 1 is_stmt 0 view .LVU222
+ 841 0000 C068     		ldr	r0, [r0, #12]
+ 842              	.LVL32:
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 28
+
+
+ 843              		.loc 3 70 1 view .LVU223
+ 844 0002 7047     		bx	lr
+ 845              		.cfi_endproc
+ 846              	.LFE83:
+ 848              		.section	.text.circle_free,"ax",%progbits
+ 849              		.align	1
+ 850              		.global	circle_free
+ 851              		.syntax unified
+ 852              		.thumb
+ 853              		.thumb_func
+ 855              	circle_free:
+ 856              	.LVL33:
+ 857              	.LFB84:
+  71:Core/Src/USER/circular_buffer.c **** size_t circle_free(CCBuf *c)
+  72:Core/Src/USER/circular_buffer.c **** {
+ 858              		.loc 3 72 1 is_stmt 1 view -0
+ 859              		.cfi_startproc
+ 860              		@ args = 0, pretend = 0, frame = 0
+ 861              		@ frame_needed = 0, uses_anonymous_args = 0
+ 862              		@ link register save eliminated.
+  73:Core/Src/USER/circular_buffer.c **** return c->max - c->count;
+ 863              		.loc 3 73 1 view .LVU225
+ 864              		.loc 3 73 9 is_stmt 0 view .LVU226
+ 865 0000 0269     		ldr	r2, [r0, #16]
+ 866              		.loc 3 73 18 view .LVU227
+ 867 0002 C068     		ldr	r0, [r0, #12]
+ 868              	.LVL34:
+  74:Core/Src/USER/circular_buffer.c **** }
+ 869              		.loc 3 74 1 view .LVU228
+ 870 0004 101A     		subs	r0, r2, r0
+ 871 0006 7047     		bx	lr
+ 872              		.cfi_endproc
+ 873              	.LFE84:
+ 875              		.section	.text.user_usb_rx,"ax",%progbits
+ 876              		.align	1
+ 877              		.global	user_usb_rx
+ 878              		.syntax unified
+ 879              		.thumb
+ 880              		.thumb_func
+ 882              	user_usb_rx:
+ 883              	.LVL35:
+ 884              	.LFB85:
+ 885              		.file 4 "Core/Src/USER/user.c"
+   1:Core/Src/USER/user.c **** /* ***********************************************
+   2:Core/Src/USER/user.c **** **                                              **
+   3:Core/Src/USER/user.c **** ** 40mA   RTC clock V1.0 www.vabolis.lt (c)2023 **
+   4:Core/Src/USER/user.c **** **                                              **
+   5:Core/Src/USER/user.c **** ************************************************ */
+   6:Core/Src/USER/user.c **** 
+   7:Core/Src/USER/user.c **** #include "user.h"
+   8:Core/Src/USER/user.c **** 
+   9:Core/Src/USER/user.c **** 
+  10:Core/Src/USER/user.c **** #include "rtc.c"
+  11:Core/Src/USER/user.c **** #include "circular_buffer.c"
+  12:Core/Src/USER/user.c **** 
+  13:Core/Src/USER/user.c **** extern IWDG_HandleTypeDef hiwdg;
+  14:Core/Src/USER/user.c **** extern RTC_HandleTypeDef hrtc;
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 29
+
+
+  15:Core/Src/USER/user.c **** extern TIM_HandleTypeDef htim1;
+  16:Core/Src/USER/user.c **** 
+  17:Core/Src/USER/user.c **** 
+  18:Core/Src/USER/user.c **** #define BUFFER_SIZE 64
+  19:Core/Src/USER/user.c **** unsigned char testas[BUFFER_SIZE];
+  20:Core/Src/USER/user.c **** 
+  21:Core/Src/USER/user.c **** CCBuf cc; //struktura
+  22:Core/Src/USER/user.c **** 
+  23:Core/Src/USER/user.c **** 
+  24:Core/Src/USER/user.c **** 
+  25:Core/Src/USER/user.c **** 
+  26:Core/Src/USER/user.c **** void user_usb_rx(uint8_t* Buf, uint32_t *Len)
+  27:Core/Src/USER/user.c **** {
+ 886              		.loc 4 27 1 is_stmt 1 view -0
+ 887              		.cfi_startproc
+ 888              		@ args = 0, pretend = 0, frame = 0
+ 889              		@ frame_needed = 0, uses_anonymous_args = 0
+ 890              		.loc 4 27 1 is_stmt 0 view .LVU230
+ 891 0000 70B5     		push	{r4, r5, r6, lr}
+ 892              	.LCFI14:
+ 893              		.cfi_def_cfa_offset 16
+ 894              		.cfi_offset 4, -16
+ 895              		.cfi_offset 5, -12
+ 896              		.cfi_offset 6, -8
+ 897              		.cfi_offset 14, -4
+ 898 0002 0646     		mov	r6, r0
+ 899 0004 0D46     		mov	r5, r1
+  28:Core/Src/USER/user.c **** unsigned char i,a;
+ 900              		.loc 4 28 1 is_stmt 1 view .LVU231
+  29:Core/Src/USER/user.c **** for (i=0;i<*Len;i++)
+ 901              		.loc 4 29 1 view .LVU232
+ 902              	.LVL36:
+ 903              		.loc 4 29 7 is_stmt 0 view .LVU233
+ 904 0006 0024     		movs	r4, #0
+ 905              		.loc 4 29 1 view .LVU234
+ 906 0008 01E0     		b	.L51
+ 907              	.LVL37:
+ 908              	.L52:
+ 909              		.loc 4 29 17 is_stmt 1 discriminator 2 view .LVU235
+ 910              		.loc 4 29 18 is_stmt 0 discriminator 2 view .LVU236
+ 911 000a 0134     		adds	r4, r4, #1
+ 912              	.LVL38:
+ 913              		.loc 4 29 18 discriminator 2 view .LVU237
+ 914 000c E4B2     		uxtb	r4, r4
+ 915              	.LVL39:
+ 916              	.L51:
+ 917              		.loc 4 29 10 is_stmt 1 discriminator 1 view .LVU238
+ 918              		.loc 4 29 12 is_stmt 0 discriminator 1 view .LVU239
+ 919 000e 2B68     		ldr	r3, [r5]
+ 920              		.loc 4 29 1 discriminator 1 view .LVU240
+ 921 0010 9C42     		cmp	r4, r3
+ 922 0012 06D2     		bcs	.L55
+  30:Core/Src/USER/user.c **** 	{
+  31:Core/Src/USER/user.c **** 		a=Buf[i];
+ 923              		.loc 4 31 3 is_stmt 1 view .LVU241
+ 924              		.loc 4 31 4 is_stmt 0 view .LVU242
+ 925 0014 315D     		ldrb	r1, [r6, r4]	@ zero_extendqisi2
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 30
+
+
+ 926              	.LVL40:
+  32:Core/Src/USER/user.c **** 		if (a>10) circle_push(&cc , a);
+ 927              		.loc 4 32 3 is_stmt 1 view .LVU243
+ 928              		.loc 4 32 6 is_stmt 0 view .LVU244
+ 929 0016 0A29     		cmp	r1, #10
+ 930 0018 F7D9     		bls	.L52
+ 931              		.loc 4 32 13 is_stmt 1 discriminator 1 view .LVU245
+ 932 001a 0248     		ldr	r0, .L56
+ 933 001c FFF7FEFF 		bl	circle_push
+ 934              	.LVL41:
+ 935              		.loc 4 32 13 is_stmt 0 discriminator 1 view .LVU246
+ 936 0020 F3E7     		b	.L52
+ 937              	.L55:
+  33:Core/Src/USER/user.c **** 	}
+  34:Core/Src/USER/user.c **** }
+ 938              		.loc 4 34 1 view .LVU247
+ 939 0022 70BD     		pop	{r4, r5, r6, pc}
+ 940              	.LVL42:
+ 941              	.L57:
+ 942              		.loc 4 34 1 view .LVU248
+ 943              		.align	2
+ 944              	.L56:
+ 945 0024 00000000 		.word	.LANCHOR3
+ 946              		.cfi_endproc
+ 947              	.LFE85:
+ 949              		.section	.text.user_init,"ax",%progbits
+ 950              		.align	1
+ 951              		.global	user_init
+ 952              		.syntax unified
+ 953              		.thumb
+ 954              		.thumb_func
+ 956              	user_init:
+ 957              	.LFB86:
+  35:Core/Src/USER/user.c **** 
+  36:Core/Src/USER/user.c **** void user_init(void)
+  37:Core/Src/USER/user.c **** {
+ 958              		.loc 4 37 1 is_stmt 1 view -0
+ 959              		.cfi_startproc
+ 960              		@ args = 0, pretend = 0, frame = 0
+ 961              		@ frame_needed = 0, uses_anonymous_args = 0
+ 962 0000 08B5     		push	{r3, lr}
+ 963              	.LCFI15:
+ 964              		.cfi_def_cfa_offset 8
+ 965              		.cfi_offset 3, -8
+ 966              		.cfi_offset 14, -4
+  38:Core/Src/USER/user.c **** 	cc.buffer=testas;
+ 967              		.loc 4 38 2 view .LVU250
+ 968              		.loc 4 38 11 is_stmt 0 view .LVU251
+ 969 0002 0648     		ldr	r0, .L60
+ 970 0004 064B     		ldr	r3, .L60+4
+ 971 0006 0360     		str	r3, [r0]
+  39:Core/Src/USER/user.c **** 	circle_reset(&cc,BUFFER_SIZE);			//init circle buffer
+ 972              		.loc 4 39 2 is_stmt 1 view .LVU252
+ 973 0008 4021     		movs	r1, #64
+ 974 000a FFF7FEFF 		bl	circle_reset
+ 975              	.LVL43:
+  40:Core/Src/USER/user.c **** 	rtc_int_init();
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 31
+
+
+ 976              		.loc 4 40 2 view .LVU253
+ 977 000e FFF7FEFF 		bl	rtc_int_init
+ 978              	.LVL44:
+  41:Core/Src/USER/user.c **** 	
+  42:Core/Src/USER/user.c **** 	HAL_TIM_Base_Start_IT(&htim1);
+ 979              		.loc 4 42 2 view .LVU254
+ 980 0012 0448     		ldr	r0, .L60+8
+ 981 0014 FFF7FEFF 		bl	HAL_TIM_Base_Start_IT
+ 982              	.LVL45:
+  43:Core/Src/USER/user.c **** 
+  44:Core/Src/USER/user.c **** 	//HAL_RTCEx_SetSmoothCalib(&hrtc,0,0,10); // du nuliai nes F1 nera. paskutinis- skaicius 0-7F, tik
+  45:Core/Src/USER/user.c **** }
+ 983              		.loc 4 45 1 is_stmt 0 view .LVU255
+ 984 0018 08BD     		pop	{r3, pc}
+ 985              	.L61:
+ 986 001a 00BF     		.align	2
+ 987              	.L60:
+ 988 001c 00000000 		.word	.LANCHOR3
+ 989 0020 00000000 		.word	.LANCHOR4
+ 990 0024 00000000 		.word	.LANCHOR5
+ 991              		.cfi_endproc
+ 992              	.LFE86:
+ 994              		.section	.text.user_seconds_job,"ax",%progbits
+ 995              		.align	1
+ 996              		.global	user_seconds_job
+ 997              		.syntax unified
+ 998              		.thumb
+ 999              		.thumb_func
+ 1001              	user_seconds_job:
+ 1002              	.LFB89:
+  46:Core/Src/USER/user.c **** 
+  47:Core/Src/USER/user.c **** 
+  48:Core/Src/USER/user.c **** 
+  49:Core/Src/USER/user.c **** void commandcom(char * txt) // network (UART,USB) command interpreter
+  50:Core/Src/USER/user.c **** {
+  51:Core/Src/USER/user.c **** 
+  52:Core/Src/USER/user.c **** if (txt[0] !='A' || txt[1]!='T') return;
+  53:Core/Src/USER/user.c **** 
+  54:Core/Src/USER/user.c **** 	switch(txt[2])
+  55:Core/Src/USER/user.c **** 	{
+  56:Core/Src/USER/user.c **** 		case 'T':
+  57:Core/Src/USER/user.c **** 			rtc_set_time_text(txt+3);
+  58:Core/Src/USER/user.c **** 		break;
+  59:Core/Src/USER/user.c **** 		case 'D':
+  60:Core/Src/USER/user.c **** 			rtc_set_date_text(txt+3);		
+  61:Core/Src/USER/user.c **** 		break;
+  62:Core/Src/USER/user.c **** 		case 'I':
+  63:Core/Src/USER/user.c **** 			CDC_Transmit_FS((uint8_t*) "9H CLOCK\r\n(c)2023 Vabolis.lt\r\n",33);
+  64:Core/Src/USER/user.c **** 		break;
+  65:Core/Src/USER/user.c **** 		case 'A':
+  66:Core/Src/USER/user.c **** 			__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,55*255);
+  67:Core/Src/USER/user.c **** 		break;
+  68:Core/Src/USER/user.c **** 	}
+  69:Core/Src/USER/user.c **** }
+  70:Core/Src/USER/user.c **** 
+  71:Core/Src/USER/user.c **** 
+  72:Core/Src/USER/user.c **** void user_loop(void)
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 32
+
+
+  73:Core/Src/USER/user.c **** {
+  74:Core/Src/USER/user.c **** char a;
+  75:Core/Src/USER/user.c **** char txt[32];
+  76:Core/Src/USER/user.c **** unsigned char txtp=0;
+  77:Core/Src/USER/user.c **** 
+  78:Core/Src/USER/user.c **** while(1)
+  79:Core/Src/USER/user.c **** 	{
+  80:Core/Src/USER/user.c **** 	HAL_IWDG_Refresh(&hiwdg); //watchdogas
+  81:Core/Src/USER/user.c **** 	while(circle_available(&cc)>0) 
+  82:Core/Src/USER/user.c **** 		{
+  83:Core/Src/USER/user.c **** 			a=circle_pull(&cc);
+  84:Core/Src/USER/user.c **** 			
+  85:Core/Src/USER/user.c **** 			if (a>=' ' && a<='z')
+  86:Core/Src/USER/user.c **** 			{
+  87:Core/Src/USER/user.c **** 				txt[txtp]=a;
+  88:Core/Src/USER/user.c **** 				txtp++;
+  89:Core/Src/USER/user.c **** 				txt[txtp]=0;
+  90:Core/Src/USER/user.c **** 				if (txtp >30) {txtp=0;}
+  91:Core/Src/USER/user.c **** 			}
+  92:Core/Src/USER/user.c **** 			else if (a<' ')
+  93:Core/Src/USER/user.c **** 			{
+  94:Core/Src/USER/user.c **** 				if (txtp>2)commandcom(txt);
+  95:Core/Src/USER/user.c **** 				txt[0]=0;
+  96:Core/Src/USER/user.c **** 				txtp=0;
+  97:Core/Src/USER/user.c **** 			}
+  98:Core/Src/USER/user.c **** 		}
+  99:Core/Src/USER/user.c **** 	}
+ 100:Core/Src/USER/user.c **** } /* be isejimo is loop! */
+ 101:Core/Src/USER/user.c **** 
+ 102:Core/Src/USER/user.c **** 
+ 103:Core/Src/USER/user.c **** 
+ 104:Core/Src/USER/user.c **** void user_seconds_job(void)
+ 105:Core/Src/USER/user.c **** {
+ 1003              		.loc 4 105 1 is_stmt 1 view -0
+ 1004              		.cfi_startproc
+ 1005              		@ args = 0, pretend = 0, frame = 0
+ 1006              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1007 0000 08B5     		push	{r3, lr}
+ 1008              	.LCFI16:
+ 1009              		.cfi_def_cfa_offset 8
+ 1010              		.cfi_offset 3, -8
+ 1011              		.cfi_offset 14, -4
+ 106:Core/Src/USER/user.c **** 	HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
+ 1012              		.loc 4 106 2 view .LVU257
+ 1013 0002 0022     		movs	r2, #0
+ 1014 0004 0449     		ldr	r1, .L64
+ 1015 0006 0548     		ldr	r0, .L64+4
+ 1016 0008 FFF7FEFF 		bl	HAL_RTC_GetTime
+ 1017              	.LVL46:
+ 107:Core/Src/USER/user.c **** 
+ 108:Core/Src/USER/user.c **** 	HAL_GPIO_TogglePin(GPIOA, LED_Pin);
+ 1018              		.loc 4 108 2 view .LVU258
+ 1019 000c 0121     		movs	r1, #1
+ 1020 000e 0448     		ldr	r0, .L64+8
+ 1021 0010 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 1022              	.LVL47:
+ 109:Core/Src/USER/user.c **** 
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 33
+
+
+ 110:Core/Src/USER/user.c **** }
+ 1023              		.loc 4 110 1 is_stmt 0 view .LVU259
+ 1024 0014 08BD     		pop	{r3, pc}
+ 1025              	.L65:
+ 1026 0016 00BF     		.align	2
+ 1027              	.L64:
+ 1028 0018 00000000 		.word	.LANCHOR1
+ 1029 001c 00000000 		.word	.LANCHOR2
+ 1030 0020 00080140 		.word	1073809408
+ 1031              		.cfi_endproc
+ 1032              	.LFE89:
+ 1034              		.section	.text.HAL_RTCEx_RTCEventCallback,"ax",%progbits
+ 1035              		.align	1
+ 1036              		.global	HAL_RTCEx_RTCEventCallback
+ 1037              		.syntax unified
+ 1038              		.thumb
+ 1039              		.thumb_func
+ 1041              	HAL_RTCEx_RTCEventCallback:
+ 1042              	.LVL48:
+ 1043              	.LFB78:
+ 235:Core/Src/USER/rtc.c **** 
+ 236:Core/Src/USER/rtc.c **** 
+ 237:Core/Src/USER/rtc.c **** /**
+ 238:Core/Src/USER/rtc.c ****   * @brief  Second event callback.
+ 239:Core/Src/USER/rtc.c **** **/
+ 240:Core/Src/USER/rtc.c **** /* kas sekunde, turi buti ijungtas INT */
+ 241:Core/Src/USER/rtc.c **** void HAL_RTCEx_RTCEventCallback(RTC_HandleTypeDef *hrtc)
+ 242:Core/Src/USER/rtc.c **** {
+ 1044              		.loc 2 242 1 is_stmt 1 view -0
+ 1045              		.cfi_startproc
+ 1046              		@ args = 0, pretend = 0, frame = 0
+ 1047              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1048              		.loc 2 242 1 is_stmt 0 view .LVU261
+ 1049 0000 08B5     		push	{r3, lr}
+ 1050              	.LCFI17:
+ 1051              		.cfi_def_cfa_offset 8
+ 1052              		.cfi_offset 3, -8
+ 1053              		.cfi_offset 14, -4
+ 243:Core/Src/USER/rtc.c **** 	user_seconds_job();
+ 1054              		.loc 2 243 2 is_stmt 1 view .LVU262
+ 1055 0002 FFF7FEFF 		bl	user_seconds_job
+ 1056              	.LVL49:
+ 244:Core/Src/USER/rtc.c **** 	//if(LastHour != currTime.Hours) {rtc_backup_date(); LastHour=currTime.Hours;}
+ 245:Core/Src/USER/rtc.c **** }...
+ 1057              		.loc 2 245 1 is_stmt 0 view .LVU263
+ 1058 0006 08BD     		pop	{r3, pc}
+ 1059              		.cfi_endproc
+ 1060              	.LFE78:
+ 1062              		.section	.text.Error_Handler,"ax",%progbits
+ 1063              		.align	1
+ 1064              		.global	Error_Handler
+ 1065              		.syntax unified
+ 1066              		.thumb
+ 1067              		.thumb_func
+ 1069              	Error_Handler:
+ 1070              	.LFB96:
+ 389:Core/Src/main.c **** 
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 34
+
+
+ 390:Core/Src/main.c **** /* USER CODE BEGIN 4 */
+ 391:Core/Src/main.c **** 
+ 392:Core/Src/main.c **** /* USER CODE END 4 */
+ 393:Core/Src/main.c **** 
+ 394:Core/Src/main.c **** /**
+ 395:Core/Src/main.c ****   * @brief  This function is executed in case of error occurrence.
+ 396:Core/Src/main.c ****   * @retval None
+ 397:Core/Src/main.c ****   */
+ 398:Core/Src/main.c **** void Error_Handler(void)
+ 399:Core/Src/main.c **** {
+ 1071              		.loc 1 399 1 is_stmt 1 view -0
+ 1072              		.cfi_startproc
+ 1073              		@ Volatile: function does not return.
+ 1074              		@ args = 0, pretend = 0, frame = 0
+ 1075              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1076              		@ link register save eliminated.
+ 400:Core/Src/main.c ****   /* USER CODE BEGIN Error_Handler_Debug */
+ 401:Core/Src/main.c ****   /* User can add his own implementation to report the HAL error return state */
+ 402:Core/Src/main.c ****   __disable_irq();
+ 1077              		.loc 1 402 3 view .LVU265
+ 1078              	.LBB7:
+ 1079              	.LBI7:
+ 1080              		.file 5 "Drivers/CMSIS/Include/cmsis_gcc.h"
+   1:Drivers/CMSIS/Include/cmsis_gcc.h **** /**************************************************************************//**
+   2:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
+   3:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
+   4:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @version  V5.0.4
+   5:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @date     09. April 2018
+   6:Drivers/CMSIS/Include/cmsis_gcc.h ****  ******************************************************************************/
+   7:Drivers/CMSIS/Include/cmsis_gcc.h **** /*
+   8:Drivers/CMSIS/Include/cmsis_gcc.h ****  * Copyright (c) 2009-2018 Arm Limited. All rights reserved.
+   9:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  10:Drivers/CMSIS/Include/cmsis_gcc.h ****  * SPDX-License-Identifier: Apache-2.0
+  11:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  12:Drivers/CMSIS/Include/cmsis_gcc.h ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  13:Drivers/CMSIS/Include/cmsis_gcc.h ****  * not use this file except in compliance with the License.
+  14:Drivers/CMSIS/Include/cmsis_gcc.h ****  * You may obtain a copy of the License at
+  15:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  16:Drivers/CMSIS/Include/cmsis_gcc.h ****  * www.apache.org/licenses/LICENSE-2.0
+  17:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  18:Drivers/CMSIS/Include/cmsis_gcc.h ****  * Unless required by applicable law or agreed to in writing, software
+  19:Drivers/CMSIS/Include/cmsis_gcc.h ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  20:Drivers/CMSIS/Include/cmsis_gcc.h ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  21:Drivers/CMSIS/Include/cmsis_gcc.h ****  * See the License for the specific language governing permissions and
+  22:Drivers/CMSIS/Include/cmsis_gcc.h ****  * limitations under the License.
+  23:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+  24:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  25:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __CMSIS_GCC_H
+  26:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_H
+  27:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  28:Drivers/CMSIS/Include/cmsis_gcc.h **** /* ignore some GCC warnings */
+  29:Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic push
+  30:Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wsign-conversion"
+  31:Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wconversion"
+  32:Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wunused-parameter"
+  33:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  34:Drivers/CMSIS/Include/cmsis_gcc.h **** /* Fallback for __has_builtin */
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 35
+
+
+  35:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __has_builtin
+  36:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __has_builtin(x) (0)
+  37:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  38:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  39:Drivers/CMSIS/Include/cmsis_gcc.h **** /* CMSIS compiler specific defines */
+  40:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __ASM
+  41:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __ASM                                  __asm
+  42:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  43:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __INLINE
+  44:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __INLINE                               inline
+  45:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  46:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_INLINE
+  47:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __STATIC_INLINE                        static inline
+  48:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  49:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_FORCEINLINE                 
+  50:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __STATIC_FORCEINLINE                   __attribute__((always_inline)) static inline
+  51:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif                                           
+  52:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __NO_RETURN
+  53:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __NO_RETURN                            __attribute__((__noreturn__))
+  54:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  55:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __USED
+  56:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __USED                                 __attribute__((used))
+  57:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  58:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __WEAK
+  59:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __WEAK                                 __attribute__((weak))
+  60:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  61:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __PACKED
+  62:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED                               __attribute__((packed, aligned(1)))
+  63:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  64:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __PACKED_STRUCT
+  65:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED_STRUCT                        struct __attribute__((packed, aligned(1)))
+  66:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  67:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __PACKED_UNION
+  68:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED_UNION                         union __attribute__((packed, aligned(1)))
+  69:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  70:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32        /* deprecated */
+  71:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  72:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  73:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  74:Drivers/CMSIS/Include/cmsis_gcc.h ****   struct __attribute__((packed)) T_UINT32 { uint32_t v; };
+  75:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  76:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32(x)                  (((struct T_UINT32 *)(x))->v)
+  77:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  78:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_WRITE
+  79:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  80:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  81:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  82:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_WRITE { uint16_t v; };
+  83:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  84:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT16_WRITE(addr, val)    (void)((((struct T_UINT16_WRITE *)(void *)(addr))-
+  85:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  86:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_READ
+  87:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  88:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  89:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  90:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_READ { uint16_t v; };
+  91:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 36
+
+
+  92:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT16_READ(addr)          (((const struct T_UINT16_READ *)(const void *)(add
+  93:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  94:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_WRITE
+  95:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  96:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  97:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  98:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_WRITE { uint32_t v; };
+  99:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+ 100:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32_WRITE(addr, val)    (void)((((struct T_UINT32_WRITE *)(void *)(addr))-
+ 101:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 102:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_READ
+ 103:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+ 104:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+ 105:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+ 106:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
+ 107:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+ 108:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32_READ(addr)          (((const struct T_UINT32_READ *)(const void *)(add
+ 109:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 110:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __ALIGNED
+ 111:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __ALIGNED(x)                           __attribute__((aligned(x)))
+ 112:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 113:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __RESTRICT
+ 114:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __RESTRICT                             __restrict
+ 115:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 116:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 117:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 118:Drivers/CMSIS/Include/cmsis_gcc.h **** /* ###########################  Core Function Access  ########################### */
+ 119:Drivers/CMSIS/Include/cmsis_gcc.h **** /** \ingroup  CMSIS_Core_FunctionInterface
+ 120:Drivers/CMSIS/Include/cmsis_gcc.h ****     \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
+ 121:Drivers/CMSIS/Include/cmsis_gcc.h ****   @{
+ 122:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 123:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 124:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 125:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Enable IRQ Interrupts
+ 126:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Enables IRQ interrupts by clearing the I-bit in the CPSR.
+ 127:Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
+ 128:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 129:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __enable_irq(void)
+ 130:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 131:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsie i" : : : "memory");
+ 132:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 133:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 134:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 135:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 136:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Disable IRQ Interrupts
+ 137:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Disables IRQ interrupts by setting the I-bit in the CPSR.
+ 138:Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
+ 139:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 140:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __disable_irq(void)
+ 1081              		.loc 5 140 27 view .LVU266
+ 1082              	.LBB8:
+ 141:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 142:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsid i" : : : "memory");
+ 1083              		.loc 5 142 3 view .LVU267
+ 1084              		.syntax unified
+ 1085              	@ 142 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1086 0000 72B6     		cpsid i
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 37
+
+
+ 1087              	@ 0 "" 2
+ 1088              		.thumb
+ 1089              		.syntax unified
+ 1090              	.L69:
+ 1091              	.LBE8:
+ 1092              	.LBE7:
+ 403:Core/Src/main.c ****   while (1)
+ 1093              		.loc 1 403 3 discriminator 1 view .LVU268
+ 404:Core/Src/main.c ****   {
+ 405:Core/Src/main.c ****   }
+ 1094              		.loc 1 405 3 discriminator 1 view .LVU269
+ 403:Core/Src/main.c ****   while (1)
+ 1095              		.loc 1 403 9 discriminator 1 view .LVU270
+ 1096 0002 FEE7     		b	.L69
+ 1097              		.cfi_endproc
+ 1098              	.LFE96:
+ 1100              		.section	.text.rtc_set_date_text,"ax",%progbits
+ 1101              		.align	1
+ 1102              		.global	rtc_set_date_text
+ 1103              		.syntax unified
+ 1104              		.thumb
+ 1105              		.thumb_func
+ 1107              	rtc_set_date_text:
+ 1108              	.LVL50:
+ 1109              	.LFB70:
+  95:Core/Src/USER/rtc.c **** {
+ 1110              		.loc 2 95 1 view -0
+ 1111              		.cfi_startproc
+ 1112              		@ args = 0, pretend = 0, frame = 8
+ 1113              		@ frame_needed = 0, uses_anonymous_args = 0
+  95:Core/Src/USER/rtc.c **** {
+ 1114              		.loc 2 95 1 is_stmt 0 view .LVU272
+ 1115 0000 10B5     		push	{r4, lr}
+ 1116              	.LCFI18:
+ 1117              		.cfi_def_cfa_offset 8
+ 1118              		.cfi_offset 4, -8
+ 1119              		.cfi_offset 14, -4
+ 1120 0002 82B0     		sub	sp, sp, #8
+ 1121              	.LCFI19:
+ 1122              		.cfi_def_cfa_offset 16
+ 1123 0004 0446     		mov	r4, r0
+  96:Core/Src/USER/rtc.c **** filter_string(Buf);
+ 1124              		.loc 2 96 1 is_stmt 1 view .LVU273
+ 1125 0006 FFF7FEFF 		bl	filter_string
+ 1126              	.LVL51:
+  99:Core/Src/USER/rtc.c **** RTC_DateTypeDef dienos;
+ 1127              		.loc 2 99 1 view .LVU274
+ 101:Core/Src/USER/rtc.c **** if(strlen(Buf)<8) return;
+ 1128              		.loc 2 101 1 view .LVU275
+ 101:Core/Src/USER/rtc.c **** if(strlen(Buf)<8) return;
+ 1129              		.loc 2 101 4 is_stmt 0 view .LVU276
+ 1130 000a 2046     		mov	r0, r4
+ 1131 000c FFF7FEFF 		bl	strlen
+ 1132              	.LVL52:
+ 101:Core/Src/USER/rtc.c **** if(strlen(Buf)<8) return;
+ 1133              		.loc 2 101 3 view .LVU277
+ 1134 0010 0728     		cmp	r0, #7
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 38
+
+
+ 1135 0012 01D8     		bhi	.L75
+ 1136              	.L70:
+ 119:Core/Src/USER/rtc.c **** }
+ 1137              		.loc 2 119 1 view .LVU278
+ 1138 0014 02B0     		add	sp, sp, #8
+ 1139              	.LCFI20:
+ 1140              		.cfi_remember_state
+ 1141              		.cfi_def_cfa_offset 8
+ 1142              		@ sp needed
+ 1143 0016 10BD     		pop	{r4, pc}
+ 1144              	.LVL53:
+ 1145              	.L75:
+ 1146              	.LCFI21:
+ 1147              		.cfi_restore_state
+ 102:Core/Src/USER/rtc.c **** 	char delim[] = ".";
+ 1148              		.loc 2 102 2 is_stmt 1 view .LVU279
+ 102:Core/Src/USER/rtc.c **** 	char delim[] = ".";
+ 1149              		.loc 2 102 7 is_stmt 0 view .LVU280
+ 1150 0018 2E23     		movs	r3, #46
+ 1151 001a ADF80030 		strh	r3, [sp]	@ movhi
+ 104:Core/Src/USER/rtc.c **** 	char *ptr = strtok(Buf, delim);
+ 1152              		.loc 2 104 2 is_stmt 1 view .LVU281
+ 104:Core/Src/USER/rtc.c **** 	char *ptr = strtok(Buf, delim);
+ 1153              		.loc 2 104 14 is_stmt 0 view .LVU282
+ 1154 001e 6946     		mov	r1, sp
+ 1155 0020 2046     		mov	r0, r4
+ 1156 0022 FFF7FEFF 		bl	strtok
+ 1157              	.LVL54:
+ 105:Core/Src/USER/rtc.c **** 	dienos.Year=atoi(ptr);
+ 1158              		.loc 2 105 2 is_stmt 1 view .LVU283
+ 105:Core/Src/USER/rtc.c **** 	dienos.Year=atoi(ptr);
+ 1159              		.loc 2 105 14 is_stmt 0 view .LVU284
+ 1160 0026 FFF7FEFF 		bl	atoi
+ 1161              	.LVL55:
+ 105:Core/Src/USER/rtc.c **** 	dienos.Year=atoi(ptr);
+ 1162              		.loc 2 105 13 view .LVU285
+ 1163 002a 8DF80700 		strb	r0, [sp, #7]
+ 107:Core/Src/USER/rtc.c **** 	ptr = strtok(NULL, delim);
+ 1164              		.loc 2 107 2 is_stmt 1 view .LVU286
+ 107:Core/Src/USER/rtc.c **** 	ptr = strtok(NULL, delim);
+ 1165              		.loc 2 107 8 is_stmt 0 view .LVU287
+ 1166 002e 6946     		mov	r1, sp
+ 1167 0030 0020     		movs	r0, #0
+ 1168 0032 FFF7FEFF 		bl	strtok
+ 1169              	.LVL56:
+ 108:Core/Src/USER/rtc.c **** 	dienos.Month=atoi(ptr);
+ 1170              		.loc 2 108 2 is_stmt 1 view .LVU288
+ 108:Core/Src/USER/rtc.c **** 	dienos.Month=atoi(ptr);
+ 1171              		.loc 2 108 15 is_stmt 0 view .LVU289
+ 1172 0036 FFF7FEFF 		bl	atoi
+ 1173              	.LVL57:
+ 108:Core/Src/USER/rtc.c **** 	dienos.Month=atoi(ptr);
+ 1174              		.loc 2 108 14 view .LVU290
+ 1175 003a 8DF80500 		strb	r0, [sp, #5]
+ 110:Core/Src/USER/rtc.c **** 	ptr = strtok(NULL, delim);
+ 1176              		.loc 2 110 2 is_stmt 1 view .LVU291
+ 110:Core/Src/USER/rtc.c **** 	ptr = strtok(NULL, delim);
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 39
+
+
+ 1177              		.loc 2 110 8 is_stmt 0 view .LVU292
+ 1178 003e 6946     		mov	r1, sp
+ 1179 0040 0020     		movs	r0, #0
+ 1180 0042 FFF7FEFF 		bl	strtok
+ 1181              	.LVL58:
+ 111:Core/Src/USER/rtc.c **** 	dienos.Date=atoi(ptr);
+ 1182              		.loc 2 111 2 is_stmt 1 view .LVU293
+ 111:Core/Src/USER/rtc.c **** 	dienos.Date=atoi(ptr);
+ 1183              		.loc 2 111 14 is_stmt 0 view .LVU294
+ 1184 0046 FFF7FEFF 		bl	atoi
+ 1185              	.LVL59:
+ 111:Core/Src/USER/rtc.c **** 	dienos.Date=atoi(ptr);
+ 1186              		.loc 2 111 13 view .LVU295
+ 1187 004a 8DF80600 		strb	r0, [sp, #6]
+ 113:Core/Src/USER/rtc.c ****  if (HAL_RTC_SetDate(&hrtc, &dienos, RTC_FORMAT_BIN) != HAL_OK)
+ 1188              		.loc 2 113 2 is_stmt 1 view .LVU296
+ 113:Core/Src/USER/rtc.c ****  if (HAL_RTC_SetDate(&hrtc, &dienos, RTC_FORMAT_BIN) != HAL_OK)
+ 1189              		.loc 2 113 6 is_stmt 0 view .LVU297
+ 1190 004e 0022     		movs	r2, #0
+ 1191 0050 01A9     		add	r1, sp, #4
+ 1192 0052 0448     		ldr	r0, .L77
+ 1193 0054 FFF7FEFF 		bl	HAL_RTC_SetDate
+ 1194              	.LVL60:
+ 113:Core/Src/USER/rtc.c ****  if (HAL_RTC_SetDate(&hrtc, &dienos, RTC_FORMAT_BIN) != HAL_OK)
+ 1195              		.loc 2 113 5 view .LVU298
+ 1196 0058 10B9     		cbnz	r0, .L76
+ 118:Core/Src/USER/rtc.c ****   rtc_backup_date();
+ 1197              		.loc 2 118 3 is_stmt 1 view .LVU299
+ 1198 005a FFF7FEFF 		bl	rtc_backup_date
+ 1199              	.LVL61:
+ 1200 005e D9E7     		b	.L70
+ 1201              	.L76:
+ 115:Core/Src/USER/rtc.c ****     Error_Handler();
+ 1202              		.loc 2 115 5 view .LVU300
+ 1203 0060 FFF7FEFF 		bl	Error_Handler
+ 1204              	.LVL62:
+ 1205              	.L78:
+ 1206              		.align	2
+ 1207              	.L77:
+ 1208 0064 00000000 		.word	.LANCHOR2
+ 1209              		.cfi_endproc
+ 1210              	.LFE70:
+ 1212              		.section	.text.rtc_set_time_text,"ax",%progbits
+ 1213              		.align	1
+ 1214              		.global	rtc_set_time_text
+ 1215              		.syntax unified
+ 1216              		.thumb
+ 1217              		.thumb_func
+ 1219              	rtc_set_time_text:
+ 1220              	.LVL63:
+ 1221              	.LFB71:
+ 123:Core/Src/USER/rtc.c **** {
+ 1222              		.loc 2 123 1 view -0
+ 1223              		.cfi_startproc
+ 1224              		@ args = 0, pretend = 0, frame = 8
+ 1225              		@ frame_needed = 0, uses_anonymous_args = 0
+ 123:Core/Src/USER/rtc.c **** {
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 40
+
+
+ 1226              		.loc 2 123 1 is_stmt 0 view .LVU302
+ 1227 0000 10B5     		push	{r4, lr}
+ 1228              	.LCFI22:
+ 1229              		.cfi_def_cfa_offset 8
+ 1230              		.cfi_offset 4, -8
+ 1231              		.cfi_offset 14, -4
+ 1232 0002 82B0     		sub	sp, sp, #8
+ 1233              	.LCFI23:
+ 1234              		.cfi_def_cfa_offset 16
+ 1235 0004 0446     		mov	r4, r0
+ 128:Core/Src/USER/rtc.c **** filter_string(Buf);
+ 1236              		.loc 2 128 1 is_stmt 1 view .LVU303
+ 1237 0006 FFF7FEFF 		bl	filter_string
+ 1238              	.LVL64:
+ 130:Core/Src/USER/rtc.c **** if(strlen(Buf)<8) return;
+ 1239              		.loc 2 130 1 view .LVU304
+ 130:Core/Src/USER/rtc.c **** if(strlen(Buf)<8) return;
+ 1240              		.loc 2 130 4 is_stmt 0 view .LVU305
+ 1241 000a 2046     		mov	r0, r4
+ 1242 000c FFF7FEFF 		bl	strlen
+ 1243              	.LVL65:
+ 130:Core/Src/USER/rtc.c **** if(strlen(Buf)<8) return;
+ 1244              		.loc 2 130 3 view .LVU306
+ 1245 0010 0728     		cmp	r0, #7
+ 1246 0012 01D8     		bhi	.L84
+ 1247              	.LVL66:
+ 1248              	.L79:
+ 148:Core/Src/USER/rtc.c **** }
+ 1249              		.loc 2 148 1 view .LVU307
+ 1250 0014 02B0     		add	sp, sp, #8
+ 1251              	.LCFI24:
+ 1252              		.cfi_remember_state
+ 1253              		.cfi_def_cfa_offset 8
+ 1254              		@ sp needed
+ 1255 0016 10BD     		pop	{r4, pc}
+ 1256              	.LVL67:
+ 1257              	.L84:
+ 1258              	.LCFI25:
+ 1259              		.cfi_restore_state
+ 132:Core/Src/USER/rtc.c **** 	char delim[] = ":";
+ 1260              		.loc 2 132 2 is_stmt 1 view .LVU308
+ 132:Core/Src/USER/rtc.c **** 	char delim[] = ":";
+ 1261              		.loc 2 132 7 is_stmt 0 view .LVU309
+ 1262 0018 3A23     		movs	r3, #58
+ 1263 001a ADF80430 		strh	r3, [sp, #4]	@ movhi
+ 134:Core/Src/USER/rtc.c **** 	char *ptr = strtok(Buf, delim);
+ 1264              		.loc 2 134 2 is_stmt 1 view .LVU310
+ 134:Core/Src/USER/rtc.c **** 	char *ptr = strtok(Buf, delim);
+ 1265              		.loc 2 134 14 is_stmt 0 view .LVU311
+ 1266 001e 01A9     		add	r1, sp, #4
+ 1267 0020 2046     		mov	r0, r4
+ 1268 0022 FFF7FEFF 		bl	strtok
+ 1269              	.LVL68:
+ 135:Core/Src/USER/rtc.c **** 	currTime.Hours=atoi(ptr);
+ 1270              		.loc 2 135 2 is_stmt 1 view .LVU312
+ 135:Core/Src/USER/rtc.c **** 	currTime.Hours=atoi(ptr);
+ 1271              		.loc 2 135 17 is_stmt 0 view .LVU313
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 41
+
+
+ 1272 0026 FFF7FEFF 		bl	atoi
+ 1273              	.LVL69:
+ 135:Core/Src/USER/rtc.c **** 	currTime.Hours=atoi(ptr);
+ 1274              		.loc 2 135 16 view .LVU314
+ 1275 002a 0C4C     		ldr	r4, .L85
+ 1276              	.LVL70:
+ 135:Core/Src/USER/rtc.c **** 	currTime.Hours=atoi(ptr);
+ 1277              		.loc 2 135 16 view .LVU315
+ 1278 002c 2070     		strb	r0, [r4]
+ 137:Core/Src/USER/rtc.c **** 	ptr = strtok(NULL, delim);
+ 1279              		.loc 2 137 2 is_stmt 1 view .LVU316
+ 137:Core/Src/USER/rtc.c **** 	ptr = strtok(NULL, delim);
+ 1280              		.loc 2 137 8 is_stmt 0 view .LVU317
+ 1281 002e 01A9     		add	r1, sp, #4
+ 1282 0030 0020     		movs	r0, #0
+ 1283 0032 FFF7FEFF 		bl	strtok
+ 1284              	.LVL71:
+ 138:Core/Src/USER/rtc.c **** 	currTime.Minutes=atoi(ptr);
+ 1285              		.loc 2 138 2 is_stmt 1 view .LVU318
+ 138:Core/Src/USER/rtc.c **** 	currTime.Minutes=atoi(ptr);
+ 1286              		.loc 2 138 19 is_stmt 0 view .LVU319
+ 1287 0036 FFF7FEFF 		bl	atoi
+ 1288              	.LVL72:
+ 138:Core/Src/USER/rtc.c **** 	currTime.Minutes=atoi(ptr);
+ 1289              		.loc 2 138 18 view .LVU320
+ 1290 003a 6070     		strb	r0, [r4, #1]
+ 140:Core/Src/USER/rtc.c **** 	ptr = strtok(NULL, delim);
+ 1291              		.loc 2 140 2 is_stmt 1 view .LVU321
+ 140:Core/Src/USER/rtc.c **** 	ptr = strtok(NULL, delim);
+ 1292              		.loc 2 140 8 is_stmt 0 view .LVU322
+ 1293 003c 01A9     		add	r1, sp, #4
+ 1294 003e 0020     		movs	r0, #0
+ 1295 0040 FFF7FEFF 		bl	strtok
+ 1296              	.LVL73:
+ 141:Core/Src/USER/rtc.c **** 	currTime.Seconds=atoi(ptr);
+ 1297              		.loc 2 141 2 is_stmt 1 view .LVU323
+ 141:Core/Src/USER/rtc.c **** 	currTime.Seconds=atoi(ptr);
+ 1298              		.loc 2 141 19 is_stmt 0 view .LVU324
+ 1299 0044 FFF7FEFF 		bl	atoi
+ 1300              	.LVL74:
+ 141:Core/Src/USER/rtc.c **** 	currTime.Seconds=atoi(ptr);
+ 1301              		.loc 2 141 18 view .LVU325
+ 1302 0048 A070     		strb	r0, [r4, #2]
+ 143:Core/Src/USER/rtc.c ****  if (HAL_RTC_SetTime(&hrtc, &currTime, RTC_FORMAT_BIN) != HAL_OK)
+ 1303              		.loc 2 143 2 is_stmt 1 view .LVU326
+ 143:Core/Src/USER/rtc.c ****  if (HAL_RTC_SetTime(&hrtc, &currTime, RTC_FORMAT_BIN) != HAL_OK)
+ 1304              		.loc 2 143 6 is_stmt 0 view .LVU327
+ 1305 004a 0022     		movs	r2, #0
+ 1306 004c 2146     		mov	r1, r4
+ 1307 004e 0448     		ldr	r0, .L85+4
+ 1308 0050 FFF7FEFF 		bl	HAL_RTC_SetTime
+ 1309              	.LVL75:
+ 143:Core/Src/USER/rtc.c ****  if (HAL_RTC_SetTime(&hrtc, &currTime, RTC_FORMAT_BIN) != HAL_OK)
+ 1310              		.loc 2 143 5 view .LVU328
+ 1311 0054 0028     		cmp	r0, #0
+ 1312 0056 DDD0     		beq	.L79
+ 145:Core/Src/USER/rtc.c ****     Error_Handler();
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 42
+
+
+ 1313              		.loc 2 145 5 is_stmt 1 view .LVU329
+ 1314 0058 FFF7FEFF 		bl	Error_Handler
+ 1315              	.LVL76:
+ 1316              	.L86:
+ 1317              		.align	2
+ 1318              	.L85:
+ 1319 005c 00000000 		.word	.LANCHOR1
+ 1320 0060 00000000 		.word	.LANCHOR2
+ 1321              		.cfi_endproc
+ 1322              	.LFE71:
+ 1324              		.section	.rodata.commandcom.str1.4,"aMS",%progbits,1
+ 1325              		.align	2
+ 1326              	.LC0:
+ 1327 0000 39482043 		.ascii	"9H CLOCK\015\012(c)2023 Vabolis.lt\015\012\000"
+ 1327      4C4F434B 
+ 1327      0D0A2863 
+ 1327      29323032 
+ 1327      33205661 
+ 1328              		.section	.text.commandcom,"ax",%progbits
+ 1329              		.align	1
+ 1330              		.global	commandcom
+ 1331              		.syntax unified
+ 1332              		.thumb
+ 1333              		.thumb_func
+ 1335              	commandcom:
+ 1336              	.LVL77:
+ 1337              	.LFB87:
+  50:Core/Src/USER/user.c **** 
+ 1338              		.loc 4 50 1 view -0
+ 1339              		.cfi_startproc
+ 1340              		@ args = 0, pretend = 0, frame = 0
+ 1341              		@ frame_needed = 0, uses_anonymous_args = 0
+  50:Core/Src/USER/user.c **** 
+ 1342              		.loc 4 50 1 is_stmt 0 view .LVU331
+ 1343 0000 08B5     		push	{r3, lr}
+ 1344              	.LCFI26:
+ 1345              		.cfi_def_cfa_offset 8
+ 1346              		.cfi_offset 3, -8
+ 1347              		.cfi_offset 14, -4
+  52:Core/Src/USER/user.c **** 
+ 1348              		.loc 4 52 1 is_stmt 1 view .LVU332
+  52:Core/Src/USER/user.c **** 
+ 1349              		.loc 4 52 8 is_stmt 0 view .LVU333
+ 1350 0002 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+  52:Core/Src/USER/user.c **** 
+ 1351              		.loc 4 52 4 view .LVU334
+ 1352 0004 412B     		cmp	r3, #65
+ 1353 0006 15D1     		bne	.L87
+  52:Core/Src/USER/user.c **** 
+ 1354              		.loc 4 52 24 discriminator 2 view .LVU335
+ 1355 0008 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+  52:Core/Src/USER/user.c **** 
+ 1356              		.loc 4 52 18 discriminator 2 view .LVU336
+ 1357 000a 542B     		cmp	r3, #84
+ 1358 000c 12D1     		bne	.L87
+  54:Core/Src/USER/user.c **** 	{
+ 1359              		.loc 4 54 2 is_stmt 1 view .LVU337
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 43
+
+
+  54:Core/Src/USER/user.c **** 	{
+ 1360              		.loc 4 54 12 is_stmt 0 view .LVU338
+ 1361 000e 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+  54:Core/Src/USER/user.c **** 	{
+ 1362              		.loc 4 54 2 view .LVU339
+ 1363 0010 413B     		subs	r3, r3, #65
+ 1364 0012 132B     		cmp	r3, #19
+ 1365 0014 0ED8     		bhi	.L87
+ 1366 0016 DFE803F0 		tbb	[pc, r3]
+ 1367              	.L90:
+ 1368 001a 17       		.byte	(.L93-.L90)/2
+ 1369 001b 0D       		.byte	(.L87-.L90)/2
+ 1370 001c 0D       		.byte	(.L87-.L90)/2
+ 1371 001d 0E       		.byte	(.L92-.L90)/2
+ 1372 001e 0D       		.byte	(.L87-.L90)/2
+ 1373 001f 0D       		.byte	(.L87-.L90)/2
+ 1374 0020 0D       		.byte	(.L87-.L90)/2
+ 1375 0021 0D       		.byte	(.L87-.L90)/2
+ 1376 0022 12       		.byte	(.L91-.L90)/2
+ 1377 0023 0D       		.byte	(.L87-.L90)/2
+ 1378 0024 0D       		.byte	(.L87-.L90)/2
+ 1379 0025 0D       		.byte	(.L87-.L90)/2
+ 1380 0026 0D       		.byte	(.L87-.L90)/2
+ 1381 0027 0D       		.byte	(.L87-.L90)/2
+ 1382 0028 0D       		.byte	(.L87-.L90)/2
+ 1383 0029 0D       		.byte	(.L87-.L90)/2
+ 1384 002a 0D       		.byte	(.L87-.L90)/2
+ 1385 002b 0D       		.byte	(.L87-.L90)/2
+ 1386 002c 0D       		.byte	(.L87-.L90)/2
+ 1387 002d 0A       		.byte	(.L89-.L90)/2
+ 1388              		.p2align 1
+ 1389              	.L89:
+  57:Core/Src/USER/user.c **** 		break;
+ 1390              		.loc 4 57 4 is_stmt 1 view .LVU340
+ 1391 002e 0330     		adds	r0, r0, #3
+ 1392              	.LVL78:
+  57:Core/Src/USER/user.c **** 		break;
+ 1393              		.loc 4 57 4 is_stmt 0 view .LVU341
+ 1394 0030 FFF7FEFF 		bl	rtc_set_time_text
+ 1395              	.LVL79:
+  58:Core/Src/USER/user.c **** 		case 'D':
+ 1396              		.loc 4 58 3 is_stmt 1 view .LVU342
+ 1397              	.L87:
+  69:Core/Src/USER/user.c **** 
+ 1398              		.loc 4 69 1 is_stmt 0 view .LVU343
+ 1399 0034 08BD     		pop	{r3, pc}
+ 1400              	.LVL80:
+ 1401              	.L92:
+  60:Core/Src/USER/user.c **** 		break;
+ 1402              		.loc 4 60 4 is_stmt 1 view .LVU344
+ 1403 0036 0330     		adds	r0, r0, #3
+ 1404              	.LVL81:
+  60:Core/Src/USER/user.c **** 		break;
+ 1405              		.loc 4 60 4 is_stmt 0 view .LVU345
+ 1406 0038 FFF7FEFF 		bl	rtc_set_date_text
+ 1407              	.LVL82:
+  61:Core/Src/USER/user.c **** 		case 'I':
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 44
+
+
+ 1408              		.loc 4 61 3 is_stmt 1 view .LVU346
+ 1409 003c FAE7     		b	.L87
+ 1410              	.LVL83:
+ 1411              	.L91:
+  63:Core/Src/USER/user.c **** 		break;
+ 1412              		.loc 4 63 4 view .LVU347
+ 1413 003e 2121     		movs	r1, #33
+ 1414 0040 0448     		ldr	r0, .L95
+ 1415              	.LVL84:
+  63:Core/Src/USER/user.c **** 		break;
+ 1416              		.loc 4 63 4 is_stmt 0 view .LVU348
+ 1417 0042 FFF7FEFF 		bl	CDC_Transmit_FS
+ 1418              	.LVL85:
+  64:Core/Src/USER/user.c **** 		case 'A':
+ 1419              		.loc 4 64 3 is_stmt 1 view .LVU349
+ 1420 0046 F5E7     		b	.L87
+ 1421              	.LVL86:
+ 1422              	.L93:
+  66:Core/Src/USER/user.c **** 		break;
+ 1423              		.loc 4 66 4 view .LVU350
+ 1424 0048 034B     		ldr	r3, .L95+4
+ 1425 004a 1B68     		ldr	r3, [r3]
+ 1426 004c 43F2C962 		movw	r2, #14025
+ 1427 0050 5A63     		str	r2, [r3, #52]
+  67:Core/Src/USER/user.c **** 	}
+ 1428              		.loc 4 67 3 view .LVU351
+ 1429 0052 EFE7     		b	.L87
+ 1430              	.L96:
+ 1431              		.align	2
+ 1432              	.L95:
+ 1433 0054 00000000 		.word	.LC0
+ 1434 0058 00000000 		.word	.LANCHOR5
+ 1435              		.cfi_endproc
+ 1436              	.LFE87:
+ 1438              		.section	.text.user_loop,"ax",%progbits
+ 1439              		.align	1
+ 1440              		.global	user_loop
+ 1441              		.syntax unified
+ 1442              		.thumb
+ 1443              		.thumb_func
+ 1445              	user_loop:
+ 1446              	.LFB88:
+  73:Core/Src/USER/user.c **** char a;
+ 1447              		.loc 4 73 1 view -0
+ 1448              		.cfi_startproc
+ 1449              		@ args = 0, pretend = 0, frame = 32
+ 1450              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1451 0000 10B5     		push	{r4, lr}
+ 1452              	.LCFI27:
+ 1453              		.cfi_def_cfa_offset 8
+ 1454              		.cfi_offset 4, -8
+ 1455              		.cfi_offset 14, -4
+ 1456 0002 88B0     		sub	sp, sp, #32
+ 1457              	.LCFI28:
+ 1458              		.cfi_def_cfa_offset 40
+  74:Core/Src/USER/user.c **** char txt[32];
+ 1459              		.loc 4 74 1 view .LVU353
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 45
+
+
+  75:Core/Src/USER/user.c **** unsigned char txtp=0;
+ 1460              		.loc 4 75 1 view .LVU354
+  76:Core/Src/USER/user.c **** 
+ 1461              		.loc 4 76 1 view .LVU355
+ 1462              	.LVL87:
+  76:Core/Src/USER/user.c **** 
+ 1463              		.loc 4 76 15 is_stmt 0 view .LVU356
+ 1464 0004 0024     		movs	r4, #0
+ 1465              	.LVL88:
+ 1466              	.L103:
+  78:Core/Src/USER/user.c **** 	{
+ 1467              		.loc 4 78 1 is_stmt 1 view .LVU357
+  80:Core/Src/USER/user.c **** 	while(circle_available(&cc)>0) 
+ 1468              		.loc 4 80 2 view .LVU358
+ 1469 0006 1648     		ldr	r0, .L107
+ 1470 0008 FFF7FEFF 		bl	HAL_IWDG_Refresh
+ 1471              	.LVL89:
+  81:Core/Src/USER/user.c **** 		{
+ 1472              		.loc 4 81 2 view .LVU359
+ 1473              	.L98:
+  81:Core/Src/USER/user.c **** 		{
+ 1474              		.loc 4 81 7 view .LVU360
+  81:Core/Src/USER/user.c **** 		{
+ 1475              		.loc 4 81 8 is_stmt 0 view .LVU361
+ 1476 000c 1548     		ldr	r0, .L107+4
+ 1477 000e FFF7FEFF 		bl	circle_available
+ 1478              	.LVL90:
+  81:Core/Src/USER/user.c **** 		{
+ 1479              		.loc 4 81 7 view .LVU362
+ 1480 0012 0028     		cmp	r0, #0
+ 1481 0014 F7D0     		beq	.L103
+  83:Core/Src/USER/user.c **** 			
+ 1482              		.loc 4 83 4 is_stmt 1 view .LVU363
+  83:Core/Src/USER/user.c **** 			
+ 1483              		.loc 4 83 6 is_stmt 0 view .LVU364
+ 1484 0016 1348     		ldr	r0, .L107+4
+ 1485 0018 FFF7FEFF 		bl	circle_pull
+ 1486              	.LVL91:
+  85:Core/Src/USER/user.c **** 			{
+ 1487              		.loc 4 85 4 is_stmt 1 view .LVU365
+  85:Core/Src/USER/user.c **** 			{
+ 1488              		.loc 4 85 15 is_stmt 0 view .LVU366
+ 1489 001c A0F12003 		sub	r3, r0, #32
+ 1490 0020 DBB2     		uxtb	r3, r3
+  85:Core/Src/USER/user.c **** 			{
+ 1491              		.loc 4 85 7 view .LVU367
+ 1492 0022 5A2B     		cmp	r3, #90
+ 1493 0024 10D8     		bhi	.L99
+  87:Core/Src/USER/user.c **** 				txtp++;
+ 1494              		.loc 4 87 5 is_stmt 1 view .LVU368
+  87:Core/Src/USER/user.c **** 				txtp++;
+ 1495              		.loc 4 87 14 is_stmt 0 view .LVU369
+ 1496 0026 04F12003 		add	r3, r4, #32
+ 1497 002a 6B44     		add	r3, sp, r3
+ 1498 002c 03F8200C 		strb	r0, [r3, #-32]
+  88:Core/Src/USER/user.c **** 				txt[txtp]=0;
+ 1499              		.loc 4 88 5 is_stmt 1 view .LVU370
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 46
+
+
+  88:Core/Src/USER/user.c **** 				txt[txtp]=0;
+ 1500              		.loc 4 88 9 is_stmt 0 view .LVU371
+ 1501 0030 0134     		adds	r4, r4, #1
+ 1502              	.LVL92:
+  88:Core/Src/USER/user.c **** 				txt[txtp]=0;
+ 1503              		.loc 4 88 9 view .LVU372
+ 1504 0032 E4B2     		uxtb	r4, r4
+ 1505              	.LVL93:
+  89:Core/Src/USER/user.c **** 				if (txtp >30) {txtp=0;}
+ 1506              		.loc 4 89 5 is_stmt 1 view .LVU373
+  89:Core/Src/USER/user.c **** 				if (txtp >30) {txtp=0;}
+ 1507              		.loc 4 89 14 is_stmt 0 view .LVU374
+ 1508 0034 04F12003 		add	r3, r4, #32
+ 1509 0038 6B44     		add	r3, sp, r3
+ 1510 003a 0022     		movs	r2, #0
+ 1511 003c 03F8202C 		strb	r2, [r3, #-32]
+  90:Core/Src/USER/user.c **** 			}
+ 1512              		.loc 4 90 5 is_stmt 1 view .LVU375
+  90:Core/Src/USER/user.c **** 			}
+ 1513              		.loc 4 90 8 is_stmt 0 view .LVU376
+ 1514 0040 1E2C     		cmp	r4, #30
+ 1515 0042 E3D9     		bls	.L98
+  90:Core/Src/USER/user.c **** 			}
+ 1516              		.loc 4 90 24 view .LVU377
+ 1517 0044 0024     		movs	r4, #0
+ 1518              	.LVL94:
+  90:Core/Src/USER/user.c **** 			}
+ 1519              		.loc 4 90 24 view .LVU378
+ 1520 0046 E1E7     		b	.L98
+ 1521              	.LVL95:
+ 1522              	.L99:
+  92:Core/Src/USER/user.c **** 			{
+ 1523              		.loc 4 92 9 is_stmt 1 view .LVU379
+  92:Core/Src/USER/user.c **** 			{
+ 1524              		.loc 4 92 12 is_stmt 0 view .LVU380
+ 1525 0048 1F28     		cmp	r0, #31
+ 1526 004a DFD8     		bhi	.L98
+  94:Core/Src/USER/user.c **** 				txt[0]=0;
+ 1527              		.loc 4 94 5 is_stmt 1 view .LVU381
+  94:Core/Src/USER/user.c **** 				txt[0]=0;
+ 1528              		.loc 4 94 8 is_stmt 0 view .LVU382
+ 1529 004c 022C     		cmp	r4, #2
+ 1530 004e 03D8     		bhi	.L106
+ 1531              	.LVL96:
+ 1532              	.L101:
+  95:Core/Src/USER/user.c **** 				txtp=0;
+ 1533              		.loc 4 95 5 is_stmt 1 view .LVU383
+  95:Core/Src/USER/user.c **** 				txtp=0;
+ 1534              		.loc 4 95 11 is_stmt 0 view .LVU384
+ 1535 0050 0024     		movs	r4, #0
+ 1536              	.LVL97:
+  95:Core/Src/USER/user.c **** 				txtp=0;
+ 1537              		.loc 4 95 11 view .LVU385
+ 1538 0052 8DF80040 		strb	r4, [sp]
+  96:Core/Src/USER/user.c **** 			}
+ 1539              		.loc 4 96 5 is_stmt 1 view .LVU386
+ 1540              	.LVL98:
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 47
+
+
+  96:Core/Src/USER/user.c **** 			}
+ 1541              		.loc 4 96 5 is_stmt 0 view .LVU387
+ 1542 0056 D9E7     		b	.L98
+ 1543              	.LVL99:
+ 1544              	.L106:
+  94:Core/Src/USER/user.c **** 				txt[0]=0;
+ 1545              		.loc 4 94 16 is_stmt 1 discriminator 1 view .LVU388
+ 1546 0058 6846     		mov	r0, sp
+ 1547              	.LVL100:
+  94:Core/Src/USER/user.c **** 				txt[0]=0;
+ 1548              		.loc 4 94 16 is_stmt 0 discriminator 1 view .LVU389
+ 1549 005a FFF7FEFF 		bl	commandcom
+ 1550              	.LVL101:
+ 1551 005e F7E7     		b	.L101
+ 1552              	.L108:
+ 1553              		.align	2
+ 1554              	.L107:
+ 1555 0060 00000000 		.word	.LANCHOR6
+ 1556 0064 00000000 		.word	.LANCHOR3
+ 1557              		.cfi_endproc
+ 1558              	.LFE88:
+ 1560              		.section	.text.rtc_check_screwd_calendar,"ax",%progbits
+ 1561              		.align	1
+ 1562              		.global	rtc_check_screwd_calendar
+ 1563              		.syntax unified
+ 1564              		.thumb
+ 1565              		.thumb_func
+ 1567              	rtc_check_screwd_calendar:
+ 1568              	.LFB76:
+ 201:Core/Src/USER/rtc.c **** {
+ 1569              		.loc 2 201 1 is_stmt 1 view -0
+ 1570              		.cfi_startproc
+ 1571              		@ args = 0, pretend = 0, frame = 8
+ 1572              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1573 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1574              	.LCFI29:
+ 1575              		.cfi_def_cfa_offset 24
+ 1576              		.cfi_offset 4, -24
+ 1577              		.cfi_offset 5, -20
+ 1578              		.cfi_offset 6, -16
+ 1579              		.cfi_offset 7, -12
+ 1580              		.cfi_offset 8, -8
+ 1581              		.cfi_offset 14, -4
+ 1582 0004 82B0     		sub	sp, sp, #8
+ 1583              	.LCFI30:
+ 1584              		.cfi_def_cfa_offset 32
+ 202:Core/Src/USER/rtc.c **** RTC_DateTypeDef dienos;
+ 1585              		.loc 2 202 1 view .LVU391
+ 203:Core/Src/USER/rtc.c **** 	if(HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR1)== 0x5051) //magic number, valid backup
+ 1586              		.loc 2 203 2 view .LVU392
+ 203:Core/Src/USER/rtc.c **** 	if(HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR1)== 0x5051) //magic number, valid backup
+ 1587              		.loc 2 203 5 is_stmt 0 view .LVU393
+ 1588 0006 0121     		movs	r1, #1
+ 1589 0008 2A48     		ldr	r0, .L115
+ 1590 000a FFF7FEFF 		bl	HAL_RTCEx_BKUPRead
+ 1591              	.LVL102:
+ 203:Core/Src/USER/rtc.c **** 	if(HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR1)== 0x5051) //magic number, valid backup
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 48
+
+
+ 1592              		.loc 2 203 4 view .LVU394
+ 1593 000e 45F25103 		movw	r3, #20561
+ 1594 0012 9842     		cmp	r0, r3
+ 1595 0014 02D0     		beq	.L113
+ 1596              	.L109:
+ 225:Core/Src/USER/rtc.c **** }
+ 1597              		.loc 2 225 1 view .LVU395
+ 1598 0016 02B0     		add	sp, sp, #8
+ 1599              	.LCFI31:
+ 1600              		.cfi_remember_state
+ 1601              		.cfi_def_cfa_offset 24
+ 1602              		@ sp needed
+ 1603 0018 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1604              	.L113:
+ 1605              	.LCFI32:
+ 1606              		.cfi_restore_state
+ 1607              	.LBB9:
+ 205:Core/Src/USER/rtc.c **** 		HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
+ 1608              		.loc 2 205 3 is_stmt 1 view .LVU396
+ 1609 001c DFF89480 		ldr	r8, .L115
+ 1610 0020 0022     		movs	r2, #0
+ 1611 0022 01A9     		add	r1, sp, #4
+ 1612 0024 4046     		mov	r0, r8
+ 1613 0026 FFF7FEFF 		bl	HAL_RTC_GetDate
+ 1614              	.LVL103:
+ 206:Core/Src/USER/rtc.c **** 		HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
+ 1615              		.loc 2 206 3 view .LVU397
+ 1616 002a 234C     		ldr	r4, .L115+4
+ 1617 002c 0022     		movs	r2, #0
+ 1618 002e 2146     		mov	r1, r4
+ 1619 0030 4046     		mov	r0, r8
+ 1620 0032 FFF7FEFF 		bl	HAL_RTC_GetTime
+ 1621              	.LVL104:
+ 207:Core/Src/USER/rtc.c **** 		uint32_t now_is=currTime.Hours+dienos.Date*24+dienos.Month*31*24+dienos.Year*366*24;
+ 1622              		.loc 2 207 3 view .LVU398
+ 207:Core/Src/USER/rtc.c **** 		uint32_t now_is=currTime.Hours+dienos.Date*24+dienos.Month*31*24+dienos.Year*366*24;
+ 1623              		.loc 2 207 27 is_stmt 0 view .LVU399
+ 1624 0036 2478     		ldrb	r4, [r4]	@ zero_extendqisi2
+ 207:Core/Src/USER/rtc.c **** 		uint32_t now_is=currTime.Hours+dienos.Date*24+dienos.Month*31*24+dienos.Year*366*24;
+ 1625              		.loc 2 207 40 view .LVU400
+ 1626 0038 9DF80630 		ldrb	r3, [sp, #6]	@ zero_extendqisi2
+ 207:Core/Src/USER/rtc.c **** 		uint32_t now_is=currTime.Hours+dienos.Date*24+dienos.Month*31*24+dienos.Year*366*24;
+ 1627              		.loc 2 207 45 view .LVU401
+ 1628 003c 03EB4303 		add	r3, r3, r3, lsl #1
+ 207:Core/Src/USER/rtc.c **** 		uint32_t now_is=currTime.Hours+dienos.Date*24+dienos.Month*31*24+dienos.Year*366*24;
+ 1629              		.loc 2 207 33 view .LVU402
+ 1630 0040 04EBC304 		add	r4, r4, r3, lsl #3
+ 207:Core/Src/USER/rtc.c **** 		uint32_t now_is=currTime.Hours+dienos.Date*24+dienos.Month*31*24+dienos.Year*366*24;
+ 1631              		.loc 2 207 55 view .LVU403
+ 1632 0044 9DF80530 		ldrb	r3, [sp, #5]	@ zero_extendqisi2
+ 207:Core/Src/USER/rtc.c **** 		uint32_t now_is=currTime.Hours+dienos.Date*24+dienos.Month*31*24+dienos.Year*366*24;
+ 1633              		.loc 2 207 64 view .LVU404
+ 1634 0048 4FF43A77 		mov	r7, #744
+ 207:Core/Src/USER/rtc.c **** 		uint32_t now_is=currTime.Hours+dienos.Date*24+dienos.Month*31*24+dienos.Year*366*24;
+ 1635              		.loc 2 207 48 view .LVU405
+ 1636 004c 07FB0344 		mla	r4, r7, r3, r4
+ 207:Core/Src/USER/rtc.c **** 		uint32_t now_is=currTime.Hours+dienos.Date*24+dienos.Month*31*24+dienos.Year*366*24;
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 49
+
+
+ 1637              		.loc 2 207 74 view .LVU406
+ 1638 0050 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 207:Core/Src/USER/rtc.c **** 		uint32_t now_is=currTime.Hours+dienos.Date*24+dienos.Month*31*24+dienos.Year*366*24;
+ 1639              		.loc 2 207 83 view .LVU407
+ 1640 0054 42F25026 		movw	r6, #8784
+ 207:Core/Src/USER/rtc.c **** 		uint32_t now_is=currTime.Hours+dienos.Date*24+dienos.Month*31*24+dienos.Year*366*24;
+ 1641              		.loc 2 207 67 view .LVU408
+ 1642 0058 06FB0344 		mla	r4, r6, r3, r4
+ 1643              	.LVL105:
+ 209:Core/Src/USER/rtc.c **** 		uint32_t tmp=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR2);
+ 1644              		.loc 2 209 3 is_stmt 1 view .LVU409
+ 209:Core/Src/USER/rtc.c **** 		uint32_t tmp=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR2);
+ 1645              		.loc 2 209 16 is_stmt 0 view .LVU410
+ 1646 005c 0221     		movs	r1, #2
+ 1647 005e 4046     		mov	r0, r8
+ 1648 0060 FFF7FEFF 		bl	HAL_RTCEx_BKUPRead
+ 1649              	.LVL106:
+ 1650 0064 0546     		mov	r5, r0
+ 1651              	.LVL107:
+ 210:Core/Src/USER/rtc.c **** 		uint32_t tmp2=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR3);	
+ 1652              		.loc 2 210 3 is_stmt 1 view .LVU411
+ 210:Core/Src/USER/rtc.c **** 		uint32_t tmp2=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR3);	
+ 1653              		.loc 2 210 17 is_stmt 0 view .LVU412
+ 1654 0066 0321     		movs	r1, #3
+ 1655 0068 4046     		mov	r0, r8
+ 1656              	.LVL108:
+ 210:Core/Src/USER/rtc.c **** 		uint32_t tmp2=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR3);	
+ 1657              		.loc 2 210 17 view .LVU413
+ 1658 006a FFF7FEFF 		bl	HAL_RTCEx_BKUPRead
+ 1659              	.LVL109:
+ 212:Core/Src/USER/rtc.c **** 		uint32_t now_was=(tmp>>8)*366*24+(tmp & 0x000F)*31*24+(tmp2>>8)*24+(tmp2 & 0xFF);
+ 1660              		.loc 2 212 3 is_stmt 1 view .LVU414
+ 212:Core/Src/USER/rtc.c **** 		uint32_t now_was=(tmp>>8)*366*24+(tmp & 0x000F)*31*24+(tmp2>>8)*24+(tmp2 & 0xFF);
+ 1661              		.loc 2 212 24 is_stmt 0 view .LVU415
+ 1662 006e 290A     		lsrs	r1, r5, #8
+ 212:Core/Src/USER/rtc.c **** 		uint32_t now_was=(tmp>>8)*366*24+(tmp & 0x000F)*31*24+(tmp2>>8)*24+(tmp2 & 0xFF);
+ 1663              		.loc 2 212 41 view .LVU416
+ 1664 0070 05F00F03 		and	r3, r5, #15
+ 212:Core/Src/USER/rtc.c **** 		uint32_t now_was=(tmp>>8)*366*24+(tmp & 0x000F)*31*24+(tmp2>>8)*24+(tmp2 & 0xFF);
+ 1665              		.loc 2 212 53 view .LVU417
+ 1666 0074 07FB03F3 		mul	r3, r7, r3
+ 212:Core/Src/USER/rtc.c **** 		uint32_t now_was=(tmp>>8)*366*24+(tmp & 0x000F)*31*24+(tmp2>>8)*24+(tmp2 & 0xFF);
+ 1667              		.loc 2 212 35 view .LVU418
+ 1668 0078 06FB0133 		mla	r3, r6, r1, r3
+ 212:Core/Src/USER/rtc.c **** 		uint32_t now_was=(tmp>>8)*366*24+(tmp & 0x000F)*31*24+(tmp2>>8)*24+(tmp2 & 0xFF);
+ 1669              		.loc 2 212 62 view .LVU419
+ 1670 007c 020A     		lsrs	r2, r0, #8
+ 212:Core/Src/USER/rtc.c **** 		uint32_t now_was=(tmp>>8)*366*24+(tmp & 0x000F)*31*24+(tmp2>>8)*24+(tmp2 & 0xFF);
+ 1671              		.loc 2 212 66 view .LVU420
+ 1672 007e 02EB4206 		add	r6, r2, r2, lsl #1
+ 212:Core/Src/USER/rtc.c **** 		uint32_t now_was=(tmp>>8)*366*24+(tmp & 0x000F)*31*24+(tmp2>>8)*24+(tmp2 & 0xFF);
+ 1673              		.loc 2 212 56 view .LVU421
+ 1674 0082 03EBC603 		add	r3, r3, r6, lsl #3
+ 212:Core/Src/USER/rtc.c **** 		uint32_t now_was=(tmp>>8)*366*24+(tmp & 0x000F)*31*24+(tmp2>>8)*24+(tmp2 & 0xFF);
+ 1675              		.loc 2 212 76 view .LVU422
+ 1676 0086 C0B2     		uxtb	r0, r0
+ 1677              	.LVL110:
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 50
+
+
+ 212:Core/Src/USER/rtc.c **** 		uint32_t now_was=(tmp>>8)*366*24+(tmp & 0x000F)*31*24+(tmp2>>8)*24+(tmp2 & 0xFF);
+ 1678              		.loc 2 212 12 view .LVU423
+ 1679 0088 0344     		add	r3, r3, r0
+ 1680              	.LVL111:
+ 213:Core/Src/USER/rtc.c **** 		if(now_was > now_is)
+ 1681              		.loc 2 213 3 is_stmt 1 view .LVU424
+ 213:Core/Src/USER/rtc.c **** 		if(now_was > now_is)
+ 1682              		.loc 2 213 5 is_stmt 0 view .LVU425
+ 1683 008a 9C42     		cmp	r4, r3
+ 1684 008c C3D2     		bcs	.L109
+ 215:Core/Src/USER/rtc.c **** 			dienos.Year=(tmp >> 8);
+ 1685              		.loc 2 215 4 is_stmt 1 view .LVU426
+ 215:Core/Src/USER/rtc.c **** 			dienos.Year=(tmp >> 8);
+ 1686              		.loc 2 215 15 is_stmt 0 view .LVU427
+ 1687 008e 8DF80710 		strb	r1, [sp, #7]
+ 216:Core/Src/USER/rtc.c **** 			dienos.Month=tmp & 0x0F;
+ 1688              		.loc 2 216 4 is_stmt 1 view .LVU428
+ 216:Core/Src/USER/rtc.c **** 			dienos.Month=tmp & 0x0F;
+ 1689              		.loc 2 216 21 is_stmt 0 view .LVU429
+ 1690 0092 05F00F05 		and	r5, r5, #15
+ 1691              	.LVL112:
+ 216:Core/Src/USER/rtc.c **** 			dienos.Month=tmp & 0x0F;
+ 1692              		.loc 2 216 16 view .LVU430
+ 1693 0096 8DF80550 		strb	r5, [sp, #5]
+ 217:Core/Src/USER/rtc.c **** 			dienos.Date=(tmp2 >> 8);
+ 1694              		.loc 2 217 4 is_stmt 1 view .LVU431
+ 217:Core/Src/USER/rtc.c **** 			dienos.Date=(tmp2 >> 8);
+ 1695              		.loc 2 217 15 is_stmt 0 view .LVU432
+ 1696 009a 8DF80620 		strb	r2, [sp, #6]
+ 218:Core/Src/USER/rtc.c **** 			 if (HAL_RTC_SetDate(&hrtc, &dienos, RTC_FORMAT_BIN) != HAL_OK)
+ 1697              		.loc 2 218 5 is_stmt 1 view .LVU433
+ 218:Core/Src/USER/rtc.c **** 			 if (HAL_RTC_SetDate(&hrtc, &dienos, RTC_FORMAT_BIN) != HAL_OK)
+ 1698              		.loc 2 218 9 is_stmt 0 view .LVU434
+ 1699 009e 0022     		movs	r2, #0
+ 1700 00a0 01A9     		add	r1, sp, #4
+ 1701 00a2 4046     		mov	r0, r8
+ 1702 00a4 FFF7FEFF 		bl	HAL_RTC_SetDate
+ 1703              	.LVL113:
+ 218:Core/Src/USER/rtc.c **** 			 if (HAL_RTC_SetDate(&hrtc, &dienos, RTC_FORMAT_BIN) != HAL_OK)
+ 1704              		.loc 2 218 8 view .LVU435
+ 1705 00a8 10B9     		cbnz	r0, .L114
+ 222:Core/Src/USER/rtc.c **** 			 rtc_backup_date();
+ 1706              		.loc 2 222 5 is_stmt 1 view .LVU436
+ 1707 00aa FFF7FEFF 		bl	rtc_backup_date
+ 1708              	.LVL114:
+ 1709              	.LBE9:
+ 225:Core/Src/USER/rtc.c **** }
+ 1710              		.loc 2 225 1 is_stmt 0 view .LVU437
+ 1711 00ae B2E7     		b	.L109
+ 1712              	.L114:
+ 1713              	.LBB10:
+ 220:Core/Src/USER/rtc.c **** 				Error_Handler();
+ 1714              		.loc 2 220 5 is_stmt 1 view .LVU438
+ 1715 00b0 FFF7FEFF 		bl	Error_Handler
+ 1716              	.LVL115:
+ 1717              	.L116:
+ 1718              		.align	2
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 51
+
+
+ 1719              	.L115:
+ 1720 00b4 00000000 		.word	.LANCHOR2
+ 1721 00b8 00000000 		.word	.LANCHOR1
+ 1722              	.LBE10:
+ 1723              		.cfi_endproc
+ 1724              	.LFE76:
+ 1726              		.section	.text.MX_RTC_Init,"ax",%progbits
+ 1727              		.align	1
+ 1728              		.syntax unified
+ 1729              		.thumb
+ 1730              		.thumb_func
+ 1732              	MX_RTC_Init:
+ 1733              	.LFB93:
+ 201:Core/Src/main.c **** 
+ 1734              		.loc 1 201 1 view -0
+ 1735              		.cfi_startproc
+ 1736              		@ args = 0, pretend = 0, frame = 16
+ 1737              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1738 0000 10B5     		push	{r4, lr}
+ 1739              	.LCFI33:
+ 1740              		.cfi_def_cfa_offset 8
+ 1741              		.cfi_offset 4, -8
+ 1742              		.cfi_offset 14, -4
+ 1743 0002 84B0     		sub	sp, sp, #16
+ 1744              	.LCFI34:
+ 1745              		.cfi_def_cfa_offset 24
+ 207:Core/Src/main.c ****   RTC_DateTypeDef DateToUpdate = {0};
+ 1746              		.loc 1 207 3 view .LVU440
+ 207:Core/Src/main.c ****   RTC_DateTypeDef DateToUpdate = {0};
+ 1747              		.loc 1 207 19 is_stmt 0 view .LVU441
+ 1748 0004 0023     		movs	r3, #0
+ 1749 0006 ADF80C30 		strh	r3, [sp, #12]	@ movhi
+ 1750 000a 8DF80E30 		strb	r3, [sp, #14]
+ 208:Core/Src/main.c **** 
+ 1751              		.loc 1 208 3 is_stmt 1 view .LVU442
+ 208:Core/Src/main.c **** 
+ 1752              		.loc 1 208 19 is_stmt 0 view .LVU443
+ 1753 000e 0293     		str	r3, [sp, #8]
+ 211:Core/Src/main.c ****   hrtc.Init.AsynchPrediv = RTC_AUTO_1_SECOND;
+ 1754              		.loc 1 211 3 is_stmt 1 view .LVU444
+ 211:Core/Src/main.c ****   hrtc.Init.AsynchPrediv = RTC_AUTO_1_SECOND;
+ 1755              		.loc 1 211 17 is_stmt 0 view .LVU445
+ 1756 0010 2F4B     		ldr	r3, .L127
+ 1757 0012 304A     		ldr	r2, .L127+4
+ 1758 0014 1A60     		str	r2, [r3]
+ 212:Core/Src/main.c ****   hrtc.Init.OutPut = RTC_OUTPUTSOURCE_ALARM;
+ 1759              		.loc 1 212 3 is_stmt 1 view .LVU446
+ 212:Core/Src/main.c ****   hrtc.Init.OutPut = RTC_OUTPUTSOURCE_ALARM;
+ 1760              		.loc 1 212 26 is_stmt 0 view .LVU447
+ 1761 0016 4FF0FF32 		mov	r2, #-1
+ 1762 001a 5A60     		str	r2, [r3, #4]
+ 213:Core/Src/main.c ****   if ((RCC->BDCR & RCC_BDCR_RTCEN) == 0) {
+ 1763              		.loc 1 213 3 is_stmt 1 view .LVU448
+ 213:Core/Src/main.c ****   if ((RCC->BDCR & RCC_BDCR_RTCEN) == 0) {
+ 1764              		.loc 1 213 20 is_stmt 0 view .LVU449
+ 1765 001c 4FF48072 		mov	r2, #256
+ 1766 0020 9A60     		str	r2, [r3, #8]
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 52
+
+
+ 214:Core/Src/main.c ****   /* USER CODE END RTC_Init 1 */
+ 1767              		.loc 1 214 3 is_stmt 1 view .LVU450
+ 214:Core/Src/main.c ****   /* USER CODE END RTC_Init 1 */
+ 1768              		.loc 1 214 11 is_stmt 0 view .LVU451
+ 1769 0022 2D4B     		ldr	r3, .L127+8
+ 1770 0024 1B6A     		ldr	r3, [r3, #32]
+ 214:Core/Src/main.c ****   /* USER CODE END RTC_Init 1 */
+ 1771              		.loc 1 214 6 view .LVU452
+ 1772 0026 13F4004F 		tst	r3, #32768
+ 1773 002a 05D1     		bne	.L118
+ 219:Core/Src/main.c ****   hrtc.Init.AsynchPrediv = RTC_AUTO_1_SECOND;
+ 1774              		.loc 1 219 3 is_stmt 1 view .LVU453
+ 220:Core/Src/main.c ****   hrtc.Init.OutPut = RTC_OUTPUTSOURCE_ALARM;
+ 1775              		.loc 1 220 3 view .LVU454
+ 221:Core/Src/main.c ****   if (HAL_RTC_Init(&hrtc) != HAL_OK)
+ 1776              		.loc 1 221 3 view .LVU455
+ 222:Core/Src/main.c ****   {
+ 1777              		.loc 1 222 3 view .LVU456
+ 222:Core/Src/main.c ****   {
+ 1778              		.loc 1 222 7 is_stmt 0 view .LVU457
+ 1779 002c 2848     		ldr	r0, .L127
+ 1780 002e FFF7FEFF 		bl	HAL_RTC_Init
+ 1781              	.LVL116:
+ 222:Core/Src/main.c ****   {
+ 1782              		.loc 1 222 6 view .LVU458
+ 1783 0032 48B1     		cbz	r0, .L119
+ 224:Core/Src/main.c ****   }
+ 1784              		.loc 1 224 5 is_stmt 1 view .LVU459
+ 1785 0034 FFF7FEFF 		bl	Error_Handler
+ 1786              	.LVL117:
+ 1787              	.L118:
+ 230:Core/Src/main.c **** 	  HAL_NVIC_EnableIRQ(RTC_IRQn);
+ 1788              		.loc 1 230 4 view .LVU460
+ 1789 0038 0022     		movs	r2, #0
+ 1790 003a 0F21     		movs	r1, #15
+ 1791 003c 0320     		movs	r0, #3
+ 1792 003e FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 1793              	.LVL118:
+ 231:Core/Src/main.c **** 	}
+ 1794              		.loc 1 231 4 view .LVU461
+ 1795 0042 0320     		movs	r0, #3
+ 1796 0044 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 1797              	.LVL119:
+ 1798              	.L119:
+ 233:Core/Src/main.c **** 	{
+ 1799              		.loc 1 233 2 view .LVU462
+ 233:Core/Src/main.c **** 	{
+ 1800              		.loc 1 233 5 is_stmt 0 view .LVU463
+ 1801 0048 0121     		movs	r1, #1
+ 1802 004a 2148     		ldr	r0, .L127
+ 1803 004c FFF7FEFF 		bl	HAL_RTCEx_BKUPRead
+ 1804              	.LVL120:
+ 233:Core/Src/main.c **** 	{
+ 1805              		.loc 1 233 4 view .LVU464
+ 1806 0050 45F25103 		movw	r3, #20561
+ 1807 0054 9842     		cmp	r0, r3
+ 1808 0056 1BD0     		beq	.L120
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 53
+
+
+ 239:Core/Src/main.c ****   sTime.Minutes = 0x0;
+ 1809              		.loc 1 239 3 is_stmt 1 view .LVU465
+ 239:Core/Src/main.c ****   sTime.Minutes = 0x0;
+ 1810              		.loc 1 239 15 is_stmt 0 view .LVU466
+ 1811 0058 0023     		movs	r3, #0
+ 1812 005a 8DF80C30 		strb	r3, [sp, #12]
+ 240:Core/Src/main.c ****   sTime.Seconds = 0x0;
+ 1813              		.loc 1 240 3 is_stmt 1 view .LVU467
+ 240:Core/Src/main.c ****   sTime.Seconds = 0x0;
+ 1814              		.loc 1 240 17 is_stmt 0 view .LVU468
+ 1815 005e 8DF80D30 		strb	r3, [sp, #13]
+ 241:Core/Src/main.c **** 
+ 1816              		.loc 1 241 3 is_stmt 1 view .LVU469
+ 241:Core/Src/main.c **** 
+ 1817              		.loc 1 241 17 is_stmt 0 view .LVU470
+ 1818 0062 8DF80E30 		strb	r3, [sp, #14]
+ 243:Core/Src/main.c ****   {
+ 1819              		.loc 1 243 3 is_stmt 1 view .LVU471
+ 243:Core/Src/main.c ****   {
+ 1820              		.loc 1 243 7 is_stmt 0 view .LVU472
+ 1821 0066 0122     		movs	r2, #1
+ 1822 0068 03A9     		add	r1, sp, #12
+ 1823 006a 1948     		ldr	r0, .L127
+ 1824 006c FFF7FEFF 		bl	HAL_RTC_SetTime
+ 1825              	.LVL121:
+ 243:Core/Src/main.c ****   {
+ 1826              		.loc 1 243 6 view .LVU473
+ 1827 0070 30BB     		cbnz	r0, .L124
+ 247:Core/Src/main.c ****   DateToUpdate.Month = RTC_MONTH_JANUARY;
+ 1828              		.loc 1 247 3 is_stmt 1 view .LVU474
+ 247:Core/Src/main.c ****   DateToUpdate.Month = RTC_MONTH_JANUARY;
+ 1829              		.loc 1 247 24 is_stmt 0 view .LVU475
+ 1830 0072 0122     		movs	r2, #1
+ 1831 0074 8DF80820 		strb	r2, [sp, #8]
+ 248:Core/Src/main.c ****   DateToUpdate.Date = 0x1;
+ 1832              		.loc 1 248 3 is_stmt 1 view .LVU476
+ 248:Core/Src/main.c ****   DateToUpdate.Date = 0x1;
+ 1833              		.loc 1 248 22 is_stmt 0 view .LVU477
+ 1834 0078 8DF80920 		strb	r2, [sp, #9]
+ 249:Core/Src/main.c ****   DateToUpdate.Year = 0x0;
+ 1835              		.loc 1 249 3 is_stmt 1 view .LVU478
+ 249:Core/Src/main.c ****   DateToUpdate.Year = 0x0;
+ 1836              		.loc 1 249 21 is_stmt 0 view .LVU479
+ 1837 007c 8DF80A20 		strb	r2, [sp, #10]
+ 250:Core/Src/main.c **** 
+ 1838              		.loc 1 250 3 is_stmt 1 view .LVU480
+ 250:Core/Src/main.c **** 
+ 1839              		.loc 1 250 21 is_stmt 0 view .LVU481
+ 1840 0080 0023     		movs	r3, #0
+ 1841 0082 8DF80B30 		strb	r3, [sp, #11]
+ 252:Core/Src/main.c ****   {
+ 1842              		.loc 1 252 3 is_stmt 1 view .LVU482
+ 252:Core/Src/main.c ****   {
+ 1843              		.loc 1 252 7 is_stmt 0 view .LVU483
+ 1844 0086 02A9     		add	r1, sp, #8
+ 1845 0088 1148     		ldr	r0, .L127
+ 1846 008a FFF7FEFF 		bl	HAL_RTC_SetDate
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 54
+
+
+ 1847              	.LVL122:
+ 252:Core/Src/main.c ****   {
+ 1848              		.loc 1 252 6 view .LVU484
+ 1849 008e C8B9     		cbnz	r0, .L125
+ 1850              	.L120:
+ 264:Core/Src/main.c **** /* read time seconds for epoch */
+ 1851              		.loc 1 264 2 is_stmt 1 view .LVU485
+ 1852 0090 0F4C     		ldr	r4, .L127
+ 1853 0092 0022     		movs	r2, #0
+ 1854 0094 1149     		ldr	r1, .L127+12
+ 1855 0096 2046     		mov	r0, r4
+ 1856 0098 FFF7FEFF 		bl	HAL_RTC_GetTime
+ 1857              	.LVL123:
+ 271:Core/Src/main.c **** 	HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
+ 1858              		.loc 1 271 2 view .LVU486
+ 271:Core/Src/main.c **** 	HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
+ 1859              		.loc 1 271 18 is_stmt 0 view .LVU487
+ 1860 009c 0022     		movs	r2, #0
+ 1861 009e 0192     		str	r2, [sp, #4]
+ 272:Core/Src/main.c **** 	if(dienos.Year < 20) {rtc_check_screwd_calendar();}
+ 1862              		.loc 1 272 2 is_stmt 1 view .LVU488
+ 1863 00a0 01A9     		add	r1, sp, #4
+ 1864 00a2 2046     		mov	r0, r4
+ 1865 00a4 FFF7FEFF 		bl	HAL_RTC_GetDate
+ 1866              	.LVL124:
+ 273:Core/Src/main.c **** 	
+ 1867              		.loc 1 273 2 view .LVU489
+ 273:Core/Src/main.c **** 	
+ 1868              		.loc 1 273 11 is_stmt 0 view .LVU490
+ 1869 00a8 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 273:Core/Src/main.c **** 	
+ 1870              		.loc 1 273 4 view .LVU491
+ 1871 00ac 132B     		cmp	r3, #19
+ 1872 00ae 0BD9     		bls	.L126
+ 1873              	.L122:
+ 278:Core/Src/main.c **** 
+ 1874              		.loc 1 278 2 is_stmt 1 view .LVU492
+ 1875 00b0 45F25102 		movw	r2, #20561
+ 1876 00b4 0121     		movs	r1, #1
+ 1877 00b6 0648     		ldr	r0, .L127
+ 1878 00b8 FFF7FEFF 		bl	HAL_RTCEx_BKUPWrite
+ 1879              	.LVL125:
+ 283:Core/Src/main.c **** 
+ 1880              		.loc 1 283 1 is_stmt 0 view .LVU493
+ 1881 00bc 04B0     		add	sp, sp, #16
+ 1882              	.LCFI35:
+ 1883              		.cfi_remember_state
+ 1884              		.cfi_def_cfa_offset 8
+ 1885              		@ sp needed
+ 1886 00be 10BD     		pop	{r4, pc}
+ 1887              	.L124:
+ 1888              	.LCFI36:
+ 1889              		.cfi_restore_state
+ 245:Core/Src/main.c ****   }
+ 1890              		.loc 1 245 5 is_stmt 1 view .LVU494
+ 1891 00c0 FFF7FEFF 		bl	Error_Handler
+ 1892              	.LVL126:
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 55
+
+
+ 1893              	.L125:
+ 254:Core/Src/main.c ****   }
+ 1894              		.loc 1 254 5 view .LVU495
+ 1895 00c4 FFF7FEFF 		bl	Error_Handler
+ 1896              	.LVL127:
+ 1897              	.L126:
+ 273:Core/Src/main.c **** 	
+ 1898              		.loc 1 273 24 discriminator 1 view .LVU496
+ 1899 00c8 FFF7FEFF 		bl	rtc_check_screwd_calendar
+ 1900              	.LVL128:
+ 1901 00cc F0E7     		b	.L122
+ 1902              	.L128:
+ 1903 00ce 00BF     		.align	2
+ 1904              	.L127:
+ 1905 00d0 00000000 		.word	.LANCHOR2
+ 1906 00d4 00280040 		.word	1073752064
+ 1907 00d8 00100240 		.word	1073876992
+ 1908 00dc 00000000 		.word	.LANCHOR1
+ 1909              		.cfi_endproc
+ 1910              	.LFE93:
+ 1912              		.section	.text.MX_TIM1_Init,"ax",%progbits
+ 1913              		.align	1
+ 1914              		.syntax unified
+ 1915              		.thumb
+ 1916              		.thumb_func
+ 1918              	MX_TIM1_Init:
+ 1919              	.LFB94:
+ 291:Core/Src/main.c **** 
+ 1920              		.loc 1 291 1 view -0
+ 1921              		.cfi_startproc
+ 1922              		@ args = 0, pretend = 0, frame = 88
+ 1923              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1924 0000 10B5     		push	{r4, lr}
+ 1925              	.LCFI37:
+ 1926              		.cfi_def_cfa_offset 8
+ 1927              		.cfi_offset 4, -8
+ 1928              		.cfi_offset 14, -4
+ 1929 0002 96B0     		sub	sp, sp, #88
+ 1930              	.LCFI38:
+ 1931              		.cfi_def_cfa_offset 96
+ 297:Core/Src/main.c ****   TIM_MasterConfigTypeDef sMasterConfig = {0};
+ 1932              		.loc 1 297 3 view .LVU498
+ 297:Core/Src/main.c ****   TIM_MasterConfigTypeDef sMasterConfig = {0};
+ 1933              		.loc 1 297 26 is_stmt 0 view .LVU499
+ 1934 0004 0024     		movs	r4, #0
+ 1935 0006 1294     		str	r4, [sp, #72]
+ 1936 0008 1394     		str	r4, [sp, #76]
+ 1937 000a 1494     		str	r4, [sp, #80]
+ 1938 000c 1594     		str	r4, [sp, #84]
+ 298:Core/Src/main.c ****   TIM_OC_InitTypeDef sConfigOC = {0};
+ 1939              		.loc 1 298 3 is_stmt 1 view .LVU500
+ 298:Core/Src/main.c ****   TIM_OC_InitTypeDef sConfigOC = {0};
+ 1940              		.loc 1 298 27 is_stmt 0 view .LVU501
+ 1941 000e 1094     		str	r4, [sp, #64]
+ 1942 0010 1194     		str	r4, [sp, #68]
+ 299:Core/Src/main.c ****   TIM_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig = {0};
+ 1943              		.loc 1 299 3 is_stmt 1 view .LVU502
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 56
+
+
+ 299:Core/Src/main.c ****   TIM_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig = {0};
+ 1944              		.loc 1 299 22 is_stmt 0 view .LVU503
+ 1945 0012 0994     		str	r4, [sp, #36]
+ 1946 0014 0A94     		str	r4, [sp, #40]
+ 1947 0016 0B94     		str	r4, [sp, #44]
+ 1948 0018 0C94     		str	r4, [sp, #48]
+ 1949 001a 0D94     		str	r4, [sp, #52]
+ 1950 001c 0E94     		str	r4, [sp, #56]
+ 1951 001e 0F94     		str	r4, [sp, #60]
+ 300:Core/Src/main.c **** 
+ 1952              		.loc 1 300 3 is_stmt 1 view .LVU504
+ 300:Core/Src/main.c **** 
+ 1953              		.loc 1 300 34 is_stmt 0 view .LVU505
+ 1954 0020 2022     		movs	r2, #32
+ 1955 0022 2146     		mov	r1, r4
+ 1956 0024 01A8     		add	r0, sp, #4
+ 1957 0026 FFF7FEFF 		bl	memset
+ 1958              	.LVL129:
+ 305:Core/Src/main.c ****   htim1.Init.Prescaler = 0;
+ 1959              		.loc 1 305 3 is_stmt 1 view .LVU506
+ 305:Core/Src/main.c ****   htim1.Init.Prescaler = 0;
+ 1960              		.loc 1 305 18 is_stmt 0 view .LVU507
+ 1961 002a 2948     		ldr	r0, .L143
+ 1962 002c 294B     		ldr	r3, .L143+4
+ 1963 002e 0360     		str	r3, [r0]
+ 306:Core/Src/main.c ****   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
+ 1964              		.loc 1 306 3 is_stmt 1 view .LVU508
+ 306:Core/Src/main.c ****   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
+ 1965              		.loc 1 306 24 is_stmt 0 view .LVU509
+ 1966 0030 4460     		str	r4, [r0, #4]
+ 307:Core/Src/main.c ****   htim1.Init.Period = 35535;
+ 1967              		.loc 1 307 3 is_stmt 1 view .LVU510
+ 307:Core/Src/main.c ****   htim1.Init.Period = 35535;
+ 1968              		.loc 1 307 26 is_stmt 0 view .LVU511
+ 1969 0032 8460     		str	r4, [r0, #8]
+ 308:Core/Src/main.c ****   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+ 1970              		.loc 1 308 3 is_stmt 1 view .LVU512
+ 308:Core/Src/main.c ****   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+ 1971              		.loc 1 308 21 is_stmt 0 view .LVU513
+ 1972 0034 48F6CF23 		movw	r3, #35535
+ 1973 0038 C360     		str	r3, [r0, #12]
+ 309:Core/Src/main.c ****   htim1.Init.RepetitionCounter = 0;
+ 1974              		.loc 1 309 3 is_stmt 1 view .LVU514
+ 309:Core/Src/main.c ****   htim1.Init.RepetitionCounter = 0;
+ 1975              		.loc 1 309 28 is_stmt 0 view .LVU515
+ 1976 003a 0461     		str	r4, [r0, #16]
+ 310:Core/Src/main.c ****   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+ 1977              		.loc 1 310 3 is_stmt 1 view .LVU516
+ 310:Core/Src/main.c ****   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+ 1978              		.loc 1 310 32 is_stmt 0 view .LVU517
+ 1979 003c 4461     		str	r4, [r0, #20]
+ 311:Core/Src/main.c ****   if (HAL_TIM_Base_Init(&htim1) != HAL_OK)
+ 1980              		.loc 1 311 3 is_stmt 1 view .LVU518
+ 311:Core/Src/main.c ****   if (HAL_TIM_Base_Init(&htim1) != HAL_OK)
+ 1981              		.loc 1 311 32 is_stmt 0 view .LVU519
+ 1982 003e 8461     		str	r4, [r0, #24]
+ 312:Core/Src/main.c ****   {
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 57
+
+
+ 1983              		.loc 1 312 3 is_stmt 1 view .LVU520
+ 312:Core/Src/main.c ****   {
+ 1984              		.loc 1 312 7 is_stmt 0 view .LVU521
+ 1985 0040 FFF7FEFF 		bl	HAL_TIM_Base_Init
+ 1986              	.LVL130:
+ 312:Core/Src/main.c ****   {
+ 1987              		.loc 1 312 6 view .LVU522
+ 1988 0044 0028     		cmp	r0, #0
+ 1989 0046 37D1     		bne	.L137
+ 316:Core/Src/main.c ****   if (HAL_TIM_ConfigClockSource(&htim1, &sClockSourceConfig) != HAL_OK)
+ 1990              		.loc 1 316 3 is_stmt 1 view .LVU523
+ 316:Core/Src/main.c ****   if (HAL_TIM_ConfigClockSource(&htim1, &sClockSourceConfig) != HAL_OK)
+ 1991              		.loc 1 316 34 is_stmt 0 view .LVU524
+ 1992 0048 4FF48053 		mov	r3, #4096
+ 1993 004c 1293     		str	r3, [sp, #72]
+ 317:Core/Src/main.c ****   {
+ 1994              		.loc 1 317 3 is_stmt 1 view .LVU525
+ 317:Core/Src/main.c ****   {
+ 1995              		.loc 1 317 7 is_stmt 0 view .LVU526
+ 1996 004e 12A9     		add	r1, sp, #72
+ 1997 0050 1F48     		ldr	r0, .L143
+ 1998 0052 FFF7FEFF 		bl	HAL_TIM_ConfigClockSource
+ 1999              	.LVL131:
+ 317:Core/Src/main.c ****   {
+ 2000              		.loc 1 317 6 view .LVU527
+ 2001 0056 0028     		cmp	r0, #0
+ 2002 0058 30D1     		bne	.L138
+ 321:Core/Src/main.c ****   {
+ 2003              		.loc 1 321 3 is_stmt 1 view .LVU528
+ 321:Core/Src/main.c ****   {
+ 2004              		.loc 1 321 7 is_stmt 0 view .LVU529
+ 2005 005a 1D48     		ldr	r0, .L143
+ 2006 005c FFF7FEFF 		bl	HAL_TIM_PWM_Init
+ 2007              	.LVL132:
+ 321:Core/Src/main.c ****   {
+ 2008              		.loc 1 321 6 view .LVU530
+ 2009 0060 0028     		cmp	r0, #0
+ 2010 0062 2DD1     		bne	.L139
+ 325:Core/Src/main.c ****   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+ 2011              		.loc 1 325 3 is_stmt 1 view .LVU531
+ 325:Core/Src/main.c ****   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+ 2012              		.loc 1 325 37 is_stmt 0 view .LVU532
+ 2013 0064 0023     		movs	r3, #0
+ 2014 0066 1093     		str	r3, [sp, #64]
+ 326:Core/Src/main.c ****   if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK)
+ 2015              		.loc 1 326 3 is_stmt 1 view .LVU533
+ 326:Core/Src/main.c ****   if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK)
+ 2016              		.loc 1 326 33 is_stmt 0 view .LVU534
+ 2017 0068 1193     		str	r3, [sp, #68]
+ 327:Core/Src/main.c ****   {
+ 2018              		.loc 1 327 3 is_stmt 1 view .LVU535
+ 327:Core/Src/main.c ****   {
+ 2019              		.loc 1 327 7 is_stmt 0 view .LVU536
+ 2020 006a 10A9     		add	r1, sp, #64
+ 2021 006c 1848     		ldr	r0, .L143
+ 2022 006e FFF7FEFF 		bl	HAL_TIMEx_MasterConfigSynchronization
+ 2023              	.LVL133:
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 58
+
+
+ 327:Core/Src/main.c ****   {
+ 2024              		.loc 1 327 6 view .LVU537
+ 2025 0072 38BB     		cbnz	r0, .L140
+ 331:Core/Src/main.c ****   sConfigOC.Pulse = 0;
+ 2026              		.loc 1 331 3 is_stmt 1 view .LVU538
+ 331:Core/Src/main.c ****   sConfigOC.Pulse = 0;
+ 2027              		.loc 1 331 20 is_stmt 0 view .LVU539
+ 2028 0074 6023     		movs	r3, #96
+ 2029 0076 0993     		str	r3, [sp, #36]
+ 332:Core/Src/main.c ****   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+ 2030              		.loc 1 332 3 is_stmt 1 view .LVU540
+ 332:Core/Src/main.c ****   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+ 2031              		.loc 1 332 19 is_stmt 0 view .LVU541
+ 2032 0078 0022     		movs	r2, #0
+ 2033 007a 0A92     		str	r2, [sp, #40]
+ 333:Core/Src/main.c ****   sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+ 2034              		.loc 1 333 3 is_stmt 1 view .LVU542
+ 333:Core/Src/main.c ****   sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+ 2035              		.loc 1 333 24 is_stmt 0 view .LVU543
+ 2036 007c 0B92     		str	r2, [sp, #44]
+ 334:Core/Src/main.c ****   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+ 2037              		.loc 1 334 3 is_stmt 1 view .LVU544
+ 334:Core/Src/main.c ****   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+ 2038              		.loc 1 334 25 is_stmt 0 view .LVU545
+ 2039 007e 0C92     		str	r2, [sp, #48]
+ 335:Core/Src/main.c ****   sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
+ 2040              		.loc 1 335 3 is_stmt 1 view .LVU546
+ 335:Core/Src/main.c ****   sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
+ 2041              		.loc 1 335 24 is_stmt 0 view .LVU547
+ 2042 0080 0D92     		str	r2, [sp, #52]
+ 336:Core/Src/main.c ****   sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+ 2043              		.loc 1 336 3 is_stmt 1 view .LVU548
+ 336:Core/Src/main.c ****   sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+ 2044              		.loc 1 336 25 is_stmt 0 view .LVU549
+ 2045 0082 0E92     		str	r2, [sp, #56]
+ 337:Core/Src/main.c ****   if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+ 2046              		.loc 1 337 3 is_stmt 1 view .LVU550
+ 337:Core/Src/main.c ****   if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+ 2047              		.loc 1 337 26 is_stmt 0 view .LVU551
+ 2048 0084 0F92     		str	r2, [sp, #60]
+ 338:Core/Src/main.c ****   {
+ 2049              		.loc 1 338 3 is_stmt 1 view .LVU552
+ 338:Core/Src/main.c ****   {
+ 2050              		.loc 1 338 7 is_stmt 0 view .LVU553
+ 2051 0086 09A9     		add	r1, sp, #36
+ 2052 0088 1148     		ldr	r0, .L143
+ 2053 008a FFF7FEFF 		bl	HAL_TIM_PWM_ConfigChannel
+ 2054              	.LVL134:
+ 338:Core/Src/main.c ****   {
+ 2055              		.loc 1 338 6 view .LVU554
+ 2056 008e D8B9     		cbnz	r0, .L141
+ 342:Core/Src/main.c ****   sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_DISABLE;
+ 2057              		.loc 1 342 3 is_stmt 1 view .LVU555
+ 342:Core/Src/main.c ****   sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_DISABLE;
+ 2058              		.loc 1 342 40 is_stmt 0 view .LVU556
+ 2059 0090 0023     		movs	r3, #0
+ 2060 0092 0193     		str	r3, [sp, #4]
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 59
+
+
+ 343:Core/Src/main.c ****   sBreakDeadTimeConfig.LockLevel = TIM_LOCKLEVEL_OFF;
+ 2061              		.loc 1 343 3 is_stmt 1 view .LVU557
+ 343:Core/Src/main.c ****   sBreakDeadTimeConfig.LockLevel = TIM_LOCKLEVEL_OFF;
+ 2062              		.loc 1 343 41 is_stmt 0 view .LVU558
+ 2063 0094 0293     		str	r3, [sp, #8]
+ 344:Core/Src/main.c ****   sBreakDeadTimeConfig.DeadTime = 0;
+ 2064              		.loc 1 344 3 is_stmt 1 view .LVU559
+ 344:Core/Src/main.c ****   sBreakDeadTimeConfig.DeadTime = 0;
+ 2065              		.loc 1 344 34 is_stmt 0 view .LVU560
+ 2066 0096 0393     		str	r3, [sp, #12]
+ 345:Core/Src/main.c ****   sBreakDeadTimeConfig.BreakState = TIM_BREAK_DISABLE;
+ 2067              		.loc 1 345 3 is_stmt 1 view .LVU561
+ 345:Core/Src/main.c ****   sBreakDeadTimeConfig.BreakState = TIM_BREAK_DISABLE;
+ 2068              		.loc 1 345 33 is_stmt 0 view .LVU562
+ 2069 0098 0493     		str	r3, [sp, #16]
+ 346:Core/Src/main.c ****   sBreakDeadTimeConfig.BreakPolarity = TIM_BREAKPOLARITY_HIGH;
+ 2070              		.loc 1 346 3 is_stmt 1 view .LVU563
+ 346:Core/Src/main.c ****   sBreakDeadTimeConfig.BreakPolarity = TIM_BREAKPOLARITY_HIGH;
+ 2071              		.loc 1 346 35 is_stmt 0 view .LVU564
+ 2072 009a 0593     		str	r3, [sp, #20]
+ 347:Core/Src/main.c ****   sBreakDeadTimeConfig.AutomaticOutput = TIM_AUTOMATICOUTPUT_DISABLE;
+ 2073              		.loc 1 347 3 is_stmt 1 view .LVU565
+ 347:Core/Src/main.c ****   sBreakDeadTimeConfig.AutomaticOutput = TIM_AUTOMATICOUTPUT_DISABLE;
+ 2074              		.loc 1 347 38 is_stmt 0 view .LVU566
+ 2075 009c 4FF40052 		mov	r2, #8192
+ 2076 00a0 0692     		str	r2, [sp, #24]
+ 348:Core/Src/main.c ****   if (HAL_TIMEx_ConfigBreakDeadTime(&htim1, &sBreakDeadTimeConfig) != HAL_OK)
+ 2077              		.loc 1 348 3 is_stmt 1 view .LVU567
+ 348:Core/Src/main.c ****   if (HAL_TIMEx_ConfigBreakDeadTime(&htim1, &sBreakDeadTimeConfig) != HAL_OK)
+ 2078              		.loc 1 348 40 is_stmt 0 view .LVU568
+ 2079 00a2 0893     		str	r3, [sp, #32]
+ 349:Core/Src/main.c ****   {
+ 2080              		.loc 1 349 3 is_stmt 1 view .LVU569
+ 349:Core/Src/main.c ****   {
+ 2081              		.loc 1 349 7 is_stmt 0 view .LVU570
+ 2082 00a4 01A9     		add	r1, sp, #4
+ 2083 00a6 0A48     		ldr	r0, .L143
+ 2084 00a8 FFF7FEFF 		bl	HAL_TIMEx_ConfigBreakDeadTime
+ 2085              	.LVL135:
+ 349:Core/Src/main.c ****   {
+ 2086              		.loc 1 349 6 view .LVU571
+ 2087 00ac 70B9     		cbnz	r0, .L142
+ 356:Core/Src/main.c **** 
+ 2088              		.loc 1 356 3 is_stmt 1 view .LVU572
+ 2089 00ae 0848     		ldr	r0, .L143
+ 2090 00b0 FFF7FEFF 		bl	HAL_TIM_MspPostInit
+ 2091              	.LVL136:
+ 358:Core/Src/main.c **** 
+ 2092              		.loc 1 358 1 is_stmt 0 view .LVU573
+ 2093 00b4 16B0     		add	sp, sp, #88
+ 2094              	.LCFI39:
+ 2095              		.cfi_remember_state
+ 2096              		.cfi_def_cfa_offset 8
+ 2097              		@ sp needed
+ 2098 00b6 10BD     		pop	{r4, pc}
+ 2099              	.L137:
+ 2100              	.LCFI40:
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 60
+
+
+ 2101              		.cfi_restore_state
+ 314:Core/Src/main.c ****   }
+ 2102              		.loc 1 314 5 is_stmt 1 view .LVU574
+ 2103 00b8 FFF7FEFF 		bl	Error_Handler
+ 2104              	.LVL137:
+ 2105              	.L138:
+ 319:Core/Src/main.c ****   }
+ 2106              		.loc 1 319 5 view .LVU575
+ 2107 00bc FFF7FEFF 		bl	Error_Handler
+ 2108              	.LVL138:
+ 2109              	.L139:
+ 323:Core/Src/main.c ****   }
+ 2110              		.loc 1 323 5 view .LVU576
+ 2111 00c0 FFF7FEFF 		bl	Error_Handler
+ 2112              	.LVL139:
+ 2113              	.L140:
+ 329:Core/Src/main.c ****   }
+ 2114              		.loc 1 329 5 view .LVU577
+ 2115 00c4 FFF7FEFF 		bl	Error_Handler
+ 2116              	.LVL140:
+ 2117              	.L141:
+ 340:Core/Src/main.c ****   }
+ 2118              		.loc 1 340 5 view .LVU578
+ 2119 00c8 FFF7FEFF 		bl	Error_Handler
+ 2120              	.LVL141:
+ 2121              	.L142:
+ 351:Core/Src/main.c ****   }
+ 2122              		.loc 1 351 5 view .LVU579
+ 2123 00cc FFF7FEFF 		bl	Error_Handler
+ 2124              	.LVL142:
+ 2125              	.L144:
+ 2126              		.align	2
+ 2127              	.L143:
+ 2128 00d0 00000000 		.word	.LANCHOR5
+ 2129 00d4 002C0140 		.word	1073818624
+ 2130              		.cfi_endproc
+ 2131              	.LFE94:
+ 2133              		.section	.text.MX_IWDG_Init,"ax",%progbits
+ 2134              		.align	1
+ 2135              		.syntax unified
+ 2136              		.thumb
+ 2137              		.thumb_func
+ 2139              	MX_IWDG_Init:
+ 2140              	.LFB92:
+ 173:Core/Src/main.c **** 
+ 2141              		.loc 1 173 1 view -0
+ 2142              		.cfi_startproc
+ 2143              		@ args = 0, pretend = 0, frame = 0
+ 2144              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2145 0000 08B5     		push	{r3, lr}
+ 2146              	.LCFI41:
+ 2147              		.cfi_def_cfa_offset 8
+ 2148              		.cfi_offset 3, -8
+ 2149              		.cfi_offset 14, -4
+ 182:Core/Src/main.c ****   hiwdg.Init.Prescaler = IWDG_PRESCALER_4;
+ 2150              		.loc 1 182 3 view .LVU581
+ 182:Core/Src/main.c ****   hiwdg.Init.Prescaler = IWDG_PRESCALER_4;
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 61
+
+
+ 2151              		.loc 1 182 18 is_stmt 0 view .LVU582
+ 2152 0002 0748     		ldr	r0, .L149
+ 2153 0004 074B     		ldr	r3, .L149+4
+ 2154 0006 0360     		str	r3, [r0]
+ 183:Core/Src/main.c ****   hiwdg.Init.Reload = 4095;
+ 2155              		.loc 1 183 3 is_stmt 1 view .LVU583
+ 183:Core/Src/main.c ****   hiwdg.Init.Reload = 4095;
+ 2156              		.loc 1 183 24 is_stmt 0 view .LVU584
+ 2157 0008 0023     		movs	r3, #0
+ 2158 000a 4360     		str	r3, [r0, #4]
+ 184:Core/Src/main.c ****   if (HAL_IWDG_Init(&hiwdg) != HAL_OK)
+ 2159              		.loc 1 184 3 is_stmt 1 view .LVU585
+ 184:Core/Src/main.c ****   if (HAL_IWDG_Init(&hiwdg) != HAL_OK)
+ 2160              		.loc 1 184 21 is_stmt 0 view .LVU586
+ 2161 000c 40F6FF73 		movw	r3, #4095
+ 2162 0010 8360     		str	r3, [r0, #8]
+ 185:Core/Src/main.c ****   {
+ 2163              		.loc 1 185 3 is_stmt 1 view .LVU587
+ 185:Core/Src/main.c ****   {
+ 2164              		.loc 1 185 7 is_stmt 0 view .LVU588
+ 2165 0012 FFF7FEFF 		bl	HAL_IWDG_Init
+ 2166              	.LVL143:
+ 185:Core/Src/main.c ****   {
+ 2167              		.loc 1 185 6 view .LVU589
+ 2168 0016 00B9     		cbnz	r0, .L148
+ 193:Core/Src/main.c **** 
+ 2169              		.loc 1 193 1 view .LVU590
+ 2170 0018 08BD     		pop	{r3, pc}
+ 2171              	.L148:
+ 187:Core/Src/main.c ****   }
+ 2172              		.loc 1 187 5 is_stmt 1 view .LVU591
+ 2173 001a FFF7FEFF 		bl	Error_Handler
+ 2174              	.LVL144:
+ 2175              	.L150:
+ 2176 001e 00BF     		.align	2
+ 2177              	.L149:
+ 2178 0020 00000000 		.word	.LANCHOR6
+ 2179 0024 00300040 		.word	1073754112
+ 2180              		.cfi_endproc
+ 2181              	.LFE92:
+ 2183              		.section	.text.SystemClock_Config,"ax",%progbits
+ 2184              		.align	1
+ 2185              		.global	SystemClock_Config
+ 2186              		.syntax unified
+ 2187              		.thumb
+ 2188              		.thumb_func
+ 2190              	SystemClock_Config:
+ 2191              	.LFB91:
+ 122:Core/Src/main.c ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+ 2192              		.loc 1 122 1 view -0
+ 2193              		.cfi_startproc
+ 2194              		@ args = 0, pretend = 0, frame = 88
+ 2195              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2196 0000 00B5     		push	{lr}
+ 2197              	.LCFI42:
+ 2198              		.cfi_def_cfa_offset 4
+ 2199              		.cfi_offset 14, -4
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 62
+
+
+ 2200 0002 97B0     		sub	sp, sp, #92
+ 2201              	.LCFI43:
+ 2202              		.cfi_def_cfa_offset 96
+ 123:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 2203              		.loc 1 123 3 view .LVU593
+ 123:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 2204              		.loc 1 123 22 is_stmt 0 view .LVU594
+ 2205 0004 2822     		movs	r2, #40
+ 2206 0006 0021     		movs	r1, #0
+ 2207 0008 0CA8     		add	r0, sp, #48
+ 2208 000a FFF7FEFF 		bl	memset
+ 2209              	.LVL145:
+ 124:Core/Src/main.c ****   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+ 2210              		.loc 1 124 3 is_stmt 1 view .LVU595
+ 124:Core/Src/main.c ****   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+ 2211              		.loc 1 124 22 is_stmt 0 view .LVU596
+ 2212 000e 0023     		movs	r3, #0
+ 2213 0010 0793     		str	r3, [sp, #28]
+ 2214 0012 0893     		str	r3, [sp, #32]
+ 2215 0014 0993     		str	r3, [sp, #36]
+ 2216 0016 0A93     		str	r3, [sp, #40]
+ 2217 0018 0B93     		str	r3, [sp, #44]
+ 125:Core/Src/main.c **** 
+ 2218              		.loc 1 125 3 is_stmt 1 view .LVU597
+ 125:Core/Src/main.c **** 
+ 2219              		.loc 1 125 28 is_stmt 0 view .LVU598
+ 2220 001a 0193     		str	r3, [sp, #4]
+ 2221 001c 0293     		str	r3, [sp, #8]
+ 2222 001e 0393     		str	r3, [sp, #12]
+ 2223 0020 0493     		str	r3, [sp, #16]
+ 2224 0022 0593     		str	r3, [sp, #20]
+ 2225 0024 0693     		str	r3, [sp, #24]
+ 130:Core/Src/main.c ****                               |RCC_OSCILLATORTYPE_LSE;
+ 2226              		.loc 1 130 3 is_stmt 1 view .LVU599
+ 130:Core/Src/main.c ****                               |RCC_OSCILLATORTYPE_LSE;
+ 2227              		.loc 1 130 36 is_stmt 0 view .LVU600
+ 2228 0026 0D23     		movs	r3, #13
+ 2229 0028 0C93     		str	r3, [sp, #48]
+ 132:Core/Src/main.c ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+ 2230              		.loc 1 132 3 is_stmt 1 view .LVU601
+ 132:Core/Src/main.c ****   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+ 2231              		.loc 1 132 30 is_stmt 0 view .LVU602
+ 2232 002a 4FF48032 		mov	r2, #65536
+ 2233 002e 0D92     		str	r2, [sp, #52]
+ 133:Core/Src/main.c ****   RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+ 2234              		.loc 1 133 3 is_stmt 1 view .LVU603
+ 134:Core/Src/main.c ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+ 2235              		.loc 1 134 3 view .LVU604
+ 134:Core/Src/main.c ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+ 2236              		.loc 1 134 30 is_stmt 0 view .LVU605
+ 2237 0030 0123     		movs	r3, #1
+ 2238 0032 0F93     		str	r3, [sp, #60]
+ 135:Core/Src/main.c ****   RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+ 2239              		.loc 1 135 3 is_stmt 1 view .LVU606
+ 135:Core/Src/main.c ****   RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+ 2240              		.loc 1 135 30 is_stmt 0 view .LVU607
+ 2241 0034 1093     		str	r3, [sp, #64]
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 63
+
+
+ 136:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 2242              		.loc 1 136 3 is_stmt 1 view .LVU608
+ 136:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 2243              		.loc 1 136 30 is_stmt 0 view .LVU609
+ 2244 0036 1293     		str	r3, [sp, #72]
+ 137:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+ 2245              		.loc 1 137 3 is_stmt 1 view .LVU610
+ 137:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+ 2246              		.loc 1 137 34 is_stmt 0 view .LVU611
+ 2247 0038 0223     		movs	r3, #2
+ 2248 003a 1393     		str	r3, [sp, #76]
+ 138:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL6;
+ 2249              		.loc 1 138 3 is_stmt 1 view .LVU612
+ 138:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL6;
+ 2250              		.loc 1 138 35 is_stmt 0 view .LVU613
+ 2251 003c 1492     		str	r2, [sp, #80]
+ 139:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 2252              		.loc 1 139 3 is_stmt 1 view .LVU614
+ 139:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 2253              		.loc 1 139 32 is_stmt 0 view .LVU615
+ 2254 003e 4FF48013 		mov	r3, #1048576
+ 2255 0042 1593     		str	r3, [sp, #84]
+ 140:Core/Src/main.c ****   {
+ 2256              		.loc 1 140 3 is_stmt 1 view .LVU616
+ 140:Core/Src/main.c ****   {
+ 2257              		.loc 1 140 7 is_stmt 0 view .LVU617
+ 2258 0044 0CA8     		add	r0, sp, #48
+ 2259 0046 FFF7FEFF 		bl	HAL_RCC_OscConfig
+ 2260              	.LVL146:
+ 140:Core/Src/main.c ****   {
+ 2261              		.loc 1 140 6 view .LVU618
+ 2262 004a E8B9     		cbnz	r0, .L156
+ 147:Core/Src/main.c ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+ 2263              		.loc 1 147 3 is_stmt 1 view .LVU619
+ 147:Core/Src/main.c ****                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+ 2264              		.loc 1 147 31 is_stmt 0 view .LVU620
+ 2265 004c 0F23     		movs	r3, #15
+ 2266 004e 0793     		str	r3, [sp, #28]
+ 149:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 2267              		.loc 1 149 3 is_stmt 1 view .LVU621
+ 149:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 2268              		.loc 1 149 34 is_stmt 0 view .LVU622
+ 2269 0050 0223     		movs	r3, #2
+ 2270 0052 0893     		str	r3, [sp, #32]
+ 150:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+ 2271              		.loc 1 150 3 is_stmt 1 view .LVU623
+ 150:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+ 2272              		.loc 1 150 35 is_stmt 0 view .LVU624
+ 2273 0054 0023     		movs	r3, #0
+ 2274 0056 0993     		str	r3, [sp, #36]
+ 151:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 2275              		.loc 1 151 3 is_stmt 1 view .LVU625
+ 151:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 2276              		.loc 1 151 36 is_stmt 0 view .LVU626
+ 2277 0058 4FF48062 		mov	r2, #1024
+ 2278 005c 0A92     		str	r2, [sp, #40]
+ 152:Core/Src/main.c **** 
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 64
+
+
+ 2279              		.loc 1 152 3 is_stmt 1 view .LVU627
+ 152:Core/Src/main.c **** 
+ 2280              		.loc 1 152 36 is_stmt 0 view .LVU628
+ 2281 005e 0B93     		str	r3, [sp, #44]
+ 154:Core/Src/main.c ****   {
+ 2282              		.loc 1 154 3 is_stmt 1 view .LVU629
+ 154:Core/Src/main.c ****   {
+ 2283              		.loc 1 154 7 is_stmt 0 view .LVU630
+ 2284 0060 0121     		movs	r1, #1
+ 2285 0062 07A8     		add	r0, sp, #28
+ 2286 0064 FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 2287              	.LVL147:
+ 154:Core/Src/main.c ****   {
+ 2288              		.loc 1 154 6 view .LVU631
+ 2289 0068 80B9     		cbnz	r0, .L157
+ 158:Core/Src/main.c ****   PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
+ 2290              		.loc 1 158 3 is_stmt 1 view .LVU632
+ 158:Core/Src/main.c ****   PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
+ 2291              		.loc 1 158 38 is_stmt 0 view .LVU633
+ 2292 006a 1123     		movs	r3, #17
+ 2293 006c 0193     		str	r3, [sp, #4]
+ 159:Core/Src/main.c ****   PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL;
+ 2294              		.loc 1 159 3 is_stmt 1 view .LVU634
+ 159:Core/Src/main.c ****   PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL;
+ 2295              		.loc 1 159 35 is_stmt 0 view .LVU635
+ 2296 006e 4FF48073 		mov	r3, #256
+ 2297 0072 0293     		str	r3, [sp, #8]
+ 160:Core/Src/main.c ****   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+ 2298              		.loc 1 160 3 is_stmt 1 view .LVU636
+ 160:Core/Src/main.c ****   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+ 2299              		.loc 1 160 35 is_stmt 0 view .LVU637
+ 2300 0074 4FF48003 		mov	r3, #4194304
+ 2301 0078 0693     		str	r3, [sp, #24]
+ 161:Core/Src/main.c ****   {
+ 2302              		.loc 1 161 3 is_stmt 1 view .LVU638
+ 161:Core/Src/main.c ****   {
+ 2303              		.loc 1 161 7 is_stmt 0 view .LVU639
+ 2304 007a 01A8     		add	r0, sp, #4
+ 2305 007c FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
+ 2306              	.LVL148:
+ 161:Core/Src/main.c ****   {
+ 2307              		.loc 1 161 6 view .LVU640
+ 2308 0080 30B9     		cbnz	r0, .L158
+ 165:Core/Src/main.c **** 
+ 2309              		.loc 1 165 1 view .LVU641
+ 2310 0082 17B0     		add	sp, sp, #92
+ 2311              	.LCFI44:
+ 2312              		.cfi_remember_state
+ 2313              		.cfi_def_cfa_offset 4
+ 2314              		@ sp needed
+ 2315 0084 5DF804FB 		ldr	pc, [sp], #4
+ 2316              	.L156:
+ 2317              	.LCFI45:
+ 2318              		.cfi_restore_state
+ 142:Core/Src/main.c ****   }
+ 2319              		.loc 1 142 5 is_stmt 1 view .LVU642
+ 2320 0088 FFF7FEFF 		bl	Error_Handler
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 65
+
+
+ 2321              	.LVL149:
+ 2322              	.L157:
+ 156:Core/Src/main.c ****   }
+ 2323              		.loc 1 156 5 view .LVU643
+ 2324 008c FFF7FEFF 		bl	Error_Handler
+ 2325              	.LVL150:
+ 2326              	.L158:
+ 163:Core/Src/main.c ****   }
+ 2327              		.loc 1 163 5 view .LVU644
+ 2328 0090 FFF7FEFF 		bl	Error_Handler
+ 2329              	.LVL151:
+ 2330              		.cfi_endproc
+ 2331              	.LFE91:
+ 2333              		.section	.text.main,"ax",%progbits
+ 2334              		.align	1
+ 2335              		.global	main
+ 2336              		.syntax unified
+ 2337              		.thumb
+ 2338              		.thumb_func
+ 2340              	main:
+ 2341              	.LFB90:
+  74:Core/Src/main.c ****   /* USER CODE BEGIN 1 */
+ 2342              		.loc 1 74 1 view -0
+ 2343              		.cfi_startproc
+ 2344              		@ Volatile: function does not return.
+ 2345              		@ args = 0, pretend = 0, frame = 0
+ 2346              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2347 0000 08B5     		push	{r3, lr}
+ 2348              	.LCFI46:
+ 2349              		.cfi_def_cfa_offset 8
+ 2350              		.cfi_offset 3, -8
+ 2351              		.cfi_offset 14, -4
+  82:Core/Src/main.c **** 
+ 2352              		.loc 1 82 3 view .LVU646
+ 2353 0002 FFF7FEFF 		bl	HAL_Init
+ 2354              	.LVL152:
+  89:Core/Src/main.c **** 
+ 2355              		.loc 1 89 3 view .LVU647
+ 2356 0006 FFF7FEFF 		bl	SystemClock_Config
+ 2357              	.LVL153:
+  96:Core/Src/main.c ****   MX_RTC_Init();
+ 2358              		.loc 1 96 3 view .LVU648
+ 2359 000a FFF7FEFF 		bl	MX_GPIO_Init
+ 2360              	.LVL154:
+  97:Core/Src/main.c ****   MX_TIM1_Init();
+ 2361              		.loc 1 97 3 view .LVU649
+ 2362 000e FFF7FEFF 		bl	MX_RTC_Init
+ 2363              	.LVL155:
+  98:Core/Src/main.c ****   MX_USB_DEVICE_Init();
+ 2364              		.loc 1 98 3 view .LVU650
+ 2365 0012 FFF7FEFF 		bl	MX_TIM1_Init
+ 2366              	.LVL156:
+  99:Core/Src/main.c ****   MX_IWDG_Init();
+ 2367              		.loc 1 99 3 view .LVU651
+ 2368 0016 FFF7FEFF 		bl	MX_USB_DEVICE_Init
+ 2369              	.LVL157:
+ 100:Core/Src/main.c ****   /* USER CODE BEGIN 2 */
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 66
+
+
+ 2370              		.loc 1 100 3 view .LVU652
+ 2371 001a FFF7FEFF 		bl	MX_IWDG_Init
+ 2372              	.LVL158:
+ 102:Core/Src/main.c ****   /* USER CODE END 2 */
+ 2373              		.loc 1 102 1 view .LVU653
+ 2374 001e FFF7FEFF 		bl	user_init
+ 2375              	.LVL159:
+ 107:Core/Src/main.c ****   {
+ 2376              		.loc 1 107 3 view .LVU654
+ 112:Core/Src/main.c ****   }
+ 2377              		.loc 1 112 2 view .LVU655
+ 2378 0022 FFF7FEFF 		bl	user_loop
+ 2379              	.LVL160:
+ 2380              		.cfi_endproc
+ 2381              	.LFE90:
+ 2383              		.global	htim1
+ 2384              		.global	hrtc
+ 2385              		.global	hiwdg
+ 2386              		.global	cc
+ 2387              		.global	testas
+ 2388              		.global	LastHour
+ 2389              		.global	oldTime
+ 2390              		.global	currTime
+ 2391              		.section	.bss.cc,"aw",%nobits
+ 2392              		.align	2
+ 2393              		.set	.LANCHOR3,. + 0
+ 2396              	cc:
+ 2397 0000 00000000 		.space	20
+ 2397      00000000 
+ 2397      00000000 
+ 2397      00000000 
+ 2397      00000000 
+ 2398              		.section	.bss.currTime,"aw",%nobits
+ 2399              		.align	2
+ 2400              		.set	.LANCHOR1,. + 0
+ 2403              	currTime:
+ 2404 0000 000000   		.space	3
+ 2405              		.section	.bss.hiwdg,"aw",%nobits
+ 2406              		.align	2
+ 2407              		.set	.LANCHOR6,. + 0
+ 2410              	hiwdg:
+ 2411 0000 00000000 		.space	12
+ 2411      00000000 
+ 2411      00000000 
+ 2412              		.section	.bss.hrtc,"aw",%nobits
+ 2413              		.align	2
+ 2414              		.set	.LANCHOR2,. + 0
+ 2417              	hrtc:
+ 2418 0000 00000000 		.space	20
+ 2418      00000000 
+ 2418      00000000 
+ 2418      00000000 
+ 2418      00000000 
+ 2419              		.section	.bss.htim1,"aw",%nobits
+ 2420              		.align	2
+ 2421              		.set	.LANCHOR5,. + 0
+ 2424              	htim1:
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 67
+
+
+ 2425 0000 00000000 		.space	72
+ 2425      00000000 
+ 2425      00000000 
+ 2425      00000000 
+ 2425      00000000 
+ 2426              		.section	.bss.testas,"aw",%nobits
+ 2427              		.align	2
+ 2428              		.set	.LANCHOR4,. + 0
+ 2431              	testas:
+ 2432 0000 00000000 		.space	64
+ 2432      00000000 
+ 2432      00000000 
+ 2432      00000000 
+ 2432      00000000 
+ 2433              		.section	.data.LastHour,"aw"
+ 2436              	LastHour:
+ 2437 0000 FF       		.byte	-1
+ 2438              		.section	.data.oldTime,"aw"
+ 2439              		.align	2
+ 2440              		.set	.LANCHOR0,. + 0
+ 2443              	oldTime:
+ 2444 0000 FF       		.byte	-1
+ 2445 0001 FF       		.byte	-1
+ 2446 0002 FF       		.byte	-1
+ 2447              		.text
+ 2448              	.Letext0:
+ 2449              		.file 6 "c:\\program files (x86)\\gnu arm embedded toolchain\\arm\\arm-none-eabi\\include\\machine
+ 2450              		.file 7 "c:\\program files (x86)\\gnu arm embedded toolchain\\arm\\arm-none-eabi\\include\\sys\\_s
+ 2451              		.file 8 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 2452              		.file 9 "c:\\program files (x86)\\gnu arm embedded toolchain\\arm\\lib\\gcc\\arm-none-eabi\\10.3.1
+ 2453              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 2454              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h"
+ 2455              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h"
+ 2456              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 2457              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 2458              		.file 15 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_iwdg.h"
+ 2459              		.file 16 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc.h"
+ 2460              		.file 17 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 2461              		.file 18 "Core/Src/USER/circular_buffer.h"
+ 2462              		.file 19 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h"
+ 2463              		.file 20 "Core/Inc/main.h"
+ 2464              		.file 21 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h"
+ 2465              		.file 22 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h"
+ 2466              		.file 23 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 2467              		.file 24 "USB_DEVICE/App/usb_device.h"
+ 2468              		.file 25 "USB_DEVICE/App/usbd_cdc_if.h"
+ 2469              		.file 26 "c:\\program files (x86)\\gnu arm embedded toolchain\\arm\\arm-none-eabi\\include\\string
+ 2470              		.file 27 "c:\\program files (x86)\\gnu arm embedded toolchain\\arm\\arm-none-eabi\\include\\stdlib
+ 2471              		.file 28 "<built-in>"
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 68
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:18     .text.MX_GPIO_Init:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:23     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:127    .text.MX_GPIO_Init:0000006c $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:133    .text.rtc_clean:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:139    .text.rtc_clean:00000000 rtc_clean
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:163    .text.rtc_clean:0000000c $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:168    .text.filter_string:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:174    .text.filter_string:00000000 filter_string
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:257    .text.rtc_update:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:263    .text.rtc_update:00000000 rtc_update
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:285    .text.rtc_update:00000010 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:291    .text.rtc_time_string:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:297    .text.rtc_time_string:00000000 rtc_time_string
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:393    .text.rtc_time_string:00000074 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:400    .text.rtc_date_string:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:406    .text.rtc_date_string:00000000 rtc_date_string
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:503    .text.rtc_date_string:00000078 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:509    .text.rtc_backup_date:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:515    .text.rtc_backup_date:00000000 rtc_backup_date
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:593    .text.rtc_backup_date:00000058 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:599    .text.rtc_int_init:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:605    .text.rtc_int_init:00000000 rtc_int_init
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:623    .text.rtc_int_init:00000010 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:628    .text.circle_reset:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:634    .text.circle_reset:00000000 circle_reset
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:662    .text.circle_push:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:668    .text.circle_push:00000000 circle_push
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:714    .text.circle_pull:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:720    .text.circle_pull:00000000 circle_pull
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:769    .text.circle_push_buf:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:775    .text.circle_push_buf:00000000 circle_push_buf
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:825    .text.circle_available:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:831    .text.circle_available:00000000 circle_available
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:849    .text.circle_free:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:855    .text.circle_free:00000000 circle_free
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:876    .text.user_usb_rx:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:882    .text.user_usb_rx:00000000 user_usb_rx
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:945    .text.user_usb_rx:00000024 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:950    .text.user_init:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:956    .text.user_init:00000000 user_init
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:988    .text.user_init:0000001c $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:995    .text.user_seconds_job:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1001   .text.user_seconds_job:00000000 user_seconds_job
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1028   .text.user_seconds_job:00000018 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1035   .text.HAL_RTCEx_RTCEventCallback:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1041   .text.HAL_RTCEx_RTCEventCallback:00000000 HAL_RTCEx_RTCEventCallback
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1063   .text.Error_Handler:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1069   .text.Error_Handler:00000000 Error_Handler
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1101   .text.rtc_set_date_text:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1107   .text.rtc_set_date_text:00000000 rtc_set_date_text
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1208   .text.rtc_set_date_text:00000064 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1213   .text.rtc_set_time_text:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1219   .text.rtc_set_time_text:00000000 rtc_set_time_text
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1319   .text.rtc_set_time_text:0000005c $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1325   .rodata.commandcom.str1.4:00000000 $d
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 69
+
+
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1329   .text.commandcom:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1335   .text.commandcom:00000000 commandcom
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1368   .text.commandcom:0000001a $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1388   .text.commandcom:0000002e $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1433   .text.commandcom:00000054 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1439   .text.user_loop:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1445   .text.user_loop:00000000 user_loop
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1555   .text.user_loop:00000060 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1561   .text.rtc_check_screwd_calendar:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1567   .text.rtc_check_screwd_calendar:00000000 rtc_check_screwd_calendar
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1720   .text.rtc_check_screwd_calendar:000000b4 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1727   .text.MX_RTC_Init:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1732   .text.MX_RTC_Init:00000000 MX_RTC_Init
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1905   .text.MX_RTC_Init:000000d0 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1913   .text.MX_TIM1_Init:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:1918   .text.MX_TIM1_Init:00000000 MX_TIM1_Init
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2128   .text.MX_TIM1_Init:000000d0 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2134   .text.MX_IWDG_Init:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2139   .text.MX_IWDG_Init:00000000 MX_IWDG_Init
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2178   .text.MX_IWDG_Init:00000020 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2184   .text.SystemClock_Config:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2190   .text.SystemClock_Config:00000000 SystemClock_Config
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2334   .text.main:00000000 $t
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2340   .text.main:00000000 main
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2424   .bss.htim1:00000000 htim1
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2417   .bss.hrtc:00000000 hrtc
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2410   .bss.hiwdg:00000000 hiwdg
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2396   .bss.cc:00000000 cc
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2431   .bss.testas:00000000 testas
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2436   .data.LastHour:00000000 LastHour
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2443   .data.oldTime:00000000 oldTime
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2403   .bss.currTime:00000000 currTime
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2392   .bss.cc:00000000 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2399   .bss.currTime:00000000 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2406   .bss.hiwdg:00000000 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2413   .bss.hrtc:00000000 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2420   .bss.htim1:00000000 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2427   .bss.testas:00000000 $d
+C:\Users\User\AppData\Local\Temp\cc1qfoyw.s:2439   .data.oldTime:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_WritePin
+HAL_GPIO_Init
+HAL_RTC_GetTime
+HAL_RTC_GetDate
+HAL_RTCEx_BKUPRead
+HAL_RTCEx_BKUPWrite
+HAL_TIM_Base_Start_IT
+HAL_GPIO_TogglePin
+strlen
+strtok
+atoi
+HAL_RTC_SetDate
+HAL_RTC_SetTime
+CDC_Transmit_FS
+HAL_IWDG_Refresh
+HAL_RTC_Init
+ARM GAS  C:\Users\User\AppData\Local\Temp\cc1qfoyw.s 			page 70
+
+
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+memset
+HAL_TIM_Base_Init
+HAL_TIM_ConfigClockSource
+HAL_TIM_PWM_Init
+HAL_TIMEx_MasterConfigSynchronization
+HAL_TIM_PWM_ConfigChannel
+HAL_TIMEx_ConfigBreakDeadTime
+HAL_TIM_MspPostInit
+HAL_IWDG_Init
+HAL_RCC_OscConfig
+HAL_RCC_ClockConfig
+HAL_RCCEx_PeriphCLKConfig
+HAL_Init
+MX_USB_DEVICE_Init

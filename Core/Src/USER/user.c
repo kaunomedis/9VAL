@@ -40,7 +40,7 @@ void user_init(void)
 	rtc_int_init();
 	
 	HAL_TIM_Base_Start_IT(&htim1);
-
+__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,55*255);
 	//HAL_RTCEx_SetSmoothCalib(&hrtc,0,0,10); // du nuliai nes F1 nera. paskutinis- skaicius 0-7F, tik mazina greiti. 127=314sekundziu per 30d.
 }
 

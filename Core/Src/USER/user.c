@@ -20,7 +20,7 @@ unsigned char testas[BUFFER_SIZE];
 
 CCBuf cc; //struktura
 
-
+volatile char seconds;
 
 
 void user_usb_rx(uint8_t* Buf, uint32_t *Len)
@@ -109,7 +109,8 @@ void user_seconds_job(void)
 	HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
 
 	HAL_GPIO_TogglePin(GPIOA, LED_Pin);
-
+seconds++;
+__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,seconds*255);
 }
 
 

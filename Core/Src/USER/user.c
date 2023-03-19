@@ -39,7 +39,9 @@ void user_init(void)
 	circle_reset(&cc,BUFFER_SIZE);			//init circle buffer
 	rtc_int_init();
 	
-	HAL_TIM_Base_Start(&htim1);
+	//HAL_TIM_Base_Start(&htim1);
+	
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 	//HAL_TIM_Base_Start_IT(&htim1);
 __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,5*255);
 	//HAL_RTCEx_SetSmoothCalib(&hrtc,0,0,10); // du nuliai nes F1 nera. paskutinis- skaicius 0-7F, tik mazina greiti. 127=314sekundziu per 30d.
@@ -59,7 +61,7 @@ if (txt[0] !='A' || txt[1]!='T') return;
 		break;
 		case 'D':
 			rtc_set_date_text(txt+3);		
-		break;
+		break; 
 		case 'I':
 			CDC_Transmit_FS((uint8_t*) "9H CLOCK\r\n(c)2023 Vabolis.lt\r\n",33);
 		break;

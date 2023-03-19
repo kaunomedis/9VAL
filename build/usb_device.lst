@@ -1,28 +1,28 @@
-ARM GAS  C:\Users\User\AppData\Local\Temp\ccm4DU8y.s 			page 1
+ARM GAS  X:\TMP\USER_T~1\ccdMj9C9.s 			page 1
 
 
    1              		.cpu cortex-m3
-   2              		.arch armv7-m
-   3              		.fpu softvfp
-   4              		.eabi_attribute 20, 1
-   5              		.eabi_attribute 21, 1
-   6              		.eabi_attribute 23, 3
-   7              		.eabi_attribute 24, 1
-   8              		.eabi_attribute 25, 1
-   9              		.eabi_attribute 26, 1
-  10              		.eabi_attribute 30, 1
-  11              		.eabi_attribute 34, 1
-  12              		.eabi_attribute 18, 4
-  13              		.file	"usb_device.c"
-  14              		.text
-  15              	.Ltext0:
-  16              		.cfi_sections	.debug_frame
-  17              		.section	.text.MX_USB_DEVICE_Init,"ax",%progbits
-  18              		.align	1
-  19              		.global	MX_USB_DEVICE_Init
-  20              		.syntax unified
-  21              		.thumb
-  22              		.thumb_func
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"usb_device.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.MX_USB_DEVICE_Init,"ax",%progbits
+  16              		.align	1
+  17              		.global	MX_USB_DEVICE_Init
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
   24              	MX_USB_DEVICE_Init:
   25              	.LFB68:
   26              		.file 1 "USB_DEVICE/App/usb_device.c"
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\ccm4DU8y.s 			page 1
   30:USB_DEVICE/App/usb_device.c **** 
   31:USB_DEVICE/App/usb_device.c **** /* USER CODE END Includes */
   32:USB_DEVICE/App/usb_device.c **** 
-ARM GAS  C:\Users\User\AppData\Local\Temp\ccm4DU8y.s 			page 2
+ARM GAS  X:\TMP\USER_T~1\ccdMj9C9.s 			page 2
 
 
   33:USB_DEVICE/App/usb_device.c **** /* USER CODE BEGIN PV */
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\ccm4DU8y.s 			page 1
   42              	.LVL0:
   43              		.loc 1 71 6 view .LVU3
   44 000c 70B9     		cbnz	r0, .L7
-ARM GAS  C:\Users\User\AppData\Local\Temp\ccm4DU8y.s 			page 3
+ARM GAS  X:\TMP\USER_T~1\ccdMj9C9.s 			page 3
 
 
   45              	.L2:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\ccm4DU8y.s 			page 1
   78 0030 EDE7     		b	.L2
   79              	.L8:
   77:USB_DEVICE/App/usb_device.c ****   }
-ARM GAS  C:\Users\User\AppData\Local\Temp\ccm4DU8y.s 			page 4
+ARM GAS  X:\TMP\USER_T~1\ccdMj9C9.s 			page 4
 
 
   80              		.loc 1 77 5 view .LVU15
@@ -202,41 +202,39 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\ccm4DU8y.s 			page 1
   96              		.align	2
   97              	.L11:
   98 0044 00000000 		.word	FS_Desc
-  99 0048 00000000 		.word	.LANCHOR0
+  99 0048 00000000 		.word	hUsbDeviceFS
  100 004c 00000000 		.word	USBD_CDC
  101 0050 00000000 		.word	USBD_Interface_fops_FS
  102              		.cfi_endproc
  103              	.LFE68:
- 105              		.global	hUsbDeviceFS
- 106              		.section	.bss.hUsbDeviceFS,"aw",%nobits
- 107              		.align	2
- 108              		.set	.LANCHOR0,. + 0
- 111              	hUsbDeviceFS:
- 112 0000 00000000 		.space	708
- 112      00000000 
- 112      00000000 
- 112      00000000 
- 112      00000000 
- 113              		.text
- 114              	.Letext0:
- 115              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\arm\\arm-none-eabi\\include\\machine
- 116              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\arm\\arm-none-eabi\\include\\sys\\_s
- 117              		.file 4 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
- 118              		.file 5 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
- 119              		.file 6 "USB_DEVICE/App/usbd_desc.h"
- 120              		.file 7 "USB_DEVICE/App/usbd_cdc_if.h"
- 121              		.file 8 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h"
- 122              		.file 9 "Core/Inc/main.h"
-ARM GAS  C:\Users\User\AppData\Local\Temp\ccm4DU8y.s 			page 5
+ 105              		.comm	hUsbDeviceFS,708,4
+ 106              		.text
+ 107              	.Letext0:
+ 108              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\arm_gcc\\arm-none-eabi\\include\\machine
+ 109              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\arm_gcc\\arm-none-eabi\\include\\sys\\_s
+ 110              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 111              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 112              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 113              		.file 7 "c:\\program files (x86)\\gnu tools arm embedded\\arm_gcc\\arm-none-eabi\\include\\sys\\lo
+ 114              		.file 8 "c:\\program files (x86)\\gnu tools arm embedded\\arm_gcc\\arm-none-eabi\\include\\sys\\_t
+ 115              		.file 9 "c:\\program files (x86)\\gnu tools arm embedded\\arm_gcc\\lib\\gcc\\arm-none-eabi\\9.2.1\
+ 116              		.file 10 "c:\\program files (x86)\\gnu tools arm embedded\\arm_gcc\\arm-none-eabi\\include\\sys\\r
+ 117              		.file 11 "c:\\program files (x86)\\gnu tools arm embedded\\arm_gcc\\arm-none-eabi\\include\\stdlib
+ 118              		.file 12 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h"
+ 119              		.file 13 "USB_DEVICE/App/usbd_desc.h"
+ 120              		.file 14 "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"
+ 121              		.file 15 "USB_DEVICE/App/usbd_cdc_if.h"
+ 122              		.file 16 "Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h"
+ 123              		.file 17 "Core/Inc/main.h"
+ARM GAS  X:\TMP\USER_T~1\ccdMj9C9.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 usb_device.c
-C:\Users\User\AppData\Local\Temp\ccm4DU8y.s:18     .text.MX_USB_DEVICE_Init:00000000 $t
-C:\Users\User\AppData\Local\Temp\ccm4DU8y.s:24     .text.MX_USB_DEVICE_Init:00000000 MX_USB_DEVICE_Init
-C:\Users\User\AppData\Local\Temp\ccm4DU8y.s:98     .text.MX_USB_DEVICE_Init:00000044 $d
-C:\Users\User\AppData\Local\Temp\ccm4DU8y.s:111    .bss.hUsbDeviceFS:00000000 hUsbDeviceFS
-C:\Users\User\AppData\Local\Temp\ccm4DU8y.s:107    .bss.hUsbDeviceFS:00000000 $d
+X:\TMP\USER_T~1\ccdMj9C9.s:16     .text.MX_USB_DEVICE_Init:00000000 $t
+X:\TMP\USER_T~1\ccdMj9C9.s:24     .text.MX_USB_DEVICE_Init:00000000 MX_USB_DEVICE_Init
+X:\TMP\USER_T~1\ccdMj9C9.s:98     .text.MX_USB_DEVICE_Init:00000044 $d
+                            *COM*:000002c4 hUsbDeviceFS
 
 UNDEFINED SYMBOLS
 USBD_Init

@@ -13,5 +13,5 @@ void user_seconds_job(void);
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 
 
-
+void show_time(void);
 

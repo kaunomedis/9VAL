@@ -15,6 +15,7 @@ extern IWDG_HandleTypeDef hiwdg;
 extern RTC_HandleTypeDef hrtc;
 extern TIM_HandleTypeDef htim1;
 
+
 unsigned char invertuotas=0;
 uint32_t bootsecons;
 
@@ -40,36 +41,33 @@ void user_init(void)
 {
 	cc.buffer=testas;
 	circle_reset(&cc,BUFFER_SIZE);			//init circle buffer
-	rtc_int_init();
+
+	HAL_IWDG_Refresh(&hiwdg); //watchdogas
+
 	
-	//HAL_TIM_Base_Start(&htim1);
-	
+	SSD1306_Init();
+	HAL_IWDG_Refresh(&hiwdg); //watchdogas
+	HAL_Delay(500);
+	SSD1306_Init();
+	SSD1306_clear(0);
+	SSD1306_move(0,0);
+	HAL_IWDG_Refresh(&hiwdg); //watchdogas
+
+	SSD1306_puts("WWW.VABOLIS.LT");
+	HAL_Delay(500);
+	SSD1306_dim(1);
+	HAL_IWDG_Refresh(&hiwdg); //watchdogas
+	HAL_Delay(500);
+	SSD1306_clear(0);
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-	//HAL_TIM_Base_Start_IT(&htim1);
-__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,5*255);
+	__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,5*255);
 	//HAL_RTCEx_SetSmoothCalib(&hrtc,0,0,10); // du nuliai nes F1 nera. paskutinis- skaicius 0-7F, tik mazina greiti. 127=314sekundziu per 30d.
 
-RTC_DateTypeDef dienos= {0};
-HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
-HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
-bootsecons=currTime.Hours*3600+currTime.Minutes*60+currTime.Seconds+(dienos.Date-1)*86400;
-
-
-
-
-SSD1306_Init();
-HAL_Delay(500);
-SSD1306_Init();
-SSD1306_clear(0);
-SSD1306_move(0,0);
-//HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-SSD1306_puts("WWW.VABOLIS.LT");
-HAL_Delay(500);
-SSD1306_dim(1);
-HAL_Delay(500);
-SSD1306_clear(0);
-
-
+	RTC_DateTypeDef dienos= {0};
+	HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
+	HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
+	bootsecons=currTime.Hours*3600+currTime.Minutes*60+currTime.Seconds+(dienos.Date-1)*86400;
+	rtc_int_init();
 }
 
 

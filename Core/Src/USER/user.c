@@ -17,7 +17,7 @@ extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
 
 unsigned char invertuotas=0;
-uint32_t bootsecons;
+//uint32_t bootsecons;
 
 #define BUFFER_SIZE 64
 unsigned char testas[BUFFER_SIZE];
@@ -28,8 +28,8 @@ volatile char seconds;
 volatile char buttons;
 volatile char old_buttons;
 volatile char mode;
-volatile char start_hour;
-volatile char start_minutes;
+volatile uint32_t start_hour;
+volatile uint32_t start_minutes;
 /* program state:
 
 0- normal,boot, time
@@ -40,7 +40,11 @@ volatile char start_minutes;
 
 255-OLED saver
 */
-volatile unsigned char mode_delay=30;
+#define MODE_DELAY 30
+#define SLEEP_DELAY 300
+
+volatile unsigned char mode_delay=MODE_DELAY;
+volatile uint32_t sleep_delay=SLEEP_DELAY;
 
 void user_usb_rx(uint8_t* Buf, uint32_t *Len)
 {
@@ -74,6 +78,9 @@ void user_init(void)
 	HAL_IWDG_Refresh(&hiwdg); //watchdogas
 	HAL_Delay(500);
 	SSD1306_clear(0);
+	
+	rtc_int_init();
+		
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 	HAL_TIM_Base_Start_IT 	(&htim2);
 	__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,5*255);
@@ -82,8 +89,10 @@ void user_init(void)
 	RTC_DateTypeDef dienos= {0};
 	HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
 	HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
-	bootsecons=currTime.Hours*3600+currTime.Minutes*60+currTime.Seconds+(dienos.Date-1)*86400;
-	rtc_int_init();
+	//bootsecons=currTime.Hours*3600+currTime.Minutes*60+currTime.Seconds+(dienos.Date-1)*86400;
+
+	start_hour=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR4);
+	start_minutes=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR5);
 }
 
 void ReadPins(void)
@@ -150,7 +159,7 @@ while(1)
 
 void user_seconds_job(void)
 {
-	HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
+	//HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
 
 	
 	show_time();
@@ -163,7 +172,7 @@ __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,seconds*255);
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)  //2Hz?
 {
-//char text[2];
+char text[5];
 unsigned char tmp;
 
   if (htim == &htim2 )
@@ -171,20 +180,27 @@ unsigned char tmp;
   	ReadPins();
 	HAL_GPIO_TogglePin(GPIOA, LED_Pin);
 	if (buttons==0 && mode_delay>0) {mode_delay--;}
-	if (mode_delay==0) {mode=0; SSD1306_move(3,0); SSD1306_puts("                "); }
-	
+	if (mode_delay==1) {mode=0; SSD1306_move(3,0); SSD1306_puts("                "); mode_delay=0; sleep_delay=SLEEP_DELAY;}
+	if (mode_delay==0 && sleep_delay>0) {sleep_delay--;}
+	if (sleep_delay==0) {mode=5; SSD1306_command1(SSD1306_DISPLAYOFF);}
 	if (buttons != old_buttons)
 		{
-		old_buttons=buttons;		
+		old_buttons=buttons;	
+		
+		text[2]=' ';
+		text[3]=' ';
+		text[4]=0;
 		
 		if (buttons==1)
 			{
 			mode++;
-			mode_delay=30;
-			if (mode>4) {mode=0;}
+			mode_delay=MODE_DELAY;
+			sleep_delay=SLEEP_DELAY;
+			if (mode>4) {mode=0; SSD1306_command1(SSD1306_DISPLAYON);}
 			}
-		if (buttons==6) {HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN); mode=0; currTime.Seconds=0; HAL_RTC_SetTime(&hrtc, &currTime, RTC_FORMAT_BIN);show_time();} //du mygtukai=00 sekundziu
+		else if (buttons==6) {HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN); mode=0; currTime.Seconds=0; HAL_RTC_SetTime(&hrtc, &currTime, RTC_FORMAT_BIN);show_time();} //du mygtukai=00 sekundziu
 			//########## 
+		else {
 			switch( mode ) 
 				{
 					case 0x00: //normal mode
@@ -199,7 +215,7 @@ unsigned char tmp;
 											tmp++; if (tmp>23) tmp=0;
 											currTime.Hours=(uint8_t)tmp;
 											HAL_RTC_SetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
-											show_time(); mode_delay=30;
+											show_time(); mode_delay=MODE_DELAY;
 										}
 						if(buttons==4) {
 											tmp=currTime.Hours;
@@ -207,7 +223,7 @@ unsigned char tmp;
 											if(tmp == 255) {tmp=23;}
 											currTime.Hours=(uint8_t)tmp;
 											HAL_RTC_SetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
-											show_time(); mode_delay=30;
+											show_time(); mode_delay=MODE_DELAY;
 										}
 						SSD1306_move(3,0); SSD1306_puts("Setting hours ");
 						__enable_irq();
@@ -220,31 +236,58 @@ unsigned char tmp;
 											tmp++; if(tmp>59) tmp=0;
 											currTime.Minutes=(uint8_t)tmp;
 											HAL_RTC_SetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
-											show_time(); mode_delay=30;
+											show_time(); mode_delay=MODE_DELAY;
 										}
 						if(buttons==4) {
 											tmp=currTime.Minutes;
 											tmp--; if(tmp ==255 ) {tmp=59;}
 											currTime.Minutes=(uint8_t)tmp;
 											HAL_RTC_SetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
-											show_time(); mode_delay=30;
+											show_time(); mode_delay=MODE_DELAY;
 										}
 						SSD1306_move(3,0); SSD1306_puts("Setting mins  ");
 						__enable_irq();
 					break;
 					case 0x03: //setup start hour
-						if(buttons==2) {start_hour++;}
-						if(buttons==4) {start_hour--;}
-						SSD1306_move(3,0); SSD1306_puts("End hour:");
+						if(buttons==2) {
+											start_hour=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR4);
+											start_hour++;
+											if (start_hour > 23U) {start_hour=0;}
+											HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR4, start_hour);
+											mode_delay=MODE_DELAY;
+										}
+						if(buttons==4) {
+											start_hour=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR4);
+											start_hour--;
+											if(start_hour > 25U) {start_hour=23;}
+											HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR4, start_hour);
+											mode_delay=MODE_DELAY;
+										}
+						text[0]=start_hour/10+'0'; text[1]=start_hour % 10+'0';
+						SSD1306_move(3,0); SSD1306_puts("End hour:"); SSD1306_puts(text);
 					break;
 					case 0x04: //setup start minute
-						if(buttons==2) {start_minutes++;}
-						if(buttons==4) {start_minutes--;}
-						SSD1306_move(3,0); SSD1306_puts("End min:");
+						if(buttons==2) {
+											start_minutes=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR5);
+											start_minutes++;
+											if (start_minutes > 59U) {start_minutes=0;}
+											HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR5, start_minutes);
+											mode_delay=MODE_DELAY;
+										}
+						if(buttons==4) {
+											start_minutes=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR5);
+											start_minutes--;
+											if(start_minutes > 60U) {start_minutes=59;}
+											HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR5, start_minutes);
+											mode_delay=MODE_DELAY;
+										}
+						text[0]=start_minutes/10+'0'; text[1]=start_minutes % 10+'0';
+						SSD1306_move(3,0); SSD1306_puts("End min:"); SSD1306_puts(text);
 					break;
 					case 0x05: //xxx
 					break;
 				}
+			}
 
 		}
 		
@@ -268,14 +311,14 @@ uint32_t nowsecons, uptime;
 
 RTC_DateTypeDef dienos;
 
-HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
+//HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
 HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
 //HAL_Delay(5);
 
 HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
 nowsecons=currTime.Hours*3600+currTime.Minutes*60+currTime.Seconds+(dienos.Date-1)*86400;
 
-if(nowsecons>bootsecons){uptime=nowsecons-bootsecons;} else {uptime=0;} //error!
+//if(nowsecons>bootsecons){uptime=nowsecons-bootsecons;} else {uptime=0;} //error!
 
 
 
@@ -293,9 +336,9 @@ SSD1306_put_tile(font,8);
 SSD1306_move(1, 1+9);
 SSD1306_put_tile(font,8);
 
-currTime.Hours=uptime/3600;
-currTime.Minutes=(uptime-currTime.Hours*3600)/60;
-currTime.Seconds=uptime-currTime.Hours*3600-currTime.Minutes*60;
+//currTime.Hours=uptime/3600;
+//currTime.Minutes=(uptime-currTime.Hours*3600)/60;
+//currTime.Seconds=uptime-currTime.Hours*3600-currTime.Minutes*60;
 
 
 /*

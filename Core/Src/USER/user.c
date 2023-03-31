@@ -159,13 +159,25 @@ while(1)
 
 void user_seconds_job(void)
 {
-	//HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
-
-	
+uint32_t nowseconds, starttime,pwm;
 	show_time();
+	nowseconds=currTime.Hours*3600+currTime.Minutes*60+currTime.Seconds; //+(dienos.Date-1)*86400;
+	starttime=start_hour*3600+start_minutes*60; //+(dienos.Date-1)*86400;
 	
-seconds++;
-__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,seconds*255);
+	
+	if ((nowseconds > starttime) && (nowseconds < starttime+32400))
+		{
+		pwm=32400+starttime-nowseconds; //9h+starttime-now. Reziuose gaunasi 32400-0
+		
+		
+		}
+		else
+		{
+		pwm=0;
+		}
+		
+
+__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,pwm);
 }
 
 
@@ -306,17 +318,16 @@ unsigned char tmp;
 void show_time(void)
 {
 unsigned char font[]={0x00, 0x00, 0xe7, 0xe7, 0xe7, 0xe7, 0x00, 0x00};
-uint32_t nowsecons, uptime;
+
 //char text[9];
 
-RTC_DateTypeDef dienos;
+//RTC_DateTypeDef dienos;
 
 //HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
-HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
+//HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
 //HAL_Delay(5);
 
 HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
-nowsecons=currTime.Hours*3600+currTime.Minutes*60+currTime.Seconds+(dienos.Date-1)*86400;
 
 //if(nowsecons>bootsecons){uptime=nowsecons-bootsecons;} else {uptime=0;} //error!
 

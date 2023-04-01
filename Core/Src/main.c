@@ -259,7 +259,7 @@ static void MX_RTC_Init(void)
   */
   hrtc.Instance = RTC;
   hrtc.Init.AsynchPrediv = RTC_AUTO_1_SECOND;
-  hrtc.Init.OutPut = RTC_OUTPUTSOURCE_ALARM;
+  hrtc.Init.OutPut = RTC_OUTPUTSOURCE_NONE;
   if (HAL_RTC_Init(&hrtc) != HAL_OK)
   {
     Error_Handler();
@@ -270,6 +270,8 @@ static void MX_RTC_Init(void)
     {
 	  HAL_NVIC_SetPriority(RTC_IRQn,15,0);
 	  HAL_NVIC_EnableIRQ(RTC_IRQn);
+	  HAL_PWR_EnableBkUpAccess(); //del backup ijungimo?!
+	  __HAL_RCC_BKP_CLK_ENABLE(); //del backup ijungimo?!
 	}
 	if(HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR1)!= 0x5051)
 	{

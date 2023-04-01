@@ -76,7 +76,7 @@ if(strlen(Buf)<8) return;
     Error_Handler();
   }
   
-  rtc_backup_date();
+//  rtc_backup_date();
 }
 
 //nustatyti laikrodi
@@ -146,17 +146,17 @@ void rtc_date_string(char * text)
 	text[8]=0;
 }
 
-void rtc_backup_date(void)
-{
-RTC_DateTypeDef dienos;
-	if(HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR1)== 0x5051) //magic number, valid backup
-	{
-		HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
-		HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
-		HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR2, (uint16_t) (dienos.Year<<8) + dienos.Month);	
-		HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR3, (uint16_t) (dienos.Date<<8) + currTime.Hours);	
-	}
-}
+//void rtc_backup_date(void)
+//{
+//RTC_DateTypeDef dienos;
+//	if(HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR1)== 0x5051) //magic number, valid backup
+//	{
+//		HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
+//		HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
+//		HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR2, (uint16_t) (dienos.Year<<8) + dienos.Month);	
+//		HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR3, (uint16_t) (dienos.Date<<8) + currTime.Hours);	
+//	}
+//}
 
 
 

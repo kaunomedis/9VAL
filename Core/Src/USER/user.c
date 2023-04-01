@@ -28,8 +28,8 @@ volatile char seconds;
 volatile char buttons;
 volatile char old_buttons;
 volatile char mode;
-volatile uint32_t start_hour;
-volatile uint32_t start_minutes;
+volatile uint16_t start_hour;
+volatile uint16_t start_minutes;
 /* program state:
 
 0- normal,boot, time
@@ -111,17 +111,22 @@ if (txt[0] !='A' || txt[1]!='T') return;
 	{
 		case 'T':
 			rtc_set_time_text(txt+3);
+			rtc_time_string(txt);
+			CDC_Transmit_FS((uint8_t*) txt,8);
 		break;
 		case 'D':
-			rtc_set_date_text(txt+3);		
+			rtc_set_date_text(txt+3);	
+			rtc_date_string(txt);
+			CDC_Transmit_FS((uint8_t*) txt,8);
 		break; 
 		case 'I':
-			CDC_Transmit_FS((uint8_t*) "9H CLOCK\r\n(c)2023 Vabolis.lt\r\n",33);
+			CDC_Transmit_FS((uint8_t*) "9H CLOCK\r\n(c)2023 Vabolis.lt",28);
 		break;
 		case 'A':
 			__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,55*255);
 		break;
 	}
+	CDC_Transmit_FS((uint8_t*) "\r\n",2);
 }
 
 
@@ -261,55 +266,50 @@ unsigned char tmp;
 						__enable_irq();
 					break;
 					case 0x03: //setup start hour
+					__disable_irq();
 						if(buttons==2) {
-											start_hour=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR4);
+											//start_hour=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR10) & 0x1F;
 											start_hour++;
 											if (start_hour > 23U) {start_hour=0;}
-											HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR4, start_hour);
+											//HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR4, start_hour);
 											mode_delay=MODE_DELAY;
 										}
-						if(buttons==4) {
-											start_hour=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR4);
+						else if(buttons==4) {
+											//start_hour=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR10) & 0x1F;
 											start_hour--;
 											if(start_hour > 25U) {start_hour=23;}
-											HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR4, start_hour);
+											//HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR4, start_hour);
 											mode_delay=MODE_DELAY;
 										}
 						text[0]=start_hour/10+'0'; text[1]=start_hour % 10+'0';
-						SSD1306_move(3,0); SSD1306_puts("End hour:"); SSD1306_puts(text);
+						SSD1306_move(3,0); SSD1306_puts("Start hour:"); SSD1306_puts(text);
+						__enable_irq();
 					break;
 					case 0x04: //setup start minute
+					__disable_irq();
 						if(buttons==2) {
-											start_minutes=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR5);
+											start_minutes=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR5) & 0x3f;
 											start_minutes++;
 											if (start_minutes > 59U) {start_minutes=0;}
 											HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR5, start_minutes);
 											mode_delay=MODE_DELAY;
 										}
-						if(buttons==4) {
-											start_minutes=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR5);
+						else if(buttons==4) {
+											start_minutes=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR5) & 0x3f;
 											start_minutes--;
 											if(start_minutes > 60U) {start_minutes=59;}
 											HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR5, start_minutes);
 											mode_delay=MODE_DELAY;
 										}
 						text[0]=start_minutes/10+'0'; text[1]=start_minutes % 10+'0';
-						SSD1306_move(3,0); SSD1306_puts("End min:"); SSD1306_puts(text);
+						SSD1306_move(3,0); SSD1306_puts("Start min:"); SSD1306_puts(text);
+						__enable_irq();
 					break;
 					case 0x05: //xxx
 					break;
 				}
 			}
-
 		}
-		
-		
-	//text[0]=mode+'0';
-	//text[1]=0;
-	
-	//SSD1306_puts(text);
-		
-		
   }
 }
 

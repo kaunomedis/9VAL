@@ -187,7 +187,7 @@ static void MX_I2C2_Init(void)
 
   /* USER CODE END I2C2_Init 1 */
   hi2c2.Instance = I2C2;
-  hi2c2.Init.ClockSpeed = 100000;
+  hi2c2.Init.ClockSpeed = 400000;
   hi2c2.Init.DutyCycle = I2C_DUTYCYCLE_2;
   hi2c2.Init.OwnAddress1 = 0;
   hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
@@ -277,7 +277,7 @@ static void MX_RTC_Init(void)
 
   /** Initialize RTC and set the Time and Date
   */
-  sTime.Hours = 0;
+  sTime.Hours = 12;
   sTime.Minutes = 0;
   sTime.Seconds = 0;
 
@@ -288,7 +288,7 @@ static void MX_RTC_Init(void)
   DateToUpdate.WeekDay = RTC_WEEKDAY_MONDAY;
   DateToUpdate.Month = RTC_MONTH_JANUARY;
   DateToUpdate.Date = 1;
-  DateToUpdate.Year = 0;
+  DateToUpdate.Year = 23;
 
   if (HAL_RTC_SetDate(&hrtc, &DateToUpdate, RTC_FORMAT_BIN) != HAL_OK)
   {
@@ -302,16 +302,16 @@ static void MX_RTC_Init(void)
 // LAIKRODZIO TIKRINIMAS  
   
 /* read RTC for time */
-	HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
+//	HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
 /* read time seconds for epoch */
 // uint32_t nowsecons=currTime.Hours*3600+currTime.Minutes*60+currTime.Seconds+(dienos.Date-1)*86400;
 
 //KALENDORIAUS TIKRINIMAS
 
 	//RTC kalendorius FAIL! Pas F103 jo ir nera. Cold boot su gyvu RTC
-	RTC_DateTypeDef dienos= {0};
-	HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
-	if(dienos.Year < 20) {rtc_check_screwd_calendar();}
+//	RTC_DateTypeDef dienos= {0};
+//	HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
+//	if(dienos.Year < 20) {rtc_check_screwd_calendar();}
 	
 //HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
 

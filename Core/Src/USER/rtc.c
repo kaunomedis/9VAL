@@ -23,43 +23,6 @@ RTC_TimeTypeDef currTime = {0};
 RTC_TimeTypeDef oldTime = {0xFF,0xFF,0xFF}; //del refresh
 volatile unsigned char LastHour=255;
 
-/* instrukcijos kurias reikia ikelti i main.c */
-
-//-  /* USER CODE BEGIN Check_RTC_BKUP */
-//-  
-//-  // CIA TIKRINAM AR RTC ir kiti RAM baitai isliko gyvi.
-//-    if(HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR1)!= 0x5051)
-//-	{
-//-  /* USER CODE END Check_RTC_BKUP */
-
-
-//- /* USER CODE BEGIN RTC_Init 2 */
-//-	} // Kitame user code virsuje yra IF komanda. Cia ji uzsidaro.
-//-  // LAIKAS BUVO ISSAUGOTAS, NES USER REGISTRAS TURI MAGIC skaiciu 0x5051
-//- 
-//- /* read RTC for time */
-//-	HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
-//- /* read time seconds for epoch */
-//- // uint32_t nowsecons=currTime.Hours*3600+currTime.Minutes*60+currTime.Seconds+(dienos.Date-1)*86400;
-//-
-//- /* set time to RTC */
-//-	if (HAL_RTC_SetTime(&hrtc, &currTime, RTC_FORMAT_BIN) != HAL_OK)
-//-	{
-//-	Error_Handler();
-//-	}
-//-
-//- // DEMESIO! STM32F103 NETURI KALENDORIAUS ir panasu, kad neturi epoch skaitliuko.
-//-	//RTC_DateTypeDef dienos= {0};
-//-	//HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
-//-	HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
-//-
-//- //Cia irasom MAGIC skaiciu. Jis po pilno reseto ir RTC mirties turi neislikti.
-//-	HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0x5051);//Write data to the specified backing area register
-//-
-//- //HAL_RTCEx_SetSmoothCalib(&hrtc,0,0,10);
-//-   /* USER CODE END RTC_Init 2 */
-
-
 // sunaikina sena laika. Naudojama LCD grafikos spartinimui
 void rtc_clean(void)
 {
@@ -67,8 +30,6 @@ void rtc_clean(void)
 	oldTime.Minutes = 60;
 	oldTime.Seconds = 60;
 }
-
-
 
 
 // teksto filtras laiko ir datos nustatymui.
@@ -197,32 +158,6 @@ RTC_DateTypeDef dienos;
 	}
 }
 
-void rtc_check_screwd_calendar(void)
-{
-RTC_DateTypeDef dienos;
-	if(HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR1)== 0x5051) //magic number, valid backup
-	{
-		HAL_RTC_GetDate(&hrtc, &dienos, RTC_FORMAT_BIN);
-		HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
-		uint32_t now_is=currTime.Hours+dienos.Date*24+dienos.Month*31*24+dienos.Year*366*24;
-		
-		uint32_t tmp=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR2);
-		uint32_t tmp2=HAL_RTCEx_BKUPRead(&hrtc,RTC_BKP_DR3);	
-	
-		uint32_t now_was=(tmp>>8)*366*24+(tmp & 0x000F)*31*24+(tmp2>>8)*24+(tmp2 & 0xFF);
-		if(now_was > now_is)
-			{
-			dienos.Year=(tmp >> 8);
-			dienos.Month=tmp & 0x0F;
-			dienos.Date=(tmp2 >> 8);
-			 if (HAL_RTC_SetDate(&hrtc, &dienos, RTC_FORMAT_BIN) != HAL_OK)
-			  {
-				Error_Handler();
-			  }
-			 rtc_backup_date();
-			}
-	}
-}
 
 
 /* INT INT INT INT INT INT INT INT INT INT INT INT INT INT INT INT */
@@ -241,5 +176,4 @@ void rtc_int_init(void)
 void HAL_RTCEx_RTCEventCallback(RTC_HandleTypeDef *hrtc)
 {
 	user_seconds_job();
-	//if(LastHour != currTime.Hours) {rtc_backup_date(); LastHour=currTime.Hours;}
 }

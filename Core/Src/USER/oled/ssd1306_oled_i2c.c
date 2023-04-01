@@ -208,8 +208,8 @@ void SSD1306_putc_raw(char c) {
 /* print char from ASCII */
 void SSD1306_putc(char c) {
 	// remap from petscii to ascii, shifts drawing characters into the lower 32 ascii cells
-	if(c > 'A' && c < 'Z') { }               // upper-case ascii range
-	else if(c > 'a' && c < 'z') { c -= 96; } // lower-case ascii range
+	if(c >= 'A' && c <= 'Z') { }               // upper-case ascii range
+	else if(c >= 'a' && c <= 'z') { c -= 96; } // lower-case ascii range
 	else if(c > 31 && c < 64) { }            // numbers and symbols
 	else if(c < 32) { c += 96; }             // low ascii
 	SSD1306_putc_raw(c);

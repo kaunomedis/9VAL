@@ -297,6 +297,11 @@ static void MX_RTC_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN RTC_Init 2 */
+  
+  HAL_RTCEx_BKUPWrite(&hrtc, ST_H, 8U);
+  HAL_RTCEx_BKUPWrite(&hrtc, ST_M, 0U);
+  
+  
 	} // Kitame user code virsuje yra IF komanda. Cia ji uzsidaro.
   // LAIKAS BUVO ISSAUGOTAS, NES USER REGISTRAS TURI MAGIC skaiciu 0x5051
   
@@ -348,7 +353,7 @@ static void MX_TIM1_Init(void)
   htim1.Instance = TIM1;
   htim1.Init.Prescaler = 0;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim1.Init.Period = 65535;
+  htim1.Init.Period = 45535;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;

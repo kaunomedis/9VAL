@@ -127,7 +127,11 @@ if(strlen(Buf)<5) return;
 	
 }
 
-
+void show_help(void)
+{
+char txt[]="\r\n?\r\n9h Clock. Use AT commands to setup.\r\n ATT13:00:05 -to setup time. ATT only shows current time.\r\n ATS09:00 -new start time.\r\n ATI -information.\r\n ATAxxx -debug PWM.\r\n";
+CDC_Transmit_FS((uint8_t*) txt,strlen(txt));
+}
 
 void commandcom(char * txt) // network (UART,USB) command interpreter
 {
@@ -142,9 +146,9 @@ if (txt[0] !='A' || txt[1]!='T') return;
 			CDC_Transmit_FS((uint8_t*) txt,10);
 		break;
 		case 'D':
-			rtc_set_date_text(txt+3);	
-			rtc_date_string(txt); txt[8]='\r'; txt[9]='\n';
-			CDC_Transmit_FS((uint8_t*) txt,10);
+			//rtc_set_date_text(txt+3);	
+			//rtc_date_string(txt); txt[8]='\r'; txt[9]='\n';
+			//CDC_Transmit_FS((uint8_t*) txt,10);
 		break; 
 		case 'I':
 			CDC_Transmit_FS((uint8_t*) "9H CLOCK\r\n(c)2023 Vabolis.lt\r\n ",30);
@@ -156,7 +160,17 @@ if (txt[0] !='A' || txt[1]!='T') return;
 			CDC_Transmit_FS((uint8_t*) "New start time set.\r\n ",21);
 		break;
 		case 'A':
+			__disable_irq();
+			HAL_IWDG_Refresh(&hiwdg);
 			__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,atoi(txt+3));
+			HAL_Delay(1000);
+			HAL_IWDG_Refresh(&hiwdg);
+			HAL_Delay(1000);
+			HAL_IWDG_Refresh(&hiwdg);
+			__enable_irq();
+		break;
+		default:
+			show_help();
 		break;
 	}
 	//CDC_Transmit_FS((uint8_t*) "\r\n",2);

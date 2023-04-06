@@ -127,10 +127,23 @@ if(strlen(Buf)<5) return;
 	
 }
 
+void user_usb_tx(uint8_t* Buf, uint16_t Len)
+{
+uint8_t result=USBD_BUSY;
+unsigned char retry=5;
+
+while(result !=USBD_OK && retry>1)
+	{
+		result = CDC_Transmit_FS(Buf, Len);
+		if (result==USBD_BUSY) HAL_Delay(10); //CDC_HS_BINTERVAL or CDC_FS_BINTERVAL
+		retry--;
+	}
+}
+
 void show_help(void)
 {
 char txt[]="\r\n?\r\n9h Clock. Use AT commands to setup.\r\n ATT13:00:05 -to setup time. ATT only shows current time.\r\n ATS09:00 -new start time.\r\n ATI -information.\r\n ATAxxx -debug PWM.\r\n";
-CDC_Transmit_FS((uint8_t*) txt,80);
+user_usb_tx((uint8_t*) txt,80);
 }
 
 void commandcom(char * txt) // network (UART,USB) command interpreter
@@ -160,14 +173,8 @@ if (txt[0] !='A' || txt[1]!='T') return;
 			CDC_Transmit_FS((uint8_t*) "New start time set.\r\n ",21);
 		break;
 		case 'A':
-			//__disable_irq();
 			HAL_IWDG_Refresh(&hiwdg);
 			__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,atoi(txt+3));
-			//HAL_Delay(1000);
-			//HAL_IWDG_Refresh(&hiwdg);
-			//HAL_Delay(1000);
-			//HAL_IWDG_Refresh(&hiwdg);
-			//__enable_irq();
 		break;
 		default:
 			show_help();
@@ -220,19 +227,16 @@ uint32_t nowseconds, starttime,pwm;
 	show_time();
 	nowseconds=currTime.Hours*3600+currTime.Minutes*60+currTime.Seconds; //+(dienos.Date-1)*86400;
 	starttime=start_hour*3600+start_minutes*60; //+(dienos.Date-1)*86400;
-	
-	
+
 	if ((nowseconds > starttime) && (nowseconds < starttime+32400))
 		{
 		pwm=(32400+starttime-nowseconds); //9h+starttime-now. Reziuose gaunasi 32400-0
 		pwm=(pwm*214)/1000+1520;
-		
 		}
 		else
 		{
 		pwm=0;
 		}
-		
 
 __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,pwm);
 }
@@ -241,10 +245,9 @@ void Write_Start_stop(void)
 {
 	HAL_PWR_EnableBkUpAccess();
     __HAL_RCC_BKP_CLK_ENABLE(); //sitas neinicializuotas!
-
-HAL_RTCEx_BKUPWrite(&hrtc, ST_H, start_hour & 0x1F);
-HAL_RTCEx_BKUPWrite(&hrtc, ST_M, start_minutes & 0x3F);
-//HAL_PWR_DisableBkUpAccess();
+	HAL_RTCEx_BKUPWrite(&hrtc, ST_H, start_hour & 0x1F);
+	HAL_RTCEx_BKUPWrite(&hrtc, ST_M, start_minutes & 0x3F);
+	//HAL_PWR_DisableBkUpAccess();
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)  //2Hz?
@@ -276,10 +279,9 @@ unsigned char tmp;
 			if (mode>4) {mode=0; SSD1306_command1(SSD1306_DISPLAYON);}
 			}
 		else if (buttons==7) {HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN); mode=0; currTime.Seconds=0; HAL_RTC_SetTime(&hrtc, &currTime, RTC_FORMAT_BIN);show_time();
-	  HAL_RTCEx_BKUPWrite(&hrtc, ST_H, 8U);
-  HAL_RTCEx_BKUPWrite(&hrtc, ST_M, 0U);	
-		
-		} //du mygtukai=00 sekundziu
+			HAL_RTCEx_BKUPWrite(&hrtc, ST_H, 8U);
+			HAL_RTCEx_BKUPWrite(&hrtc, ST_M, 0U);	
+			} //trys mygtukai=00 sekundziu
 			//########## 
 		else {
 			switch( mode ) 
@@ -377,7 +379,7 @@ unsigned char tmp;
 
 void show_time(void)
 {
-unsigned char font[]={0x00, 0x00, 0xe7, 0xe7, 0xe7, 0xe7, 0x00, 0x00};
+unsigned char font_dt[]={0x00, 0x00, 0xe7, 0xe7, 0xe7, 0xe7, 0x00, 0x00}; //dvitaskis
 
 HAL_RTC_GetTime(&hrtc, &currTime, RTC_FORMAT_BIN);
 
@@ -390,10 +392,10 @@ SSD1306_bigdigit(0,1+12,currTime.Seconds%10);
 
 SSD1306_move(1, 1+4);
 
-SSD1306_put_tile(font,8);
+SSD1306_put_tile(font_dt,8);
 
 SSD1306_move(1, 1+9);
-SSD1306_put_tile(font,8);
+SSD1306_put_tile(font_dt,8);
 
 //if(invertuotas>0){SSD1306_invert(); invertuotas--;} else {SSD1306_normal();}
 

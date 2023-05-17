@@ -156,7 +156,7 @@ if (txt[0] !='A' || txt[1]!='T') return;
 		case 'T':
 			rtc_set_time_text(txt+3);
 			rtc_time_string(txt); txt[8]='\r'; txt[9]='\n';
-			CDC_Transmit_FS((uint8_t*) txt,10);
+			user_usb_tx((uint8_t*) txt,10);
 		break;
 		case 'D':
 			//rtc_set_date_text(txt+3);	
@@ -164,13 +164,13 @@ if (txt[0] !='A' || txt[1]!='T') return;
 			//CDC_Transmit_FS((uint8_t*) txt,10);
 		break; 
 		case 'I':
-			CDC_Transmit_FS((uint8_t*) "9H CLOCK\r\n(c)2023 Vabolis.lt\r\n ",30);
+			user_usb_tx((uint8_t*) "9H CLOCK\r\n(c)2023 Vabolis.lt\r\n ",30);
 		break;
 		case 'S':
 			set_start_text(txt+3);
 			Write_Start_stop();
 			
-			CDC_Transmit_FS((uint8_t*) "New start time set.\r\n ",21);
+			user_usb_tx((uint8_t*) "New start time set.\r\n ",21);
 		break;
 		case 'A':
 			HAL_IWDG_Refresh(&hiwdg);

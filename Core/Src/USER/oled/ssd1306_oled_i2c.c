@@ -193,7 +193,7 @@ void SSD1306_scroll(unsigned char n)
 }
 /* send buffer to device. We need to add first "command/data" byte in the buffer.
    This gives us all rush with allocation, copying and flushing memory. */
-void SSD1306_put_tile(uint8_t *tile, uint8_t limit) {
+void SSD1306_put_tile(const uint8_t *tile, uint8_t limit) {
 	unsigned char *tempbuf=(unsigned char *) malloc(limit+1);
 	memcpy(tempbuf+1,tile,limit); tempbuf[0]=0b01000000; //data mode
 	SSD1306_sendbuffer(tempbuf,limit+1);
